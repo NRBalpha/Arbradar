@@ -1514,55 +1514,36 @@ async def arb_logical():
 @app.get("/markets/fast")
 async def markets_fast(max_days: int = Query(default=7)):
     data = await _fetch_all_markets()
-    markets = data["markets"]
     now = datetime.now(timezone.utc)
 
     results = []
-    for m in markets:
+    for m in data["markets"]:
         ct = parse_dt(m.get("close_time"))
         if ct is None:
             continue
-        delta = ct - now
-        total_hours = delta.total_seconds() / 3600
-        days_left = delta.total_seconds() / 86400
+        days_left = (ct - now).days
         if days_left < 0 or days_left > max_days:
             continue
 
-        prob = m["probability"]
-        price = prob / 100
-        if price <= 0 or price >= 1:
-            continue
-        edge = max(prob, 100 - prob) - 50
-        ann = (edge / 100) / max(days_left, 0.04) * 365 * 100  # 0.04 = ~1 hour floor
-
-        if total_hours < 24:
+        hours_left = days_left * 24
+        if days_left == 0:
             urgency = "TODAY"
-        elif total_hours < 48:
+        elif days_left == 1:
             urgency = "TOMORROW"
         elif days_left <= 3:
-            urgency = "THIS_WEEK"
+            urgency = "3 DAYS"
         else:
-            urgency = "SOON"
-
-        hours_left = round(total_hours, 1) if total_hours < 48 else None
-        close_iso = ct.isoformat()
+            urgency = "THIS WEEK"
 
         results.append({
-            "id": m["id"],
-            "title": m["title"],
-            "platform": m["platform"],
-            "probability": prob,
-            "volume": m.get("volume", 0) or 0,
-            "url": m.get("url", ""),
-            "close_time": close_iso,
-            "days_left": round(days_left, 2),
+            **m,
+            "days_left": days_left,
             "hours_left": hours_left,
-            "annualized_return": round(ann, 2),
             "urgency": urgency,
         })
 
     results.sort(key=lambda x: x["days_left"])
-    return results
+    return {"markets": results, "count": len(results), "max_days": max_days}
 
 
 @app.get("/arb/fast")

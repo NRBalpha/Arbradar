@@ -1,16 +1,26 @@
 Only modify index.html. Never touch main.py.
 
-In updatePopupSplit() function, add this check
-at the very beginning after getting the arb:
+Add a new tab called "Fast" between Tail-End 
+and Market Browser tabs.
 
-If arb.gap > 50, do not calculate profit at all.
-Instead show this message in the split section:
+When Fast tab is clicked fetch /markets/fast?max_days=7
+and display a table with columns:
+MARKET | PLATFORM | CLOSES | PROBABILITY | ACTION
 
-"Gap is too large (X%) to be a real arb.
- Verify both markets are actually the same 
- event before placing any trade."
+For CLOSES column show urgency badge:
+TODAY = red badge
+TOMORROW = orange badge
+3 DAYS = amber badge
+THIS WEEK = gray badge
 
-Show this in amber color and hide the YES/NO
-split bar and all profit calculations entirely.
+If days_left < 2 show countdown:
+"Closes in Xh Ym"
 
-Only show split calculations when gap <= 50.
+Each row clickable opens market popup.
+
+At top of tab show toggle buttons:
+[TODAY] [THIS WEEK] [ALL]
+Clicking filters the table.
+
+If no markets found show:
+"No markets closing within 7 days found"

@@ -6222,3 +6222,118 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 2026-03-20 22:39:36,044 WARNING [opinion] no working endpoint found
 2026-03-20 22:39:36,047 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
 2026-03-20 22:39:36,047 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:11,843 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:11,867 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:11,952 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:11,968 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,020 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,062 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,223 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,237 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,251 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,285 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,299 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,314 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,334 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:12,350 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:13,482 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:13,831 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:13,835 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:13,836 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:13,860 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:13,864 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:13,865 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:16,361 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:16,853 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:16,869 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:16,877 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:16,877 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:16,877 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:16,877 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:41:24,354 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:24,371 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:24,388 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:24,404 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:24,418 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:24,431 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:24,444 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:26,560 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,578 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,596 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,621 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,643 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,663 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,681 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,704 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,722 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,741 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,758 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,773 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,788 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,804 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,821 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,822 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:26,824 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,824 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:26,826 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,827 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:26,829 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,829 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:26,832 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,832 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:26,836 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,836 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:26,838 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:26,838 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:28,929 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:28,946 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:28,960 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:28,974 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:28,989 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,008 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,027 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,050 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,076 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,102 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,128 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,148 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,166 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:29,182 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,261 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:41,283 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:41,296 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:41,311 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:41,325 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:41,338 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:41,352 WARNING [opinion] https://opinion.markets/api/markets failed: 
+2026-03-20 22:41:41,367 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,380 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,393 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,407 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,421 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,434 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,448 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,462 WARNING [opinion] https://opinionmarkets.com/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,474 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,488 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,502 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,516 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,529 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,543 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,543 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:41,545 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,545 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:41,548 WARNING [opinion] https://opinionmarkets.io/api/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,563 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:41,563 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:49,281 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:49,281 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:49,283 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:49,283 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:49,345 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:49,345 WARNING [opinion] no working endpoint found
+2026-03-20 22:41:49,671 WARNING [opinion] https://opinionmarkets.io/api/markets?status=open failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:41:49,671 WARNING [opinion] no working endpoint found
+2026-03-20 22:44:22,242 WARNING [metaculus] all attempts failed, returning []
+2026-03-20 22:44:22,263 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-20 22:44:22,284 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
