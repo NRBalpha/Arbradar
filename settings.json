@@ -1,0 +1,16 @@
+{
+  "bankroll": 500,
+  "min_gap": 1.5,
+  "min_volume": 0,
+  "half_kelly": true,
+  "alert_threshold": 5,
+  "notifications": true,
+  "auto_refresh": 90,
+  "platforms": {
+    "poly": true,
+    "predict": true,
+    "manifold": true,
+    "metaculus": true,
+    "opinion": true
+  }
+}

@@ -1,0 +1,23 @@
+You are the BACKEND agent for ArbRadar.
+Only modify main.py. Never touch index.html.
+
+Tasks:
+1. Fix Metaculus — add METACULUS_API_TOKEN 
+   support from .env file in the request headers
+2. Remove ALL simulated/demo/fake data
+3. Fix /arb/cross to deduplicate results
+4. Make sure every platform fetch has retry logic
+```
+
+**Save this as `frontend.txt` in your arbradar folder:**
+```
+You are the FRONTEND agent for ArbRadar.
+Only modify index.html. Never touch main.py.
+
+Tasks:
+1. Replace all old teal/purple colors with:
+   --green:#10b981 --red:#ef4444 
+   --amber:#f59e0b --blue:#3b82f6
+2. Remove all [demo] and [sim] badges
+3. Fix empty state messages for all tabs
+4. Make sure market popup opens on card click

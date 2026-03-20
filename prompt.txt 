@@ -1,0 +1,286 @@
+Remove ALL demo, simulated, and fake data from ArbRadar.
+Every single thing shown to the user must be 100% real 
+live data from actual APIs. This is a complete purge of
+anything that is not real.
+
+════════════════════════════════════════════
+PART 1 — REMOVE FROM BACKEND (main.py)
+════════════════════════════════════════════
+
+── REMOVE SIMULATED ARB PAIRS ─────────────
+
+Find and DELETE this entire block (the 3 fake pairs
+injected when no real arb is found):
+
+The block that creates pair_1, pair_2, pair_3 with
+titles like:
+- "Federal Reserve rate cut — June 2026 FOMC"
+- "Bitcoin above $120,000 by end of Q2 2026"  
+- "US unemployment rate above 5% in 2026"
+
+Delete all of it. Do not replace with anything.
+
+Also delete any code that looks like:
+if len(arb_opportunities) == 0:
+    arb_opportunities.extend([simulated pairs])
+
+Or any variation like:
+if not results:
+    return fallback_data
+
+── REMOVE SIMULATED DUTCH BOOK ────────────
+
+Find and DELETE the hardcoded Dutch-book example:
+The one with event "2026 US Presidential Election Winner"
+with 3 fake outcomes Democrat/Republican/Third party.
+
+Delete it completely.
+
+Also delete any logic that says:
+if len(dutch_results) == 0:
+    dutch_results.append(simulated_dutch_example)
+
+── REMOVE DEMO AI RESPONSES ───────────────
+
+In the ai_predict function, the demo fallback 
+currently returns fake analysis like:
+"Based on analysis, the current price appears fair.
+The market appears efficiently priced."
+
+Replace the entire demo fallback with ONLY this:
+
+if not api_key or api_key == "your_key_here":
+    return {
+        "error": "no_api_key",
+        "message": "Add ANTHROPIC_API_KEY to your .env file to enable AI analysis. Get your key at console.anthropic.com",
+        "demo": True
+    }
+
+Do NOT return fake fair_value, fake recommendation,
+fake key_factors, or fake reasoning.
+Return only the error message.
+
+── REMOVE ALL SIMULATED FLAGS ─────────────
+
+Search the entire main.py for these and delete:
+- Any variable named: simulated, demo_data, 
+  fake_data, fallback_data, mock_data, sample_data
+- Any dict key: "simulated": True
+- Any comment saying: # simulated, # demo, # fake,
+  # fallback, # mock, # example data
+- Any function that generates fake market data
+
+── REAL EMPTY STATES IN BACKEND ───────────
+
+When platforms return no data, return honest responses:
+
+/arb/cross with no matches:
+{
+  "opportunities": [],
+  "count": 0,
+  "message": "No cross-platform arb found above the minimum gap threshold. Try lowering Min Gap % or wait for market inefficiencies.",
+  "min_gap_used": min_gap,
+  "markets_scanned": total_market_count
+}
+
+/arb/dutch with no matches:
+{
+  "opportunities": [],
+  "count": 0,
+  "message": "No math arb found. All multi-outcome markets are currently efficiently priced (sum >= 99%).",
+  "markets_scanned": poly_market_count
+}
+
+/arb/tail with no matches:
+{
+  "opportunities": [],
+  "count": 0,
+  "message": "No tail-end opportunities above threshold. Markets with probability >= min_prob% are not showing profitable returns.",
+  "min_prob_used": min_prob
+}
+
+════════════════════════════════════════════
+PART 2 — REMOVE FROM FRONTEND (index.html)
+════════════════════════════════════════════
+
+── REMOVE ALL DEMO/SIMULATED DISPLAY CODE ─
+
+Search index.html and DELETE:
+
+1. Any code block that injects fake arb rows 
+   into the table when real data is empty
+
+2. The [demo] or [sim] badge rendering code:
+   Any HTML like: 
+   ${arb.simulated ? '<span>[demo]</span>' : ''}
+   Delete the entire ternary/conditional
+
+3. Any JS array containing hardcoded market data
+   like fake Fed/Bitcoin/election markets
+
+4. Any function named something like:
+   generateDemoData(), getSimulatedMarkets(),
+   injectFallbackData(), getDemoOpportunities()
+   
+5. Any variable initialized with fake data:
+   const demoArbs = [...]
+   const sampleMarkets = [...]
+   const fallbackOpps = [...]
+   Delete all of these
+
+── FIX EMPTY STATE DISPLAYS ───────────────
+
+When the arb table is empty, show this clean UI:
+
+function renderEmptyArb(message, subtext) {
+  return `
+    <tr>
+      <td colspan="7" style="
+        padding: 60px 20px;
+        text-align: center;
+      ">
+        <div style="
+          font-size: 32px;
+          opacity: 0.15;
+          margin-bottom: 12px;
+        ">◎</div>
+        <div style="
+          font-size: 14px;
+          color: var(--text-2);
+          margin-bottom: 6px;
+        ">${message}</div>
+        <div style="
+          font-size: 12px;
+          color: var(--text-3);
+        ">${subtext}</div>
+      </td>
+    </tr>
+  `;
+}
+
+Use it like:
+// Cross-platform empty
+renderEmptyArb(
+  "No arbitrage opportunities found",
+  "Try lowering the Min Gap % threshold or refresh to check latest prices"
+)
+
+// Dutch-book empty  
+renderEmptyArb(
+  "No math arb found",
+  "All multi-outcome markets are efficiently priced right now"
+)
+
+// Tail-end empty
+renderEmptyArb(
+  "No tail-end trades found",
+  "No markets currently trading above 92% with profitable annualized returns"
+)
+
+// Market browser empty
+renderEmptyArb(
+  "No markets loaded",
+  "Check that uvicorn is running and platform APIs are responding"
+)
+
+── FIX AI PANEL FOR NO API KEY ────────────
+
+When AI returns error: "no_api_key", show this 
+instead of any fake analysis:
+
+function renderAINoKey() {
+  document.getElementById('mp-ai-loading').style.display = 'none';
+  document.getElementById('mp-ai-result').classList.remove('hidden');
+  
+  document.getElementById('mp-ai-rec').textContent = 'NO KEY';
+  document.getElementById('mp-ai-rec').className = 'mp-ai-rec avoid';
+  document.getElementById('mp-ai-fv').textContent = '';
+  document.getElementById('mp-ai-reason').innerHTML = `
+    <span style="color:var(--text-3)">
+      AI analysis disabled. Add your 
+      <span style="color:var(--amber)">ANTHROPIC_API_KEY</span> 
+      to the .env file to enable real market analysis.
+      <br><br>
+      Get your free key at 
+      <a href="https://console.anthropic.com" 
+         target="_blank" 
+         style="color:var(--blue);text-decoration:none">
+        console.anthropic.com ↗
+      </a>
+    </span>
+  `;
+}
+
+── FIX PLATFORM STATUS ────────────────────
+
+Remove any hardcoded platform counts.
+All counts must come from the actual API response.
+
+In the platform status sidebar, never show a count 
+unless it came from a real /markets/all response.
+
+If a platform is not in the response, show:
+- Gray dot
+- "—" for count
+- "UNKNOWN" status
+
+Never show a platform as green unless the backend
+confirmed it returned markets in this session.
+
+── REMOVE FAKE MARKET CARDS ───────────────
+
+If the market browser has any hardcoded cards
+(not from /markets/all API call) delete them.
+
+The market grid must only populate from:
+const data = await fetch('/markets/all')
+const markets = data.markets
+
+If data.markets is empty or the fetch fails:
+Show the empty state message
+Never show hardcoded fake market cards
+
+════════════════════════════════════════════
+PART 3 — VERIFY EVERYTHING IS REAL
+════════════════════════════════════════════
+
+After making all changes, do this verification:
+
+1. Search main.py for the word "simulated" 
+   — should find 0 results
+   
+2. Search main.py for the word "demo"
+   — should only find it in the no_api_key 
+     error response, nowhere else
+     
+3. Search main.py for the word "fake"
+   — should find 0 results
+   
+4. Search index.html for "[demo]" and "[sim]"
+   — should find 0 results
+   
+5. Search index.html for any hardcoded market 
+   titles like "Federal Reserve" or "Bitcoin" 
+   in JS arrays — should find 0 results
+
+6. Restart uvicorn: uvicorn main:app --reload
+
+7. Open index.html with NO internet connection
+   — the app should show empty states, NOT 
+     fake data (proves no hardcoded fallbacks)
+
+8. Open with internet — should show only real
+   markets from Polymarket, PredictIt, Manifold
+
+9. If arb opportunities are 0 — the table shows
+   the empty state message, not fake rows
+
+10. The word count of fake/demo/simulated data 
+    in the codebase should be ZERO after this.
+
+Print when done:
+"Demo data purge complete.
+ ArbRadar now shows 100% live data only.
+ Simulated entries removed: X
+ Demo functions removed: X  
+ Hardcoded markets removed: X"

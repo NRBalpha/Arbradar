@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ArbRadar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080b12;--bg-card:#111827;
+  --border:rgba(255,255,255,0.06);--border-active:rgba(255,255,255,0.12);
+  --green:#10b981;--green-glow:rgba(16,185,129,0.15);--green-dim:rgba(16,185,129,0.08);
+  --red:#ef4444;--red-dim:rgba(239,68,68,0.1);
+  --amber:#f59e0b;--amber-dim:rgba(245,158,11,0.1);
+  --blue:#3b82f6;--blue-dim:rgba(59,130,246,0.1);
+  --text-1:#f1f5f9;--text-2:#94a3b8;--text-3:#475569;
+  --font-text:'DM Sans',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --sidebar-w:220px;--right-w:320px;
+  --radius:8px;--radius-lg:12px;
+}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text-2);font-family:var(--font-text);font-size:13px;line-height:1.5}
+.mono{font-family:var(--font-mono)}
+a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:3px}
+
+/* Noise texture */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  background-repeat:repeat;opacity:.4}
+
+/* Layout */
+.app{display:flex;height:100vh;position:relative}
+.sidebar{width:var(--sidebar-w);background:var(--bg-card);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;flex-shrink:0;z-index:10;position:relative}
+.main-content{flex:1;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column}
+.right-panel{width:var(--right-w);background:var(--bg-card);border-left:1px solid var(--border);
+  display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;transition:width .3s}
+.right-panel.collapsed{width:0;border:none;overflow:hidden}
+
+/* Sidebar */
+.sidebar-logo{padding:20px 16px;border-bottom:1px solid var(--border)}
+.sidebar-logo h1{font-size:16px;font-weight:800;color:var(--text-1);letter-spacing:1.5px}
+.sidebar-logo span{font-size:10px;color:var(--text-3);font-weight:400;letter-spacing:0;display:block;margin-top:2px}
+.sidebar-nav{flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius);
+  color:var(--text-3);cursor:pointer;transition:all .15s;font-size:13px;font-weight:500;border:none;background:none;width:100%;text-align:left;font-family:var(--font-text)}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text-2)}
+.nav-item.active{background:var(--green-dim);color:var(--green)}
+.nav-item .icon{width:18px;text-align:center;font-size:14px;opacity:.7}
+.nav-item.active .icon{opacity:1}
+.nav-item .badge{margin-left:auto;background:var(--green-dim);color:var(--green);font-size:10px;
+  padding:1px 6px;border-radius:10px;font-weight:600}
+.sidebar-status{padding:12px 16px;border-top:1px solid var(--border);font-size:11px}
+.status-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:6px}
+.status-dot.ok{background:var(--green)}.status-dot.err{background:var(--red)}
+.status-row{display:flex;align-items:center;padding:3px 0;gap:4px}
+.status-row span:last-child{margin-left:auto;color:var(--text-3);font-size:10px}
+
+/* Top bar for main content */
+.content-header{display:flex;align-items:center;padding:14px 24px;border-bottom:1px solid var(--border);
+  background:var(--bg-card);flex-shrink:0;gap:12px;min-height:52px}
+.content-header h2{font-size:15px;font-weight:700;color:var(--text-1);white-space:nowrap}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.refresh-timer{color:var(--amber);font-size:12px;font-weight:600;min-width:36px}
+.last-update{color:var(--text-3);font-size:11px}
+
+/* Buttons */
+button{font-family:var(--font-text);cursor:pointer;border:none;border-radius:var(--radius);font-size:12px;padding:6px 12px;transition:all .15s}
+.btn-primary{background:var(--green);color:#000;font-weight:600}
+.btn-primary:hover{opacity:.85;box-shadow:0 0 20px var(--green-glow)}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text-2)}
+.btn-outline:hover{border-color:var(--border-active);color:var(--text-1)}
+.btn-outline.active{border-color:var(--green);color:var(--green);background:var(--green-dim)}
+.btn-sm{font-size:11px;padding:4px 10px}
+.btn-ghost{background:none;border:none;color:var(--text-3);padding:4px 8px}
+.btn-ghost:hover{color:var(--text-1)}
+.btn-danger{background:var(--red-dim);color:var(--red);border:1px solid rgba(239,68,68,0.2)}
+input[type=number],input[type=text],select,textarea{background:var(--bg);border:1px solid var(--border);color:var(--text-1);
+  font-family:var(--font-text);font-size:13px;padding:7px 10px;border-radius:var(--radius);outline:none;transition:border .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--green)}
+select{cursor:pointer}
+
+/* Cards */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;transition:border .2s}
+.card:hover{border-color:var(--border-active)}
+.card-glow{box-shadow:0 0 30px rgba(16,185,129,0.06)}
+
+/* Stats cards row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:20px 24px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px}
+.stat-card .label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);font-weight:600}
+.stat-card .value{font-size:28px;font-weight:800;color:var(--text-1);margin-top:4px;line-height:1.1;font-family:var(--font-mono)}
+.stat-card .value.green{color:var(--green)}.stat-card .value.blue{color:var(--blue)}
+.stat-card .value.amber{color:var(--amber)}.stat-card .value.red{color:var(--red)}
+.stat-card .sub{font-size:11px;color:var(--text-3);margin-top:4px}
+
+/* Data tables */
+.data-table{width:100%;border-collapse:collapse}
+.data-table thead th{text-align:left;padding:8px 12px;font-size:10px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--text-3);border-bottom:1px solid var(--border);white-space:nowrap;font-weight:600;
+  position:sticky;top:0;background:var(--bg);z-index:2}
+.data-table tbody td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:middle}
+.data-table tbody tr{transition:background .15s;cursor:pointer}
+.data-table tbody tr:hover{background:rgba(255,255,255,0.04)}
+
+/* Platform tags */
+.plat-tag{display:inline-block;font-size:9px;padding:2px 7px;border-radius:4px;font-weight:700;letter-spacing:.5px}
+.plat-tag.poly{background:var(--blue-dim);color:var(--blue)}.plat-tag.predict{background:var(--amber-dim);color:var(--amber)}
+.plat-tag.manifold{background:var(--green-dim);color:var(--green)}.plat-tag.metaculus{background:var(--red-dim);color:var(--red)}
+.plat-tag.opinion{background:var(--blue-dim);color:var(--blue)}
+
+/* Gap colors */
+.text-green{color:var(--green)}.text-red{color:var(--red)}.text-amber{color:var(--amber)}.text-blue{color:var(--blue)}
+.text-muted{color:var(--text-3)}.text-primary{color:var(--text-1)}
+.fw-700{font-weight:700}.fw-600{font-weight:600}
+
+/* Grade badges */
+.grade{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;
+  font-size:14px;font-weight:800}
+.grade.A{background:var(--green-dim);color:var(--green)}.grade.B{background:var(--blue-dim);color:var(--blue)}
+.grade.C{background:var(--amber-dim);color:var(--amber)}.grade.D,.grade.F{background:var(--red-dim);color:var(--red)}
+
+/* AI recommendation icons */
+.ai-rec{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px}
+.ai-rec.BUY_YES{background:var(--green-dim);color:var(--green)}
+.ai-rec.BUY_NO{background:var(--red-dim);color:var(--red)}
+.ai-rec.AVOID{background:rgba(255,255,255,0.04);color:var(--text-3)}
+.ai-rec.MONITOR{background:var(--amber-dim);color:var(--amber)}
+
+/* Page content */
+.page{display:none;flex:1;overflow-y:auto;padding:0}
+.page.active{display:flex;flex-direction:column}
+.page-body{padding:20px 24px;flex:1}
+
+/* Filter bar */
+.filter-bar{display:flex;align-items:center;gap:10px;padding:12px 24px;border-bottom:1px solid var(--border);
+  background:var(--bg-card);flex-wrap:wrap}
+.filter-bar input[type=text]{width:220px;background:var(--bg);font-size:12px}
+.filter-group{display:flex;gap:4px}
+
+/* Market cards grid */
+.market-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.market-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:14px;cursor:pointer;transition:all .2s}
+.market-card:hover{border-color:var(--green);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.market-card-title{font-size:13px;color:var(--text-1);font-weight:500;margin-bottom:8px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4}
+.market-card-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px}
+.prob-bar{width:100%;height:3px;background:var(--border);border-radius:2px;margin:8px 0;overflow:hidden}
+.prob-fill{height:100%;background:var(--green);border-radius:2px;transition:width .6s ease}
+
+/* Popup */
+.popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:400;opacity:0;pointer-events:none;transition:opacity .2s}
+.popup-overlay.open{opacity:1;pointer-events:auto}
+.popup-card{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.95);max-width:400px;width:calc(100% - 32px);
+  background:var(--bg-card);border:1px solid var(--border);border-radius:16px;z-index:500;
+  opacity:0;pointer-events:none;transition:all .2s ease;max-height:90vh;overflow-y:auto;
+  box-shadow:0 24px 80px rgba(0,0,0,.6)}
+.popup-card.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.popup-card::-webkit-scrollbar{width:4px}.popup-card::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:2px}
+.popup-head{padding:16px 20px 12px;display:flex;align-items:start;gap:10px}
+.popup-head .popup-title{flex:1;font-size:13px;font-weight:600;color:var(--text-1);line-height:1.4}
+.popup-close{background:none;border:none;color:var(--text-3);font-size:18px;cursor:pointer;padding:2px 6px;border-radius:4px;line-height:1}
+.popup-close:hover{color:var(--text-1);background:rgba(255,255,255,0.06)}
+.popup-prob{text-align:center;padding:4px 20px 16px;border-bottom:1px solid var(--border)}
+.popup-prob .big-num{font-size:56px;font-weight:800;font-family:var(--font-mono);line-height:1}
+.popup-prob .big-label{font-size:11px;color:var(--text-3);margin-top:2px}
+.popup-ai{padding:16px 20px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-2);min-height:60px}
+.popup-ai .ai-dots{display:inline-flex;gap:4px;align-items:center}
+.popup-ai .ai-dots span{width:6px;height:6px;border-radius:50%;background:var(--text-3);animation:aiDot 1.2s infinite}
+.popup-ai .ai-dots span:nth-child(2){animation-delay:.2s}
+.popup-ai .ai-dots span:nth-child(3){animation-delay:.4s}
+@keyframes aiDot{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.popup-sizing{padding:16px 20px;border-bottom:1px solid var(--border)}
+.popup-sizing .amount-row{display:flex;gap:8px;margin-bottom:8px}
+.popup-sizing .amount-row input{flex:1;font-family:var(--font-mono);font-size:14px;padding:8px 10px 8px 24px}
+.popup-sizing .dollar-sign{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:14px;font-family:var(--font-mono)}
+.popup-sizing .input-wrap{position:relative;flex:1}
+.popup-sizing .quick-row{display:flex;gap:4px;flex-wrap:wrap}
+.popup-sizing .quick-row button{font-size:11px;padding:4px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text-2);border-radius:var(--radius);cursor:pointer;font-family:var(--font-mono)}
+.popup-sizing .quick-row button:hover{border-color:var(--green);color:var(--green)}
+.popup-split{padding:12px 20px;border-bottom:1px solid var(--border)}
+.popup-split-bar{display:flex;height:36px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.popup-split-yes{background:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;font-family:var(--font-mono);transition:width .3s}
+.popup-split-no{background:var(--red);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;font-family:var(--font-mono);transition:width .3s}
+.popup-split-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:var(--text-3)}
+.popup-actions{padding:16px 20px;display:flex;gap:8px;flex-wrap:wrap}
+.popup-actions .btn-log{background:var(--bg);border:1px solid var(--border);color:var(--text-2);padding:8px 14px;border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer}
+.popup-actions .btn-log:hover{border-color:var(--text-2)}
+.popup-actions .btn-trade{background:var(--green);color:#000;padding:8px 14px;border-radius:var(--radius);font-size:12px;font-weight:700;cursor:pointer;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.popup-actions .btn-trade:hover{opacity:.85}
+.popup-actions .btn-arb{background:var(--bg);border:1px solid var(--border);padding:6px 10px;border-radius:var(--radius);font-size:11px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:3px}
+.popup-actions .btn-arb.yes{color:var(--green);border-color:rgba(16,185,129,0.3)}
+.popup-actions .btn-arb.yes:hover{background:var(--green-dim)}
+.popup-actions .btn-arb.no{color:var(--red);border-color:rgba(239,68,68,0.3)}
+.popup-actions .btn-arb.no:hover{background:var(--red-dim)}
+
+/* Position sizing */
+.size-output{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
+.size-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px}
+.size-row .label{color:var(--text-3)}.size-row .val{color:var(--green);font-weight:600;font-family:var(--font-mono)}
+.quick-amounts{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.quick-amounts button{font-size:11px;padding:4px 10px}
+
+/* Right panel - AI chat */
+.chat-container{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.chat-header{padding:12px 16px;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;
+  color:var(--text-1);display:flex;align-items:center;gap:8px}
+.chat-messages{flex:1;overflow-y:auto;padding:12px 16px}
+.chat-msg{margin-bottom:12px;font-size:12px;line-height:1.5}
+.chat-msg.user{text-align:right}
+.chat-msg .bubble{display:inline-block;padding:8px 12px;border-radius:var(--radius);max-width:90%;text-align:left}
+.chat-msg.user .bubble{background:var(--green-dim);color:var(--text-1)}
+.chat-msg.ai .bubble{background:var(--bg);border:1px solid var(--border);color:var(--text-2)}
+.chat-input-row{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
+.chat-input-row input{flex:1;font-size:12px}
+.chat-typing{padding:4px 16px;font-size:11px;color:var(--text-3);font-style:italic}
+
+/* Kelly calculator in right panel */
+.kelly-section{padding:16px;border-bottom:1px solid var(--border)}
+.kelly-section .title{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--green);
+  font-weight:700;margin-bottom:10px}
+.kelly-section label{display:block;font-size:10px;color:var(--text-3);margin:8px 0 3px;text-transform:uppercase;letter-spacing:.5px}
+.kelly-section input{width:100%}
+.kelly-results{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin-top:10px}
+.kelly-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px;border-bottom:1px solid var(--border)}
+.kelly-row:last-child{border:none}
+.kelly-row .kl{color:var(--text-3)}.kelly-row .kv{color:var(--green);font-weight:700}
+
+/* Skeleton loader */
+.skeleton{background:linear-gradient(90deg,rgba(255,255,255,.03) 25%,rgba(255,255,255,.06) 50%,rgba(255,255,255,.03) 75%);
+  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;height:16px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* Toast */
+.toast-container{position:fixed;bottom:20px;right:20px;z-index:1000;display:flex;flex-direction:column-reverse;gap:8px}
+.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 16px;
+  font-size:12px;color:var(--text-2);animation:toastIn .3s;max-width:360px;
+  box-shadow:0 8px 32px rgba(0,0,0,.4);display:flex;align-items:center;gap:8px}
+.toast.success{border-color:var(--green)}.toast.warning{border-color:var(--amber)}.toast.error{border-color:var(--red)}
+.toast .icon{font-size:14px}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* Welcome screen */
+.welcome{position:fixed;inset:0;z-index:2000;background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;transition:opacity .5s}
+.welcome.hidden{opacity:0;pointer-events:none}
+.welcome h1{font-size:32px;font-weight:800;color:var(--text-1);letter-spacing:3px;margin-bottom:8px}
+.welcome p{color:var(--text-3);font-size:13px;margin-bottom:24px}
+.welcome-progress{width:280px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:20px}
+.welcome-progress-fill{height:100%;background:var(--green);border-radius:2px;transition:width .4s;width:0}
+.welcome-status{text-align:left;font-size:12px;color:var(--text-3);min-height:120px}
+.welcome-status div{padding:3px 0;transition:color .3s}
+.welcome-status .done{color:var(--green)}
+.welcome-status .loading{color:var(--amber)}
+.welcome-status .pending{color:var(--text-3)}
+
+/* Status pulse */
+@keyframes statusPulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* Chart containers */
+.chart-container{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
+.chart-container canvas{max-height:240px}
+
+/* Misc */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-3)}
+.empty-state .empty-icon{font-size:40px;margin-bottom:12px;opacity:.3}
+.empty-state p{font-size:13px;margin-bottom:12px}
+.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gap-bar{height:4px;border-radius:2px;background:var(--border);overflow:hidden;min-width:40px;max-width:80px}
+.gap-bar-fill{height:100%;border-radius:2px;background:var(--green)}
+.flash-up{animation:flashG .6s}
+.flash-down{animation:flashR .6s}
+@keyframes flashG{0%{background:var(--green-dim)}100%{background:transparent}}
+@keyframes flashR{0%{background:var(--red-dim)}100%{background:transparent}}
+
+/* Keyboard shortcuts modal */
+.shortcuts-modal{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+.shortcuts-modal.open{display:flex}
+.shortcuts-box{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:24px;width:400px;max-height:80vh;overflow-y:auto}
+.shortcuts-box h3{font-size:16px;font-weight:700;color:var(--text-1);margin-bottom:16px}
+.shortcut-row{display:flex;align-items:center;padding:6px 0;font-size:13px}
+.shortcut-key{background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:4px;
+  font-size:11px;font-weight:600;color:var(--text-1);margin-right:12px;min-width:32px;text-align:center}
+
+/* Arb Split Calculator */
+.arb-split-bar{display:flex;height:32px;border-radius:6px;overflow:hidden;margin:12px 0;border:1px solid var(--border)}
+.arb-split-yes{background:var(--green);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#000;transition:width .4s ease}
+.arb-split-no{background:var(--red);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;transition:width .4s ease}
+.arb-split-result{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.arb-split-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.arb-split-header .title{font-size:12px;font-weight:700;color:var(--text-1)}
+.arb-split-body{padding:16px}
+.arb-split-row{display:flex;justify-content:space-between;padding:5px 0;font-size:12px;border-bottom:1px solid var(--border)}
+.arb-split-row:last-child{border:none}
+.arb-split-row .lbl{color:var(--text-3)}.arb-split-row .val{font-weight:600}
+.arb-split-section{margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+.arb-split-section .stitle{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);font-weight:700;margin-bottom:8px}
+.arb-split-warn{background:var(--amber-dim);border:1px solid rgba(245,158,11,0.2);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:var(--amber);margin-top:12px;display:flex;align-items:start;gap:8px}
+.arb-split-ok{background:var(--green-dim);border:1px solid rgba(16,185,129,0.2);border-radius:var(--radius);padding:10px 14px;font-size:12px;color:var(--green);margin-top:12px}
+.sensitivity-tbl{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}
+.sensitivity-tbl th{text-align:left;padding:4px 8px;font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--text-3);border-bottom:1px solid var(--border)}
+.sensitivity-tbl td{padding:4px 8px;border-bottom:1px solid var(--border)}
+.sensitivity-tbl tr.current{background:var(--green-dim)}
+.preset-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.preset-btns button{font-size:10px;padding:4px 10px;background:var(--bg);border:1px solid var(--border);color:var(--text-2);border-radius:var(--radius);cursor:pointer;transition:all .15s}
+.preset-btns button:hover{border-color:var(--green);color:var(--green)}
+.arb-tooltip{position:fixed;background:var(--bg-card);border:1px solid var(--green);border-radius:var(--radius);padding:8px 12px;font-size:11px;color:var(--text-2);z-index:300;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 16px rgba(0,0,0,.5);max-width:320px;white-space:nowrap}
+.arb-tooltip.visible{opacity:1}
+
+@media(max-width:1200px){.right-panel{display:none}}
+@media(max-width:900px){.sidebar{display:none}.stats-row{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- Welcome Screen -->
+<div class="welcome" id="welcome">
+  <h1>ARBRADAR</h1>
+  <p>Loading market intelligence...</p>
+  <div class="welcome-progress"><div class="welcome-progress-fill" id="welcomeBar"></div></div>
+  <div class="welcome-status" id="welcomeStatus"></div>
+</div>
+
+<div class="app" id="app" style="display:none">
+
+<!-- Left Sidebar -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <h1>ARBRADAR</h1>
+    <span>v3.0 — prediction market intelligence</span>
+  </div>
+  <div class="sidebar-nav" id="sidebarNav">
+    <button class="nav-item active" data-page="dashboard"><span class="icon">◎</span>Dashboard</button>
+    <button class="nav-item" data-page="arb"><span class="icon">⟳</span>Live Arb<span class="badge" id="navArbBadge">0</span></button>
+    <button class="nav-item" data-page="markets"><span class="icon">◫</span>Markets</button>
+    <button class="nav-item" data-page="calculator"><span class="icon">⊞</span>Calculator</button>
+    <button class="nav-item" data-page="portfolio"><span class="icon">▤</span>Portfolio</button>
+    <button class="nav-item" data-page="watchlist"><span class="icon">★</span>Watchlist</button>
+    <button class="nav-item" data-page="analytics"><span class="icon">◩</span>Analytics</button>
+    <button class="nav-item" data-page="settings"><span class="icon">⚙</span>Settings</button>
+  </div>
+  <div class="sidebar-status" id="sidebarStatus"></div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-content">
+
+<!-- ═══ DASHBOARD ═══ -->
+<div class="page active" id="page-dashboard">
+  <div class="content-header">
+    <h2>Dashboard</h2>
+    <div class="header-right">
+      <span class="last-update" id="lastUpdate">--</span>
+      <span class="refresh-timer" id="timer">90s</span>
+      <button class="btn-primary btn-sm" onclick="refresh()">Refresh</button>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card"><div class="label">Live Arb Opportunities</div><div class="value green" id="statArbs">--</div><div class="sub">cross-platform</div></div>
+    <div class="stat-card"><div class="label">Best Gap</div><div class="value blue" id="statBestGap">--</div><div class="sub">fee-adjusted</div></div>
+    <div class="stat-card"><div class="label">Markets Tracked</div><div class="value" id="statMarkets">--</div><div class="sub">across all platforms</div></div>
+    <div class="stat-card"><div class="label">Today P&L</div><div class="value amber" id="statPnl">$0</div><div class="sub">realized</div></div>
+  </div>
+  <div class="page-body" style="display:grid;grid-template-columns:3fr 2fr;gap:16px">
+    <div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:12px">Top Opportunities</h3>
+      <div id="dashTopArbs"></div>
+    </div>
+    <div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:12px">AI Market Pulse</h3>
+      <div id="dashAIPulse" class="card" style="padding:14px;font-size:12px;color:var(--text-2)">
+        Loading AI insights...
+      </div>
+      <h3 style="font-size:13px;font-weight:700;color:var(--text-1);margin:16px 0 12px">Recent Activity</h3>
+      <div id="dashRecent" style="font-size:12px;color:var(--text-3)">No recent activity</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LIVE ARB ═══ -->
+<div class="page" id="page-arb">
+  <div class="content-header">
+    <h2>Live Arbitrage</h2>
+    <div class="header-right">
+      <span class="last-update" id="lastUpdate2">--</span>
+      <button class="btn-primary btn-sm" onclick="refresh()">Refresh</button>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <input type="text" id="arbSearch" placeholder="Search markets...">
+    <label style="font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:4px">Min Gap <input type="number" id="minGap" value="1.5" min="0" step="0.5" style="width:60px"></label>
+    <label style="font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:4px">Min Vol <input type="number" id="minVol" value="0" min="0" step="any" style="width:70px"></label>
+    <div class="filter-group" id="arbTabBtns">
+      <button class="btn-outline btn-sm active" data-tab="cross">Cross-Platform</button>
+      <button class="btn-outline btn-sm" data-tab="dutch">Math Arb</button>
+      <button class="btn-outline btn-sm" data-tab="tail">Tail-End</button>
+      <button class="btn-outline btn-sm" data-tab="fast">⚡ Fast</button>
+    </div>
+    <label style="font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:4px"><input type="checkbox" id="halfKelly" checked style="accent-color:var(--green)"> Half Kelly</label>
+  </div>
+  <div class="page-body" style="padding-top:0">
+    <div id="arbContent"></div>
+  </div>
+</div>
+
+<!-- ═══ MARKETS ═══ -->
+<div class="page" id="page-markets">
+  <div class="content-header"><h2>Market Browser</h2></div>
+  <div class="filter-bar">
+    <input type="text" id="mktSearch" placeholder="Search markets..." style="width:240px">
+    <div class="filter-group" id="mktPlatBtns">
+      <button class="btn-outline btn-sm active" data-p="all">All</button>
+      <button class="btn-outline btn-sm" data-p="poly">Polymarket</button>
+      <button class="btn-outline btn-sm" data-p="predict">PredictIt</button>
+      <button class="btn-outline btn-sm" data-p="manifold">Manifold</button>
+      <button class="btn-outline btn-sm" data-p="metaculus">Metaculus</button>
+    </div>
+    <select id="mktSort"><option value="volume">Volume</option><option value="probability">Probability</option></select>
+    <span style="margin-left:auto;font-size:11px;color:var(--text-3)" id="mktCount">--</span>
+  </div>
+  <div class="page-body"><div class="market-grid" id="mktGrid"></div></div>
+</div>
+
+<!-- ═══ CALCULATOR ═══ -->
+<div class="page" id="page-calculator">
+  <div class="content-header"><h2>Calculator</h2></div>
+  <div class="page-body">
+    <div class="filter-group" id="calcModeBtns" style="margin-bottom:16px">
+      <button class="btn-outline active" data-mode="kelly">Kelly Criterion</button>
+      <button class="btn-outline" data-mode="arb">Arb Calculator</button>
+      <button class="btn-outline" data-mode="arbsplit">Arb Split</button>
+      <button class="btn-outline" data-mode="position">Position Sizing</button>
+    </div>
+    <div class="card" style="max-width:500px" id="calcContent"></div>
+  </div>
+</div>
+
+<!-- ═══ PORTFOLIO ═══ -->
+<div class="page" id="page-portfolio">
+  <div class="content-header"><h2>Portfolio</h2></div>
+  <div class="page-body">
+    <div class="stats-row" style="padding:0 0 16px">
+      <div class="stat-card"><div class="label">Total P&L</div><div class="value green" id="portPnl">$0</div></div>
+      <div class="stat-card"><div class="label">Win Rate</div><div class="value blue" id="portWinRate">--</div></div>
+      <div class="stat-card"><div class="label">Trades Taken</div><div class="value" id="portTaken">0</div></div>
+      <div class="stat-card"><div class="label">Avg Edge</div><div class="value amber" id="portEdge">--</div></div>
+    </div>
+    <div id="portContent"></div>
+  </div>
+</div>
+
+<!-- ═══ WATCHLIST ═══ -->
+<div class="page" id="page-watchlist">
+  <div class="content-header"><h2>Watchlist</h2></div>
+  <div class="page-body" id="watchlistContent"></div>
+</div>
+
+<!-- ═══ ANALYTICS ═══ -->
+<div class="page" id="page-analytics">
+  <div class="content-header"><h2>Analytics</h2></div>
+  <div class="page-body">
+    <div class="stats-row" style="padding:0 0 16px">
+      <div class="stat-card"><div class="label">Total P&L</div><div class="value green" id="anPnl">$0</div></div>
+      <div class="stat-card"><div class="label">Win Rate</div><div class="value blue" id="anWinRate">0%</div></div>
+      <div class="stat-card"><div class="label">Avg Edge</div><div class="value amber" id="anEdge">0%</div></div>
+      <div class="stat-card"><div class="label">Sharpe Ratio</div><div class="value" id="anSharpe">0</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+      <div class="chart-container"><canvas id="chartPnl"></canvas></div>
+      <div class="chart-container"><canvas id="chartPlatform"></canvas></div>
+    </div>
+    <div id="anHistory"></div>
+  </div>
+</div>
+
+<!-- ═══ SETTINGS ═══ -->
+<div class="page" id="page-settings">
+  <div class="content-header"><h2>Settings</h2></div>
+  <div class="page-body">
+    <div class="card" style="max-width:500px" id="settingsContent"></div>
+  </div>
+</div>
+
+</div><!-- /main-content -->
+
+<!-- Right Panel -->
+<aside class="right-panel" id="rightPanel">
+  <div class="kelly-section">
+    <div class="title">Quick Kelly</div>
+    <label>Bankroll ($)</label><input type="number" id="kellyBank" value="500" min="1" step="any">
+    <label>Edge (%)</label><input type="number" id="kellyEdge" value="5" min="0" step="any">
+    <label>Win Prob (%)</label><input type="number" id="kellyProb" value="55" min="0" max="100" step="1">
+    <div class="kelly-results">
+      <div class="kelly-row"><span class="kl">Full Kelly</span><span class="kv" id="fkAmt">--</span></div>
+      <div class="kelly-row"><span class="kl">Half Kelly</span><span class="kv" id="hkAmt">--</span></div>
+      <div class="kelly-row"><span class="kl">Risk</span><span class="kv" id="kellyRisk">--</span></div>
+    </div>
+  </div>
+  <div class="chat-container">
+    <div class="chat-header"><span style="width:8px;height:8px;border-radius:50%;background:var(--green)"></span> AI Assistant</div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg ai"><div class="bubble">I'm ArbRadar AI. Ask me about any market, arb opportunity, or position sizing strategy.</div></div>
+    </div>
+    <div class="chat-typing" id="chatTyping" style="display:none">Claude is thinking...</div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="Ask AI..." onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="btn-primary btn-sm" onclick="sendChat()">Send</button>
+    </div>
+  </div>
+</aside>
+
+</div><!-- /app -->
+
+<!-- Popup -->
+<div class="popup-overlay" id="popupOverlay"></div>
+<div class="popup-card" id="popupCard">
+  <div id="popupContent"></div>
+</div>
+
+<!-- Keyboard Shortcuts -->
+<div class="shortcuts-modal" id="shortcutsModal" onclick="this.classList.remove('open')">
+  <div class="shortcuts-box" onclick="event.stopPropagation()">
+    <h3>Keyboard Shortcuts</h3>
+    <div class="shortcut-row"><span class="shortcut-key">?</span>Show shortcuts</div>
+    <div class="shortcut-row"><span class="shortcut-key">R</span>Refresh data</div>
+    <div class="shortcut-row"><span class="shortcut-key">/</span>Focus search</div>
+    <div class="shortcut-row"><span class="shortcut-key">Esc</span>Close drawer</div>
+    <div class="shortcut-row"><span class="shortcut-key">1-8</span>Navigate pages</div>
+  </div>
+</div>
+
+<!-- Arb Tooltip -->
+<div class="arb-tooltip" id="arbTooltip"></div>
+
+<!-- Toasts -->
+<div class="toast-container" id="toasts"></div>
+
+<script>
+const API='http://localhost:8000';
+const $=id=>document.getElementById(id);
+const PLAT={poly:'Polymarket',predict:'PredictIt',manifold:'Manifold',metaculus:'Metaculus',opinion:'Opinion'};
+const PLAT_SHORT={poly:'POLY',predict:'PI',manifold:'MAN',metaculus:'META',opinion:'OPN'};
+
+// ── State ──
+let S={
+  cross:[],dutch:[],tail:[],logical:{opportunities:[],count:0},fastMarkets:[],fastArbs:[],
+  allMarkets:[],counts:{},health:{},
+  history:[],stats:{},watchlist:[],settings:{},analytics:{},
+  page:'dashboard',arbTab:'cross',fastFilter:'all',prevPrices:{},
+  countdown:90,timer:null,loaded:false,
+  bankroll:500,
+};
+
+// ── Helpers ──
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function platTag(p){return`<span class="plat-tag ${p}">${PLAT_SHORT[p]||p}</span>`}
+function fmtVol(v,p){if(v==null)return'--';v=+v;if(p==='metaculus')return v.toLocaleString()+' forecasters';if(v>=1e6)return'$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return'$'+(v/1e3).toFixed(1)+'K';return'$'+v.toLocaleString()}
+function gapColor(g){return g>5?'text-green':g>=3?'text-amber':g>0?'text-muted':'text-red'}
+function gradeFor(score){return score>80?'A':score>60?'B':score>40?'C':score>20?'D':'F'}
+
+// ── URL helpers ──
+const PLAT_BASE={poly:'https://polymarket.com',predict:'https://www.predictit.org',manifold:'https://manifold.markets',metaculus:'https://www.metaculus.com',opinion:'https://opinionmarkets.io'};
+function isSpecificUrl(url,platform){
+  if(!url)return false;
+  const base=PLAT_BASE[platform]||'';
+  if(url===base||url===base+'/'||url===base+'/markets')return false;
+  // Must have a path segment beyond the base domain
+  try{const u=new URL(url);return u.pathname.length>1&&u.pathname!=='/markets';}catch(e){return false;}
+}
+function resolveUrl(url,platform,slug,title){
+  // 1. If URL has a specific path, use it directly
+  if(isSpecificUrl(url,platform))return url;
+  // 2. Try using slug for Polymarket
+  if(platform==='poly'&&slug)return'https://polymarket.com/event/'+slug;
+  // 3. Fallback: search URL
+  if(platform==='poly'&&title)return'https://polymarket.com/markets?_q='+encodeURIComponent(title.substring(0,50));
+  if(platform==='predict')return'https://www.predictit.org/markets';
+  if(platform==='manifold'&&title)return'https://manifold.markets/search?q='+encodeURIComponent(title.substring(0,50));
+  if(platform==='metaculus'&&title)return'https://www.metaculus.com/questions/?search='+encodeURIComponent(title.substring(0,50));
+  // 4. Last resort: platform homepage
+  return url||PLAT_BASE[platform]||'#';
+}
+
+function animateNumber(el,from,to,dec=0,pre='',suf=''){
+  const dur=600,start=performance.now();
+  function upd(t){
+    const p=Math.min((t-start)/dur,1),e=1-Math.pow(1-p,3);
+    el.textContent=pre+(from+(to-from)*e).toFixed(dec)+suf;
+    if(p<1)requestAnimationFrame(upd);
+  }
+  requestAnimationFrame(upd);
+}
+function toast(msg,type='success'){
+  const icons={success:'✓',warning:'⚡',error:'✕'};
+  const t=document.createElement('div');
+  t.className='toast '+type;
+  t.innerHTML=`<span class="icon">${icons[type]||'•'}</span>${esc(msg)}`;
+  $('toasts').appendChild(t);
+  setTimeout(()=>t.remove(),4000);
+}
+
+// ── Kelly ──
+function calcKelly(bank,edge,prob){
+  const p=prob/100,q=1-p;
+  if(p<=0||p>=1)return{fk:0,hk:0};
+  const b=(1+edge/100)/(1-edge/100+.001);
+  const f=Math.max(0,Math.min((b*p-q)/b,0.25));
+  return{fk:f,hk:f/2};
+}
+function arbKelly(gap,probH){
+  const bank=S.bankroll,half=$('halfKelly').checked;
+  if(gap<=0)return'$0';
+  const e=gap/100,p=Math.max(probH/100,.01),q=1-p;
+  const f1=e/(1-p+.001),b=(1+e)/(1-e+.001),f2=Math.max(0,(b*p-q)/b);
+  const f=Math.min(Math.min(f1,f2),.25);
+  const amt=f*bank*(half?.5:1);
+  return amt<1?'<$1':'$'+amt.toFixed(0);
+}
+// ── Platform Fees ──
+const PLAT_FEES={poly:0.02,predict:0.10,manifold:0,metaculus:0,opinion:0.05};
+
+// ── Arb Split Calculator ──
+function calcArbSplit(totalAmount,yesPrice,noPrice,yesFee,noFee){
+  const sumPrices=yesPrice+noPrice;
+  const rawEdge=(1-sumPrices)*100;
+  if(sumPrices>=1.0)return{valid:false,reason:'No arb exists \u2014 prices sum to '+(sumPrices*100).toFixed(1)+'%. Need < 100% for guaranteed profit.'};
+  // Fee-aware optimal split: equalize profit in both outcomes
+  const A=(1/yesPrice-1)*(1-yesFee);
+  const B=(1/noPrice-1)*(1-noFee);
+  const yesPct=((B+1)/(A+B+2))*100,noPct=((A+1)/(A+B+2))*100;
+  const yesAmt=(yesPct/100)*totalAmount,noAmt=(noPct/100)*totalAmount;
+  const yesProfitBF=yesAmt*((1/yesPrice)-1),yesProfitAF=yesProfitBF*(1-yesFee);
+  const ifYesWins=yesProfitAF-noAmt;
+  const noProfitBF=noAmt*((1/noPrice)-1),noProfitAF=noProfitBF*(1-noFee);
+  const ifNoWins=noProfitAF-yesAmt;
+  const guaranteedProfit=Math.min(ifYesWins,ifNoWins);
+  const guaranteedProfitPct=(guaranteedProfit/totalAmount)*100;
+  const breakEvenYes=noPrice/(1-yesPrice+noPrice)*100;
+  const totalFeesCost=(yesProfitBF-yesProfitAF)+(noProfitBF-noProfitAF);
+  const feeImpactPct=totalFeesCost/totalAmount*100;
+  const feeAdjEdge=rawEdge-feeImpactPct;
+  return{valid:true,sumPrices:sumPrices*100,rawEdge,feeAdjEdge,yesPct,noPct,yesAmt,noAmt,
+    ifYesWins,ifNoWins,guaranteedProfit,guaranteedProfitPct,
+    isBalanced:Math.abs(ifYesWins-ifNoWins)<totalAmount*0.02,
+    imbalance:Math.abs(ifYesWins-ifNoWins),
+    breakEvenYes,totalFeesCost,feeImpactPct};
+}
+
+function renderArbSplitResult(result,totalAmount,yesPrice,noPrice,yesPlatName,noPlatName){
+  if(!result.valid)return`<div class="arb-split-warn">\u26A0 ${esc(result.reason)}</div>`;
+  const betterOutcome=result.ifYesWins>=result.ifNoWins?'YES':'NO';
+  let html=`<div class="arb-split-result">
+    <div class="arb-split-header">
+      <span class="title">ARB SPLIT</span>
+      <span style="font-size:11px"><span style="color:var(--text-3)">Sum:</span> <span style="color:${result.sumPrices<100?'var(--green)':'var(--red)'}">${result.sumPrices.toFixed(1)}%</span>
+      ${result.sumPrices<100?' \u2713 Arb exists':' \u2717 No arb'}</span>
+    </div>
+    <div class="arb-split-body">
+      <div style="font-size:11px;color:var(--text-3);margin-bottom:4px">Raw edge: <b class="text-green">${result.rawEdge.toFixed(1)}%</b> &nbsp; Fee-adj edge: <b class="text-green">${result.feeAdjEdge.toFixed(1)}%</b></div>
+      <div style="font-size:13px;font-weight:700;color:var(--text-1);margin:10px 0 4px">YOUR $${totalAmount.toFixed(0)} SPLIT:</div>
+      <div class="arb-split-bar">
+        <div class="arb-split-yes" style="width:${result.yesPct}%">${result.yesPct.toFixed(1)}%</div>
+        <div class="arb-split-no" style="width:${result.noPct}%">${result.noPct.toFixed(1)}%</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div style="background:var(--green-dim);border-radius:var(--radius);padding:10px">
+          <div style="font-size:10px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.8px">BUY YES @ ${esc(yesPlatName)}</div>
+          <div style="font-size:20px;font-weight:800;color:var(--green);margin-top:2px">$${result.yesAmt.toFixed(2)}</div>
+          <div style="font-size:10px;color:var(--text-3)">${result.yesPct.toFixed(1)}% of total</div>
+        </div>
+        <div style="background:var(--red-dim);border-radius:var(--radius);padding:10px">
+          <div style="font-size:10px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:.8px">BUY NO @ ${esc(noPlatName)}</div>
+          <div style="font-size:20px;font-weight:800;color:var(--red);margin-top:2px">$${result.noAmt.toFixed(2)}</div>
+          <div style="font-size:10px;color:var(--text-3)">${result.noPct.toFixed(1)}% of total</div>
+        </div>
+      </div>
+      <div class="arb-split-row"><span class="lbl">If YES wins</span><span class="val" style="color:${result.ifYesWins>=0?'var(--green)':'var(--red)'}">$${result.ifYesWins.toFixed(2)} (${(result.ifYesWins/totalAmount*100).toFixed(1)}%)</span></div>
+      <div class="arb-split-row"><span class="lbl">If NO wins</span><span class="val" style="color:${result.ifNoWins>=0?'var(--green)':'var(--red)'}">$${result.ifNoWins.toFixed(2)} (${(result.ifNoWins/totalAmount*100).toFixed(1)}%)</span></div>
+      <div class="arb-split-row" style="border-top:2px solid var(--border);padding-top:8px;margin-top:4px"><span class="lbl" style="font-weight:700;color:var(--text-1)">Guaranteed Profit</span><span class="val" style="color:var(--green);font-size:14px">$${result.guaranteedProfit.toFixed(2)} (${result.guaranteedProfitPct.toFixed(1)}%)</span></div>
+      <div class="arb-split-row"><span class="lbl">Fee impact</span><span class="val text-amber">-$${result.totalFeesCost.toFixed(2)} (${result.feeImpactPct.toFixed(1)}%)</span></div>
+      <div class="arb-split-row"><span class="lbl">Break-even YES prob</span><span class="val">${result.breakEvenYes.toFixed(1)}%</span></div>`;
+  if(!result.isBalanced){
+    const more=result.ifYesWins>result.ifNoWins?'YES':'NO';
+    const diff=result.imbalance;
+    html+=`<div class="arb-split-warn">\u26A0 This arb is slightly imbalanced. ${more} outcome pays $${diff.toFixed(2)} more than ${more==='YES'?'NO':'YES'}.</div>`;
+  } else {
+    html+=`<div class="arb-split-ok">\u2713 Well-balanced arb. Both outcomes pay within 2% of each other.</div>`;
+  }
+  html+=`</div></div>`;
+  return html;
+}
+
+function renderSensitivityTable(totalAmount,yesPrice,noPrice,yesFee,noFee){
+  const steps=[-0.10,-0.05,0,0.05,0.10];
+  let html=`<table class="sensitivity-tbl"><thead><tr><th>YES Price</th><th>NO Price</th><th>Sum</th><th>Guaranteed $</th><th>Return %</th></tr></thead><tbody>`;
+  steps.forEach(s=>{
+    const yp=Math.max(0.01,Math.min(0.99,yesPrice*(1+s)));
+    const np=noPrice;
+    const r=calcArbSplit(totalAmount,yp,np,yesFee,noFee);
+    const isCurrent=s===0;
+    html+=`<tr class="${isCurrent?'current':''}">
+      <td>${yp.toFixed(3)}${s!==0?' ('+(s>0?'+':'')+Math.round(s*100)+'%)':' (current)'}</td>
+      <td>${np.toFixed(3)}</td>
+      <td style="color:${(yp+np)<1?'var(--green)':'var(--red)'}">${((yp+np)*100).toFixed(1)}%</td>
+      <td style="color:${r.valid&&r.guaranteedProfit>0?'var(--green)':'var(--red)'}">${r.valid?'$'+r.guaranteedProfit.toFixed(2):'No arb'}</td>
+      <td>${r.valid?r.guaranteedProfitPct.toFixed(1)+'%':'--'}</td></tr>`;
+  });
+  html+=`</tbody></table>`;
+  return html;
+}
+
+function updateKelly(){
+  const bank=+$('kellyBank').value||500,edge=+$('kellyEdge').value||5,prob=+$('kellyProb').value||55;
+  const k=calcKelly(bank,edge,prob);
+  $('fkAmt').textContent='$'+(k.fk*bank).toFixed(0)+' ('+(k.fk*100).toFixed(1)+'%)';
+  $('hkAmt').textContent='$'+(k.hk*bank).toFixed(0)+' ('+(k.hk*100).toFixed(1)+'%)';
+  const r=k.fk>.25?'High':k.fk>.1?'Medium':'Low';
+  $('kellyRisk').textContent=r;
+  $('kellyRisk').style.color=r==='High'?'var(--red)':r==='Medium'?'var(--amber)':'var(--green)';
+}
+
+// ── Navigation ──
+function navigateTo(page){
+  S.page=page;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  $('page-'+page)?.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`.nav-item[data-page="${page}"]`)?.classList.add('active');
+  if(page==='markets')renderMarkets();
+  if(page==='calculator')renderCalc('kelly');
+  if(page==='portfolio')renderPortfolio();
+  if(page==='watchlist')renderWatchlist();
+  if(page==='analytics')renderAnalytics();
+  if(page==='settings')renderSettings();
+}
+document.querySelectorAll('.nav-item').forEach(n=>{n.onclick=()=>navigateTo(n.dataset.page)});
+
+// ── Score fetching ──
+const scoreCache={};
+async function fetchScore(arb){
+  const k=arb.title+arb.platform_high;
+  if(scoreCache[k])return scoreCache[k];
+  try{
+    const r=await fetch(API+'/score',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({platform_high:arb.platform_high,platform_low:arb.platform_low,
+        prob_high:arb.prob_high,prob_low:arb.prob_low,gap:arb.raw_gap,
+        volume_high:arb.volume_high||0,volume_low:arb.volume_low||0,
+        days_to_resolution:arb.days_to_resolution,title_a:arb.title,title_b:arb.title})});
+    const sc=await r.json();scoreCache[k]=sc;return sc;
+  }catch(e){return{score:0,grade:'?',tradeable:false,breakdown:{},warnings:[],recommendation:'Error'};}
+}
+
+// ── AI fetching ──
+async function fetchAI(arb){
+  try{
+    const r=await fetch(API+'/ai/predict',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({title:arb.title,platform:arb.platform_high,probability:arb.prob_high,
+        volume:arb.volume_high||0,days_to_resolution:arb.days_to_resolution})});
+    return await r.json();
+  }catch(e){return null;}
+}
+
+// ── Popup ──
+function openDrawer(arb,score){
+  window._popupArb=arb;
+  const gap=arb.fee_adjusted_gap;
+  const gapCol=gap>5?'var(--green)':gap>=3?'var(--amber)':'var(--red)';
+  const yesUrl=resolveUrl(arb.url_low,arb.platform_low,arb.slug_low,arb.title_low||arb.title);
+  const noUrl=resolveUrl(arb.url_high,arb.platform_high,arb.slug_high,arb.title);
+  const arbJson=JSON.stringify(arb).replace(/"/g,'&quot;');
+  $('popupContent').innerHTML=`
+    <!-- S1: platform + title -->
+    <div class="popup-head">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0">
+        <div style="display:flex;gap:4px;align-items:center">${platTag(arb.platform_high)} <span style="font-size:10px;color:var(--text-3)">vs</span> ${platTag(arb.platform_low)}</div>
+        <div class="popup-title">${esc(arb.title)}</div>
+      </div>
+      <button class="popup-close" onclick="closePopup()">×</button>
+    </div>
+    <!-- S2: big probability -->
+    <div class="popup-prob">
+      <div class="big-num" style="color:${gapCol}">${gap.toFixed(1)}%</div>
+      <div class="big-label">fee-adjusted gap · ${arb.prob_high.toFixed(0)}% vs ${arb.prob_low.toFixed(0)}%</div>
+    </div>
+    <!-- S3: AI loading -->
+    <div class="popup-ai" id="popupAI">
+      <div class="ai-dots"><span></span><span></span><span></span></div>
+      <span style="margin-left:8px;color:var(--text-3)">Analyzing market...</span>
+    </div>
+    <!-- S4: dollar input -->
+    <div class="popup-sizing">
+      <div class="amount-row">
+        <div class="input-wrap">
+          <span class="dollar-sign">$</span>
+          <input type="number" id="popupAmount" value="100" min="1" style="width:100%;padding-left:24px" oninput="updatePopupSplit()">
+        </div>
+      </div>
+      <div class="quick-row">
+        ${[25,50,100,250,500].map(a=>`<button onclick="$('popupAmount').value=${a};updatePopupSplit()">$${a}</button>`).join('')}
+      </div>
+    </div>
+    <!-- S5: YES/NO split bar -->
+    <div class="popup-split" id="popupSplit"></div>
+    <!-- S6: action buttons -->
+    <div class="popup-actions">
+      <button class="btn-log" onclick="logTrade(${arbJson});closePopup()">Log</button>
+      <a href="${yesUrl}" target="_blank" class="btn-trade">Trade ↗</a>
+      <a href="${yesUrl}" target="_blank" class="btn-arb yes">YES ↗</a>
+      <a href="${noUrl}" target="_blank" class="btn-arb no">NO ↗</a>
+    </div>`;
+  $('popupOverlay').classList.add('open');
+  $('popupCard').classList.add('open');
+  updatePopupSplit();
+  // AI async
+  fetchAI(arb).then(ai=>{
+    const el=$('popupAI');
+    if(!el)return;
+    if(!ai||!ai.fair_value){el.innerHTML='<span style="color:var(--text-3)">AI unavailable</span>';return;}
+    const recCol={BUY_YES:'var(--green)',BUY_NO:'var(--red)',AVOID:'var(--text-3)',MONITOR:'var(--amber)'};
+    el.innerHTML=`
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+        <span class="ai-rec ${ai.recommendation}" style="font-size:12px;padding:3px 10px">${ai.recommendation.replace('_',' ')}</span>
+        <span style="font-family:var(--font-mono);font-weight:700;color:${recCol[ai.recommendation]||'var(--text-2)'}">${ai.fair_value}% fair</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-2);line-height:1.5">${esc(ai.reasoning).split('.').slice(0,2).join('.')+'.'}</div>
+`;
+  });
+  // Close on overlay click
+  $('popupOverlay').onclick=closePopup;
+}
+function closePopup(){$('popupOverlay').classList.remove('open');$('popupCard').classList.remove('open')}
+function openMarketPopup(m){
+  const url=resolveUrl(m.url,m.platform,m.slug,m.title);
+  $('popupContent').innerHTML=`
+    <div class="popup-head">
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0">
+        <div>${platTag(m.platform)}</div>
+        <div class="popup-title">${esc(m.title)}</div>
+      </div>
+      <button class="popup-close" onclick="closePopup()">×</button>
+    </div>
+    <div class="popup-prob">
+      <div class="big-num" style="color:var(--green)">${m.probability.toFixed(1)}%</div>
+      <div class="big-label">current probability</div>
+    </div>
+    <div style="padding:16px 20px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text-2)">
+      <div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--text-3)">Volume</span><span class="fw-600">${fmtVol(m.volume,m.platform)}</span></div>
+      ${m.end_date?`<div style="display:flex;justify-content:space-between;padding:4px 0"><span style="color:var(--text-3)">Closes</span><span class="fw-600">${new Date(m.end_date).toLocaleDateString()}</span></div>`:''}
+    </div>
+    <div class="popup-actions">
+      <a href="${url}" target="_blank" class="btn-trade">Open on ${PLAT_SHORT[m.platform]||m.platform} ↗</a>
+    </div>`;
+  $('popupOverlay').classList.add('open');
+  $('popupCard').classList.add('open');
+  $('popupOverlay').onclick=closePopup;
+}
+function updatePopupSplit(){
+  const arb=window._popupArb;if(!arb)return;
+  const amt=+($('popupAmount')?.value)||100;
+  const yesPrice=arb.prob_low/100;
+  const noPrice=(100-arb.prob_high)/100;
+  const yesFee=PLAT_FEES[arb.platform_low]||0;
+  const noFee=PLAT_FEES[arb.platform_high]||0;
+  const r=calcArbSplit(amt,yesPrice,noPrice,yesFee,noFee);
+  const el=$('popupSplit');if(!el)return;
+  if(!r.valid){el.innerHTML=`<div style="text-align:center;font-size:12px;color:var(--amber);padding:4px 0">No arb — prices sum to ${(yesPrice+noPrice)*100|0}%</div>`;return;}
+  const yesPct=Math.max(r.yesPct,8),noPct=Math.max(r.noPct,8);
+  el.innerHTML=`
+    <div class="popup-split-bar">
+      <div class="popup-split-yes" style="width:${yesPct}%">$${r.yesAmt.toFixed(0)} YES</div>
+      <div class="popup-split-no" style="width:${noPct}%">$${r.noAmt.toFixed(0)} NO</div>
+    </div>
+    <div class="popup-split-labels">
+      <span>Profit if YES: <b style="color:${r.ifYesWins>=0?'var(--green)':'var(--red)'}">$${r.ifYesWins.toFixed(2)}</b></span>
+      <span>Profit if NO: <b style="color:${r.ifNoWins>=0?'var(--green)':'var(--red)'}">$${r.ifNoWins.toFixed(2)}</b></span>
+    </div>
+    <div style="text-align:center;margin-top:6px;font-size:13px;font-weight:700;font-family:var(--font-mono);color:var(--green)">Guaranteed +$${r.guaranteedProfit.toFixed(2)} (${r.guaranteedProfitPct.toFixed(1)}%)</div>`;
+}
+
+// ── Render Dashboard ──
+function renderDashboard(){
+  const arbs=S.cross;
+  const bestGap=arbs.length?Math.max(...arbs.map(a=>a.fee_adjusted_gap)):0;
+  $('statArbs').textContent=arbs.length;
+  $('statBestGap').textContent=bestGap>0?bestGap.toFixed(1)+'%':'--';
+  $('statMarkets').textContent=S.allMarkets.length.toLocaleString();
+  $('navArbBadge').textContent=arbs.length||S.cross.length;
+
+  // Top opportunities
+  const top=S.cross.slice(0,3);
+  const container=$('dashTopArbs');
+  if(!top.length){container.innerHTML='<div class="empty-state"><div class="empty-icon">⟳</div><p>No arb opportunities found above current threshold.<br>Try lowering Min Gap % or refreshing.</p></div>';return;}
+  container.innerHTML='';
+  top.forEach(async(a)=>{
+    const sc=await fetchScore(a);
+    const card=document.createElement('div');
+    card.className='card';
+    card.style.cssText='margin-bottom:10px;cursor:pointer;padding:14px';
+    card.onclick=()=>openDrawer(a,sc);
+    card.innerHTML=`
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span class="grade ${sc.grade}">${sc.grade}</span>
+        <span class="truncate text-primary fw-600" style="flex:1;font-size:13px">${esc(a.title)}</span>
+      </div>
+      <div style="display:flex;gap:12px;font-size:12px;color:var(--text-2)">
+        ${platTag(a.platform_high)} <span class="text-green fw-700">${a.prob_high.toFixed(1)}%</span>
+        ${platTag(a.platform_low)} <span class="text-amber fw-600">${a.prob_low.toFixed(1)}%</span>
+        <span style="margin-left:auto" class="text-green fw-700">${a.fee_adjusted_gap.toFixed(1)}% gap</span>
+        <span>${arbKelly(a.fee_adjusted_gap,a.prob_high)}</span>
+      </div>`;
+    container.appendChild(card);
+  });
+
+  // AI Pulse
+  $('dashAIPulse').innerHTML=`<div style="color:var(--text-2);line-height:1.6">
+    <b style="color:var(--green)">${arbs.length}</b> live arb opportunities across <b>${Object.keys(S.counts).filter(k=>S.counts[k]>0).length}</b> platforms.<br>
+    Best fee-adjusted gap: <b class="text-green">${bestGap.toFixed(1)}%</b><br>
+    ${S.dutch.length>0?'<span class="text-amber">Math arb detected!</span><br>':''}
+    Markets tracked: <b>${S.allMarkets.length.toLocaleString()}</b>
+  </div>`;
+}
+
+// ── Render Live Arb ──
+async function renderArb(){
+  const tab=S.arbTab;
+  const search=($('arbSearch')?.value||'').toLowerCase();
+  const el=$('arbContent');
+  if(tab==='cross'){
+    let arbs=S.cross;
+    if(search)arbs=arbs.filter(a=>a.title.toLowerCase().includes(search));
+    if(!arbs.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">⟳</div><p>No arb opportunities found above current threshold.<br>Try lowering Min Gap % or refreshing.</p><button class="btn-primary btn-sm" onclick="refresh()">Refresh</button></div>';return;}
+    const scores=await Promise.all(arbs.map(fetchScore));
+    let html='<table class="data-table"><thead><tr><th>Market</th><th>Platforms</th><th>Prices</th><th>Gap</th><th>Score</th><th>Kelly</th><th></th></tr></thead><tbody>';
+    arbs.forEach((a,i)=>{
+      const sc=scores[i];
+      html+=`<tr onmouseenter="showArbTooltip(event,S.cross[${S.cross.indexOf(a)}])" onmouseleave="hideArbTooltip()" onclick="openDrawer(S.cross[${S.cross.indexOf(a)}],scoreCache['${(a.title+a.platform_high).replace(/'/g,"\\'")}']||{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">
+        <td style="max-width:260px"><div class="truncate text-primary fw-500">${esc(a.title)}</div></td>
+        <td>${platTag(a.platform_high)}<br>${platTag(a.platform_low)}</td>
+        <td style="white-space:nowrap"><span class="text-green fw-700">${a.prob_high.toFixed(1)}%</span><br><span class="text-amber">${a.prob_low.toFixed(1)}%</span></td>
+        <td><span class="${gapColor(a.fee_adjusted_gap)} fw-700">${a.fee_adjusted_gap.toFixed(1)}%</span>
+          <div class="gap-bar"><div class="gap-bar-fill" style="width:${Math.min(a.fee_adjusted_gap*3,100)}%"></div></div></td>
+        <td><span class="grade ${sc.grade}">${sc.grade}</span></td>
+        <td class="text-green fw-700">${arbKelly(a.fee_adjusted_gap,a.prob_high)}</td>
+        <td><button class="btn-primary btn-sm" onclick="event.stopPropagation();openDrawer(S.cross[${S.cross.indexOf(a)}],scoreCache['${(a.title+a.platform_high).replace(/'/g,"\\'")}']||{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">ANALYZE →</button></td>
+      </tr>`;
+    });
+    html+='</tbody></table>';
+    el.innerHTML=html;
+  } else if(tab==='dutch'){
+    if(!S.dutch.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">⊞</div><p>No math arb found. Markets are currently efficiently priced.</p></div>';return;}
+    let html='<table class="data-table"><thead><tr><th>Event</th><th>Outcomes</th><th>Sum</th><th>Edge</th><th>Profit/$100</th></tr></thead><tbody>';
+    S.dutch.forEach(d=>{
+      html+=`<tr><td class="truncate text-primary" style="max-width:300px">${esc(d.event_title)}</td>
+        <td>${d.num_outcomes}</td><td class="text-red fw-600">${(d.sum_probs*100).toFixed(1)}%</td>
+        <td class="text-green fw-700">${d.edge_pct.toFixed(1)}%</td>
+        <td class="text-green fw-700">$${(d.guaranteed_profit_per_dollar*100).toFixed(2)}</td></tr>`;
+    });
+    html+='</tbody></table>';el.innerHTML=html;
+  } else if(tab==='tail'){
+    let tail=S.tail;
+    if(search)tail=tail.filter(t=>t.title.toLowerCase().includes(search));
+    if(!tail.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">◩</div><p>No tail-end opportunities found.<br>These appear when markets have low-probability outcomes with high annualized returns.</p></div>';return;}
+    let html='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Price</th><th>Return</th><th>Days</th><th>Annualized</th></tr></thead><tbody>';
+    tail.forEach(t=>{
+      const tUrl=resolveUrl(t.url,t.platform,t.slug,t.title);
+      html+=`<tr onclick="window.open('${tUrl.replace(/'/g,"\\'")}','_blank')">
+        <td class="truncate text-primary" style="max-width:300px">${esc(t.title)}</td>
+        <td>${platTag(t.platform)}</td><td>${t.price.toFixed(2)}</td>
+        <td class="${gapColor(t.return_pct)} fw-600">${t.return_pct.toFixed(1)}%</td>
+        <td>${t.days_to_resolution!=null?t.days_to_resolution+'d':'?'}</td>
+        <td class="${t.annualized_return>30?'text-green':t.annualized_return>10?'text-amber':'text-muted'} fw-600">${t.annualized_return.toFixed(0)}%</td></tr>`;
+    });
+    html+='</tbody></table>';el.innerHTML=html;
+  } else if(tab==='fast'){
+    renderFastTab(el,search);
+  }
+}
+function fmtCountdown(daysLeft,hoursLeft){
+  if(hoursLeft!=null&&hoursLeft<48){
+    const h=Math.floor(hoursLeft);const m=Math.round((hoursLeft-h)*60);
+    return h>0?`${h}h ${m}m`:`${m}m`;
+  }
+  if(daysLeft!=null)return daysLeft<1?'< 1d':Math.round(daysLeft)+'d';
+  return '?';
+}
+function urgencyTag(u){
+  const colors={TODAY:'var(--red)',TOMORROW:'var(--amber)',THIS_WEEK:'var(--text-2)',SOON:'var(--text-3)'};
+  return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:${u==='TODAY'?'var(--red-dim)':u==='TOMORROW'?'var(--amber-dim)':'var(--bg)'};color:${colors[u]||'var(--text-3)'};font-weight:700">${u}</span>`;
+}
+function renderFastTab(el,search){
+  let html='';
+  // Section 1: Logical Arb
+  const logOps=(S.logical.opportunities||[]);
+  html+=`<div style="margin-bottom:24px"><h3 style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:10px">Logical Arb <span style="font-size:11px;color:var(--text-3);font-weight:400">${logOps.length} found</span></h3>`;
+  if(!logOps.length){
+    html+='<div class="empty-state" style="padding:30px"><div class="empty-icon">⚖</div><p>No logical arb detected. Market probabilities are currently consistent.</p></div>';
+  } else {
+    html+='<table class="data-table"><thead><tr><th>Markets</th><th>Logical Error</th><th>Gap</th><th>Trade</th></tr></thead><tbody>';
+    logOps.forEach(o=>{
+      const urlA=o.url_a||'#';const urlB=o.url_b||'#';
+      html+=`<tr>
+        <td style="max-width:280px"><div class="truncate text-primary fw-500">${esc(o.title_a)}</div>
+          <div style="font-size:10px;color:var(--text-3)">${platTag(o.platform_a)} ${o.prob_a.toFixed(1)}%</div>
+          <div class="truncate text-primary fw-500" style="margin-top:4px">${esc(o.title_b)}</div>
+          <div style="font-size:10px;color:var(--text-3)">${platTag(o.platform_b)} ${o.prob_b.toFixed(1)}%</div></td>
+        <td style="max-width:260px"><span style="color:var(--red);font-size:12px;font-weight:600">${esc(o.logical_error)}</span></td>
+        <td><span class="text-green fw-700">${o.gap.toFixed(1)}%</span></td>
+        <td style="max-width:200px;font-size:11px"><span style="color:var(--green)">${esc(o.trade)}</span>
+          <div style="margin-top:4px;display:flex;gap:4px"><a href="${urlA}" target="_blank" class="btn-outline btn-sm" style="font-size:9px;padding:2px 6px" onclick="event.stopPropagation()">Market A ↗</a>
+          <a href="${urlB}" target="_blank" class="btn-outline btn-sm" style="font-size:9px;padding:2px 6px" onclick="event.stopPropagation()">Market B ↗</a></div></td>
+      </tr>`;
+    });
+    html+='</tbody></table>';
+  }
+  html+='</div>';
+
+  // Section 2: Closing Soon
+  html+=`<div><h3 style="font-size:14px;font-weight:700;color:var(--text-1);margin-bottom:10px">Closing Soon</h3>
+    <div style="display:flex;gap:6px;margin-bottom:12px">
+      <button class="btn-outline btn-sm ${S.fastFilter==='today'?'active':''}" onclick="S.fastFilter='today';renderArb()">TODAY</button>
+      <button class="btn-outline btn-sm ${S.fastFilter==='week'?'active':''}" onclick="S.fastFilter='week';renderArb()">THIS WEEK</button>
+      <button class="btn-outline btn-sm ${S.fastFilter==='all'?'active':''}" onclick="S.fastFilter='all';renderArb()">ALL</button>
+    </div>`;
+  let fast=S.fastMarkets;
+  if(S.fastFilter==='today')fast=fast.filter(m=>m.urgency==='TODAY');
+  else if(S.fastFilter==='week')fast=fast.filter(m=>m.urgency==='TODAY'||m.urgency==='TOMORROW'||m.urgency==='THIS_WEEK');
+  if(search)fast=fast.filter(m=>m.title.toLowerCase().includes(search));
+  if(!fast.length){
+    html+='<div class="empty-state" style="padding:30px"><div class="empty-icon">⏱</div><p>No markets closing soon in this filter.</p></div>';
+  } else {
+    html+='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Prob</th><th>Closes In</th><th>Annualized</th></tr></thead><tbody>';
+    fast.forEach(m=>{
+      const mUrl=resolveUrl(m.url,m.platform,null,m.title);
+      html+=`<tr onclick="window.open('${mUrl.replace(/'/g,"\\'")}','_blank')" style="cursor:pointer">
+        <td style="max-width:300px"><div class="truncate text-primary fw-500">${esc(m.title)}</div></td>
+        <td>${platTag(m.platform)}</td>
+        <td class="fw-600">${m.probability.toFixed(1)}%</td>
+        <td>${urgencyTag(m.urgency)} <span class="fw-600" style="font-family:var(--font-mono);font-size:11px">${fmtCountdown(m.days_left,m.hours_left)}</span></td>
+        <td class="${m.annualized_return>100?'text-green':m.annualized_return>30?'text-amber':'text-muted'} fw-600">${m.annualized_return.toFixed(0)}%</td></tr>`;
+    });
+    html+='</tbody></table>';
+  }
+
+  // Fast Arbs subsection
+  if(S.fastArbs.length){
+    html+=`<h3 style="font-size:14px;font-weight:700;color:var(--text-1);margin:20px 0 10px">⚡ Fast Arbs <span style="font-size:11px;color:var(--text-3);font-weight:400">${S.fastArbs.length} closing within 3 days</span></h3>`;
+    html+='<table class="data-table"><thead><tr><th>Market</th><th>Platforms</th><th>Gap</th><th>Closes In</th><th>Annualized</th></tr></thead><tbody>';
+    S.fastArbs.forEach(a=>{
+      html+=`<tr style="cursor:pointer" onclick="openDrawer(S.fastArbs[${S.fastArbs.indexOf(a)}],{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">
+        <td style="max-width:260px"><div class="truncate text-primary fw-500">${esc(a.title)}</div></td>
+        <td>${platTag(a.platform_high)}<br>${platTag(a.platform_low)}</td>
+        <td><span class="text-green fw-700">${a.fee_adjusted_gap.toFixed(1)}%</span></td>
+        <td>${urgencyTag(a.urgency)} <span class="fw-600" style="font-family:var(--font-mono);font-size:11px">${fmtCountdown(a.days_to_resolution,a.hours_left)}</span></td>
+        <td class="${a.annualized_return>100?'text-green':a.annualized_return>30?'text-amber':'text-muted'} fw-700">${a.annualized_return.toFixed(0)}%</td></tr>`;
+    });
+    html+='</tbody></table>';
+  }
+  html+='</div>';
+  el.innerHTML=html;
+}
+// Arb tab buttons
+document.querySelectorAll('#arbTabBtns button').forEach(b=>{
+  b.onclick=()=>{document.querySelectorAll('#arbTabBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');S.arbTab=b.dataset.tab;renderArb();}
+});
+
+// ── Render Markets ──
+function renderMarkets(){
+  const search=($('mktSearch')?.value||'').toLowerCase();
+  const plat=document.querySelector('#mktPlatBtns .active')?.dataset.p||'all';
+  const sort=$('mktSort')?.value||'volume';
+  let mkts=S.allMarkets.filter(m=>{
+    if(plat!=='all'&&m.platform!==plat)return false;
+    if(search&&!m.title.toLowerCase().includes(search))return false;
+    return true;
+  });
+  if(sort==='volume')mkts.sort((a,b)=>(b.volume||0)-(a.volume||0));
+  else mkts.sort((a,b)=>b.probability-a.probability);
+  const total=mkts.length;
+  mkts=mkts.slice(0,200);
+  $('mktCount').textContent=`${mkts.length} of ${total}`;
+  const grid=$('mktGrid');grid.innerHTML='';
+  if(!mkts.length){grid.innerHTML='<div class="empty-state"><div class="empty-icon">◫</div><p>No markets found matching your filters.<br>Try a different search term or platform.</p></div>';return;}
+  mkts.forEach(m=>{
+    const c=document.createElement('div');c.className='market-card';
+    c.onclick=()=>openMarketPopup(m);
+    c.innerHTML=`<div class="market-card-title">${esc(m.title)}</div>
+      <div class="prob-bar"><div class="prob-fill" style="width:${Math.min(m.probability,100)}%"></div></div>
+      <div class="market-card-meta">${platTag(m.platform)}<span class="text-green fw-700">${m.probability.toFixed(1)}%</span><span>${fmtVol(m.volume,m.platform)}</span></div>`;
+    grid.appendChild(c);
+  });
+}
+document.querySelectorAll('#mktPlatBtns button').forEach(b=>{
+  b.onclick=()=>{document.querySelectorAll('#mktPlatBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMarkets();}
+});
+$('mktSearch')?.addEventListener('input',()=>clearTimeout(window._mktD)||(window._mktD=setTimeout(renderMarkets,300)));
+$('mktSort')?.addEventListener('change',renderMarkets);
+
+// ── Calculator ──
+function renderCalc(mode){
+  const el=$('calcContent');
+  document.querySelectorAll('#calcModeBtns button').forEach(b=>{b.classList.toggle('active',b.dataset.mode===mode)});
+  if(mode==='kelly'){
+    el.innerHTML=`
+      <h3 style="font-size:14px;color:var(--text-1);margin-bottom:16px">Kelly Criterion Calculator</h3>
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Bankroll ($)</label>
+      <input type="number" id="calcBank" value="${S.bankroll}" style="width:100%;margin-bottom:12px" oninput="calcKellyCalc()">
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Edge (%)</label>
+      <input type="number" id="calcEdge" value="5" style="width:100%;margin-bottom:12px" oninput="calcKellyCalc()">
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Win Probability (%)</label>
+      <input type="number" id="calcProb" value="55" style="width:100%;margin-bottom:12px" oninput="calcKellyCalc()">
+      <div id="calcKellyResult" class="size-output" style="margin-top:8px"></div>`;
+    calcKellyCalc();
+  } else if(mode==='arb'){
+    el.innerHTML=`
+      <h3 style="font-size:14px;color:var(--text-1);margin-bottom:16px">Arb Calculator</h3>
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Platform A Price (YES, 0-1)</label>
+      <input type="number" id="calcArbA" value="0.61" step="0.01" style="width:100%;margin-bottom:12px" oninput="calcArbCalc()">
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Platform B Price (NO, 0-1)</label>
+      <input type="number" id="calcArbB" value="0.46" step="0.01" style="width:100%;margin-bottom:12px" oninput="calcArbCalc()">
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Investment ($)</label>
+      <input type="number" id="calcArbAmt" value="${S.bankroll}" style="width:100%;margin-bottom:12px" oninput="calcArbCalc()">
+      <div id="calcArbResult" class="size-output" style="margin-top:8px"></div>`;
+    calcArbCalc();
+  } else if(mode==='arbsplit'){
+    const platOpts=Object.entries(PLAT).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+    el.style.maxWidth='620px';
+    el.innerHTML=`
+      <h3 style="font-size:14px;color:var(--text-1);margin-bottom:12px">Arb Split Calculator</h3>
+      <p style="font-size:12px;color:var(--text-3);margin-bottom:16px">I have $X to put on this arb. Exactly how much goes on YES and how much on NO?</p>
+      <div class="preset-btns">
+        <button onclick="setArbSplitPreset(0.50,0.45,'poly','predict')">Even 50/45</button>
+        <button onclick="setArbSplitPreset(0.54,0.41,'poly','predict')">Typical Poly/PI</button>
+        <button onclick="setArbSplitPreset(0.80,0.15,'poly','predict')">High Confidence</button>
+        <button onclick="setArbSplitPreset(0.15,0.80,'predict','poly')">Long Shot</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">YES Price (0\u20131)</label>
+          <input type="number" id="splitYesPrice" value="0.54" min="0.01" max="0.99" step="0.01" style="width:100%" oninput="updateArbSplitCalc()">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">NO Price (0\u20131)</label>
+          <input type="number" id="splitNoPrice" value="0.41" min="0.01" max="0.99" step="0.01" style="width:100%" oninput="updateArbSplitCalc()">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">YES Platform</label>
+          <select id="splitYesPlat" style="width:100%" onchange="updateArbSplitCalc()">${platOpts}</select>
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">NO Platform</label>
+          <select id="splitNoPlat" style="width:100%" onchange="updateArbSplitCalc()">${platOpts.replace('value="predict"','value="predict" selected')}</select>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">YES Fee</label>
+          <input type="number" id="splitYesFee" value="${PLAT_FEES.poly}" min="0" max="0.5" step="0.01" style="width:100%" oninput="updateArbSplitCalc()">
+        </div>
+        <div>
+          <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">NO Fee</label>
+          <input type="number" id="splitNoFee" value="${PLAT_FEES.predict}" min="0" max="0.5" step="0.01" style="width:100%" oninput="updateArbSplitCalc()">
+        </div>
+      </div>
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Total Amount ($)</label>
+      <input type="number" id="splitAmount" value="${S.bankroll}" min="1" style="width:100%;margin-bottom:12px" oninput="updateArbSplitCalc()">
+      <div class="quick-amounts" style="margin-bottom:16px">
+        ${[25,50,100,250,500,1000].map(a=>`<button class="btn-outline btn-sm" onclick="document.getElementById('splitAmount').value=${a};updateArbSplitCalc()">$${a}</button>`).join('')}
+      </div>
+      <div id="arbSplitOutput"></div>
+      <div id="arbSplitSensitivity" style="margin-top:16px"></div>`;
+    updateArbSplitCalc();
+  } else {
+    el.innerHTML=`
+      <h3 style="font-size:14px;color:var(--text-1);margin-bottom:16px">Position Sizing</h3>
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Bankroll ($)</label>
+      <input type="number" id="calcPosBank" value="${S.bankroll}" style="width:100%;margin-bottom:12px" oninput="calcPosCalc()">
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Risk Tolerance (1-10)</label>
+      <input type="number" id="calcPosRisk" value="5" min="1" max="10" style="width:100%;margin-bottom:12px" oninput="calcPosCalc()">
+      <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Conviction (1-10)</label>
+      <input type="number" id="calcPosConv" value="7" min="1" max="10" style="width:100%;margin-bottom:12px" oninput="calcPosCalc()">
+      <div id="calcPosResult" class="size-output" style="margin-top:8px"></div>`;
+    calcPosCalc();
+  }
+}
+document.querySelectorAll('#calcModeBtns button').forEach(b=>{b.onclick=()=>renderCalc(b.dataset.mode)});
+function calcKellyCalc(){
+  const bank=+(document.getElementById('calcBank')?.value)||500;
+  const edge=+(document.getElementById('calcEdge')?.value)||5;
+  const prob=+(document.getElementById('calcProb')?.value)||55;
+  const k=calcKelly(bank,edge,prob);
+  const el=document.getElementById('calcKellyResult');
+  if(el)el.innerHTML=`
+    <div class="size-row"><span class="label">Full Kelly %</span><span class="val">${(k.fk*100).toFixed(2)}%</span></div>
+    <div class="size-row"><span class="label">Full Kelly $</span><span class="val">$${(k.fk*bank).toFixed(0)}</span></div>
+    <div class="size-row"><span class="label">Half Kelly $</span><span class="val">$${(k.hk*bank).toFixed(0)}</span></div>
+    <div class="size-row"><span class="label">Expected Value</span><span class="val">$${(k.fk*bank*edge/100).toFixed(2)}</span></div>`;
+}
+function calcArbCalc(){
+  const a=+(document.getElementById('calcArbA')?.value)||0.61;
+  const b=+(document.getElementById('calcArbB')?.value)||0.46;
+  const amt=+(document.getElementById('calcArbAmt')?.value)||500;
+  const cost=a+b;const profit=cost<1?(1-cost)*amt:0;
+  const el=document.getElementById('calcArbResult');
+  if(el)el.innerHTML=`
+    <div class="size-row"><span class="label">Total Cost</span><span class="val">${cost<1?'text-green':'text-red'}">${cost.toFixed(3)}</span></div>
+    <div class="size-row"><span class="label">Guaranteed Profit</span><span class="val ${profit>0?'':'text-red'}">$${profit.toFixed(2)}</span></div>
+    <div class="size-row"><span class="label">Return</span><span class="val">${cost>0?((1-cost)/cost*100).toFixed(2):'0'}%</span></div>
+    <div class="size-row"><span class="label">Arb Exists?</span><span class="val" style="color:${cost<1?'var(--green)':'var(--red)'}">${cost<1?'YES':'NO'}</span></div>`;
+}
+function calcPosCalc(){
+  const bank=+(document.getElementById('calcPosBank')?.value)||500;
+  const risk=+(document.getElementById('calcPosRisk')?.value)||5;
+  const conv=+(document.getElementById('calcPosConv')?.value)||7;
+  const pct=Math.min(risk*conv/100*25,25);const amt=pct/100*bank;
+  const el=document.getElementById('calcPosResult');
+  if(el)el.innerHTML=`
+    <div class="size-row"><span class="label">Recommended %</span><span class="val">${pct.toFixed(1)}%</span></div>
+    <div class="size-row"><span class="label">Position Size</span><span class="val">$${amt.toFixed(0)}</span></div>
+    <div class="size-row"><span class="label">Max Loss</span><span class="val" style="color:var(--red)">$${amt.toFixed(0)}</span></div>`;
+}
+
+// ── Arb Split Calc (standalone page) ──
+function updateArbSplitCalc(){
+  const yp=+(document.getElementById('splitYesPrice')?.value)||0.54;
+  const np=+(document.getElementById('splitNoPrice')?.value)||0.41;
+  const amt=+(document.getElementById('splitAmount')?.value)||500;
+  const yf=+(document.getElementById('splitYesFee')?.value)||0;
+  const nf=+(document.getElementById('splitNoFee')?.value)||0;
+  const ypn=PLAT[document.getElementById('splitYesPlat')?.value]||'Platform A';
+  const npn=PLAT[document.getElementById('splitNoPlat')?.value]||'Platform B';
+  const result=calcArbSplit(amt,yp,np,yf,nf);
+  const el=document.getElementById('arbSplitOutput');
+  if(el)el.innerHTML=renderArbSplitResult(result,amt,yp,np,ypn,npn);
+  const sel=document.getElementById('arbSplitSensitivity');
+  if(sel){
+    sel.innerHTML=`<div class="arb-split-section"><div class="stitle">Sensitivity Analysis</div>
+      <p style="font-size:11px;color:var(--text-3);margin-bottom:6px">How profit changes if YES price moves \u00B110% before you finish placing both orders.</p>
+      ${renderSensitivityTable(amt,yp,np,yf,nf)}</div>`;
+  }
+}
+function setArbSplitPreset(yp,np,yplat,nplat){
+  const ypi=document.getElementById('splitYesPrice');if(ypi)ypi.value=yp;
+  const npi=document.getElementById('splitNoPrice');if(npi)npi.value=np;
+  const yps=document.getElementById('splitYesPlat');if(yps)yps.value=yplat;
+  const nps=document.getElementById('splitNoPlat');if(nps)nps.value=nplat;
+  const yfi=document.getElementById('splitYesFee');if(yfi)yfi.value=PLAT_FEES[yplat]||0;
+  const nfi=document.getElementById('splitNoFee');if(nfi)nfi.value=PLAT_FEES[nplat]||0;
+  updateArbSplitCalc();
+}
+// Auto-fill fees when platform changes
+document.addEventListener('change',e=>{
+  if(e.target.id==='splitYesPlat'){const f=document.getElementById('splitYesFee');if(f){f.value=PLAT_FEES[e.target.value]||0;updateArbSplitCalc();}}
+  if(e.target.id==='splitNoPlat'){const f=document.getElementById('splitNoFee');if(f){f.value=PLAT_FEES[e.target.value]||0;updateArbSplitCalc();}}
+});
+
+// ── Arb Row Tooltip ──
+let _tooltipArb=null;
+function showArbTooltip(e,arb){
+  const tip=$('arbTooltip');
+  if(!tip)return;
+  const yesPrice=arb.prob_low/100;
+  const noPrice=(100-arb.prob_high)/100;
+  const yesFee=PLAT_FEES[arb.platform_low]||0;
+  const noFee=PLAT_FEES[arb.platform_high]||0;
+  const amt=S.bankroll;
+  const r=calcArbSplit(amt,yesPrice,noPrice,yesFee,noFee);
+  if(r.valid){
+    tip.innerHTML=`<b>$${amt} split:</b> $${r.yesAmt.toFixed(0)} YES @ ${PLAT_SHORT[arb.platform_low]||arb.platform_low} &nbsp;\u2502&nbsp; $${r.noAmt.toFixed(0)} NO @ ${PLAT_SHORT[arb.platform_high]||arb.platform_high} &nbsp;\u2502&nbsp; <span style="color:var(--green)">+$${r.guaranteedProfit.toFixed(2)}</span>`;
+  } else {
+    tip.innerHTML=`No arb \u2014 prices sum to ${(yesPrice+noPrice)*100|0}%`;
+  }
+  tip.style.left=Math.min(e.clientX+12,window.innerWidth-340)+'px';
+  tip.style.top=(e.clientY-36)+'px';
+  tip.classList.add('visible');
+  _tooltipArb=arb;
+}
+function hideArbTooltip(){
+  const tip=$('arbTooltip');if(tip)tip.classList.remove('visible');
+  _tooltipArb=null;
+}
+
+// ── Portfolio ──
+async function renderPortfolio(){
+  const history=S.history;
+  const taken=history.filter(h=>h.taken);
+  const results=taken.filter(h=>h.result!=null).map(h=>+h.result);
+  const wins=results.filter(r=>r>0);
+  const pnl=results.reduce((a,b)=>a+b,0);
+  $('portPnl').textContent='$'+pnl.toFixed(0);
+  $('portPnl').className='value '+(pnl>=0?'green':'red');
+  $('portWinRate').textContent=results.length?(wins.length/results.length*100).toFixed(0)+'%':'--';
+  $('portTaken').textContent=taken.length;
+  const avgGap=taken.length?taken.reduce((a,h)=>a+(h.raw_gap||h.gap||0),0)/taken.length:0;
+  $('portEdge').textContent=avgGap.toFixed(1)+'%';
+  const el=$('portContent');
+  if(!history.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">▤</div><p>No trades logged yet</p></div>';return;}
+  let html=`<div style="display:flex;gap:8px;margin-bottom:12px"><button class="btn-outline btn-sm" onclick="exportCSV()">Export CSV</button></div>`;
+  html+='<table class="data-table"><thead><tr><th>Date</th><th>Market</th><th>Gap</th><th>Status</th><th>Result</th><th>Actions</th></tr></thead><tbody>';
+  history.slice().reverse().forEach(h=>{
+    html+=`<tr>
+      <td style="font-size:11px;white-space:nowrap">${h.timestamp?new Date(h.timestamp).toLocaleDateString():''}</td>
+      <td class="truncate" style="max-width:200px">${esc((h.title||'').slice(0,40))}</td>
+      <td>${(h.raw_gap||h.gap||h.edge||0).toFixed(1)}%</td>
+      <td>${h.taken?'<span style="color:var(--green);font-size:11px;font-weight:600">TAKEN</span>':'<span style="color:var(--text-3);font-size:11px">LOGGED</span>'}</td>
+      <td style="color:${h.result>0?'var(--green)':h.result<0?'var(--red)':'var(--text-3)'}">${h.result!=null?'$'+h.result:'--'}</td>
+      <td style="display:flex;gap:4px">
+        ${!h.taken?`<button class="btn-outline btn-sm" onclick="markTaken('${h.id}')">Take</button>`:''}
+        ${h.taken&&h.result==null?`<button class="btn-outline btn-sm" onclick="addResult('${h.id}')">Result</button>`:''}
+        <button class="btn-ghost btn-sm" style="color:var(--red)" onclick="deleteTrade('${h.id}')">✕</button>
+      </td></tr>`;
+  });
+  html+='</tbody></table>';el.innerHTML=html;
+}
+
+// ── Watchlist ──
+async function renderWatchlist(){
+  let wl=[];
+  try{const r=await fetch(API+'/watchlist');wl=await r.json();S.watchlist=wl;}catch(e){}
+  const el=$('watchlistContent');
+  if(!wl.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">★</div><p>No markets on watchlist</p><p style="font-size:11px">Click ★ Watch on any market to add it here</p></div>';return;}
+  let html='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Probability</th><th>Change</th><th></th></tr></thead><tbody>';
+  wl.forEach(w=>{
+    html+=`<tr>
+      <td class="truncate text-primary" style="max-width:280px">${esc(w.title)}</td>
+      <td>${platTag(w.platform)}</td>
+      <td>${(w.current_probability||w.probability||0).toFixed(1)}%</td>
+      <td style="color:${(w.price_change||0)>0?'var(--green)':(w.price_change||0)<0?'var(--red)':'var(--text-3)'}">${w.price_change?((w.price_change>0?'+':'')+w.price_change.toFixed(1)+'pp'):'--'}</td>
+      <td><button class="btn-ghost btn-sm" style="color:var(--red)" onclick="removeWatch('${w.id}')">✕</button></td></tr>`;
+  });
+  html+='</tbody></table>';el.innerHTML=html;
+}
+
+// ── Analytics ──
+let pnlChart=null,platChart=null;
+async function renderAnalytics(){
+  let data={};
+  try{const r=await fetch(API+'/analytics');data=await r.json();}catch(e){}
+  $('anPnl').textContent='$'+(data.total_pnl||0).toFixed(0);
+  $('anWinRate').textContent=(data.win_rate||0).toFixed(0)+'%';
+  $('anEdge').textContent=(data.avg_gap_taken||0).toFixed(1)+'%';
+  $('anSharpe').textContent=(data.sharpe_ratio||0).toFixed(2);
+  // PnL chart
+  const months=data.monthly_returns||[];
+  if(pnlChart)pnlChart.destroy();
+  pnlChart=new Chart($('chartPnl'),{type:'line',data:{
+    labels:months.map(m=>m.month),datasets:[{label:'P&L',data:months.map(m=>m.pnl),
+      borderColor:'#10b981',backgroundColor:'rgba(16,185,129,0.1)',fill:true,tension:.3}]},
+    options:{plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#475569',font:{size:10}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#475569',font:{size:10}}}}}});
+  // Platform chart
+  const pb=data.platform_breakdown||{};
+  if(platChart)platChart.destroy();
+  platChart=new Chart($('chartPlatform'),{type:'bar',data:{
+    labels:Object.keys(pb).map(k=>PLAT_SHORT[k]||k),
+    datasets:[{label:'Trades',data:Object.values(pb).map(v=>v.taken),backgroundColor:'rgba(59,130,246,0.5)'},
+      {label:'Won',data:Object.values(pb).map(v=>v.won),backgroundColor:'rgba(16,185,129,0.5)'}]},
+    options:{plugins:{legend:{labels:{color:'#94a3b8',font:{size:10}}}},scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#475569',font:{size:10}}},
+      y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#475569',font:{size:10}}}}}});
+  // History table
+  const history=S.history;
+  if(history.length){
+    let html='<h3 style="font-size:13px;color:var(--text-1);margin:16px 0 8px">Trade History</h3>';
+    html+='<table class="data-table"><thead><tr><th>Date</th><th>Market</th><th>Gap</th><th>Result</th></tr></thead><tbody>';
+    history.slice().reverse().slice(0,20).forEach(h=>{
+      html+=`<tr><td style="font-size:11px">${h.timestamp?new Date(h.timestamp).toLocaleDateString():''}</td>
+        <td class="truncate" style="max-width:240px">${esc((h.title||'').slice(0,50))}</td>
+        <td>${(h.raw_gap||h.gap||0).toFixed(1)}%</td>
+        <td style="color:${h.result>0?'var(--green)':h.result<0?'var(--red)':'var(--text-3)'}">${h.result!=null?'$'+h.result:'--'}</td></tr>`;
+    });
+    $('anHistory').innerHTML=html+'</tbody></table>';
+  } else {
+    $('anHistory').innerHTML='<div class="empty-state"><div class="empty-icon">▤</div><p>No trade history yet.<br>Log trades from the Live Arb tab to see analytics here.</p></div>';
+  }
+}
+
+// ── Settings ──
+function renderSettings(){
+  const s=S.settings;
+  $('settingsContent').innerHTML=`
+    <h3 style="font-size:14px;color:var(--text-1);margin-bottom:16px">Configuration</h3>
+    <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Bankroll ($)</label>
+    <input type="number" id="setBankroll" value="${s.bankroll||500}" style="width:100%;margin-bottom:12px">
+    <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Default Min Gap (%)</label>
+    <input type="number" id="setMinGap" value="${s.min_gap||1.5}" step="0.5" style="width:100%;margin-bottom:12px">
+    <label style="display:block;font-size:11px;color:var(--text-3);margin-bottom:4px">Auto-refresh (seconds)</label>
+    <select id="setRefresh" style="width:100%;margin-bottom:12px">
+      ${[30,60,90,120,300].map(v=>`<option value="${v}" ${(s.auto_refresh||90)==v?'selected':''}>${v}s</option>`).join('')}
+    </select>
+    <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-2);margin-bottom:12px">
+      <input type="checkbox" id="setHalfKelly" ${s.half_kelly!==false?'checked':''} style="accent-color:var(--green)"> Half Kelly by default
+    </label>
+    <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-2);margin-bottom:16px">
+      <input type="checkbox" id="setNotif" ${s.notifications!==false?'checked':''} style="accent-color:var(--green)"> Browser notifications
+    </label>
+    <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:11px;color:var(--text-3)">
+      ArbRadar v3.0 — Prediction Market Intelligence<br>
+      AI powered by Claude (Anthropic)<br>
+      ${S.settings.ANTHROPIC_API_KEY?'API Key: configured':'API Key: not set — add ANTHROPIC_API_KEY to .env'}
+    </div>`;
+}
+async function saveSettings(){
+  const data={
+    bankroll:+$('setBankroll').value||500,
+    min_gap:+$('setMinGap').value||1.5,
+    auto_refresh:+$('setRefresh').value||90,
+    half_kelly:$('setHalfKelly').checked,
+    notifications:$('setNotif').checked,
+  };
+  try{
+    await fetch(API+'/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+    S.settings=data;S.bankroll=data.bankroll;S.countdown=data.auto_refresh;
+    $('minGap').value=data.min_gap;$('halfKelly').checked=data.half_kelly;
+    toast('Settings saved');
+  }catch(e){toast('Failed to save','error');}
+}
+
+// ── Sidebar status ──
+function renderStatus(){
+  const platforms=S.health.platforms||{};
+  const names={poly:'Polymarket',predict:'PredictIt',manifold:'Manifold',metaculus:'Metaculus',opinion:'Opinion'};
+  let html='';
+  ['poly','predict','manifold','metaculus','opinion'].forEach(key=>{
+    const p=platforms[key]||{};
+    const status=p.status||(p.count>0?'live':(p.ok?'live':'down'));
+    const count=p.count!=null?p.count:(S.counts||{})[key]||0;
+    const dotColor=status==='live'?'var(--green)':status==='partial'?'var(--amber)':'var(--red)';
+    const statusText=status==='live'?'LIVE':status==='partial'?'PARTIAL':'DOWN';
+    const pulse=status==='live'?'animation:statusPulse 2s infinite':'';
+    html+=`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04)">
+      <div style="display:flex;align-items:center;gap:8px">
+        <div style="width:7px;height:7px;border-radius:50%;background:${dotColor};flex-shrink:0;${pulse}"></div>
+        <span style="font-size:12px;color:var(--text-1)">${names[key]}</span>
+      </div>
+      <div style="text-align:right;display:flex;align-items:center;gap:6px">
+        <span style="font-size:9px;color:${dotColor};letter-spacing:0.08em">${statusText}</span>
+        <span style="font-size:10px;color:var(--text-3);font-family:var(--font-mono)">${count}</span>
+      </div>
+    </div>`;
+  });
+  $('sidebarStatus').innerHTML=html;
+}
+
+// ── Trade actions ──
+async function logTrade(arb){
+  try{
+    await fetch(API+'/history/log',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(arb)});
+    toast('Trade logged');loadHistory();
+  }catch(e){toast('Failed to log','error');}
+}
+async function markTaken(id){
+  try{await fetch(`${API}/history/${id}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({taken:true})});toast('Marked taken');loadHistory().then(renderPortfolio);}catch(e){toast('Error','error');}
+}
+async function addResult(id){
+  const v=prompt('Enter P&L result:');if(v===null)return;
+  try{await fetch(`${API}/history/${id}`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({result:+v})});toast('Result added');loadHistory().then(renderPortfolio);}catch(e){toast('Error','error');}
+}
+async function deleteTrade(id){
+  if(!confirm('Delete?'))return;
+  try{await fetch(`${API}/history/${id}`,{method:'DELETE'});toast('Deleted');loadHistory().then(renderPortfolio);}catch(e){toast('Error','error');}
+}
+async function addToWatchlist(market){
+  try{await fetch(API+'/watchlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(market)});toast('Added to watchlist');}catch(e){toast('Error','error');}
+}
+async function removeWatch(id){
+  try{await fetch(`${API}/watchlist/${id}`,{method:'DELETE'});toast('Removed');renderWatchlist();}catch(e){toast('Error','error');}
+}
+function exportCSV(){
+  const data=S.history;if(!data.length){toast('No data','warning');return;}
+  const rows=[['date','title','gap','taken','result'].join(',')];
+  data.forEach(h=>rows.push([h.timestamp?new Date(h.timestamp).toLocaleDateString():'','"'+(h.title||'')+'"',(h.raw_gap||0).toFixed(1),h.taken?'yes':'no',h.result!=null?h.result:''].join(',')));
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'});const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='arbradar_trades.csv';a.click();toast('CSV exported');
+}
+
+// ── AI Chat ──
+async function sendChat(){
+  const input=$('chatInput'),msg=input.value.trim();
+  if(!msg)return;input.value='';
+  const msgs=$('chatMessages');
+  msgs.innerHTML+=`<div class="chat-msg user"><div class="bubble">${esc(msg)}</div></div>`;
+  $('chatTyping').style.display='block';
+  msgs.scrollTop=msgs.scrollHeight;
+  try{
+    const r=await fetch(API+'/ai/chat',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:msg,context:{arb_count:S.cross.length,bankroll:S.bankroll,platforms:Object.keys(S.counts).filter(k=>S.counts[k]>0).join(', ')}})});
+    const data=await r.json();
+    msgs.innerHTML+=`<div class="chat-msg ai"><div class="bubble">${esc(data.response)}</div></div>`;
+  }catch(e){
+    msgs.innerHTML+=`<div class="chat-msg ai"><div class="bubble" style="color:var(--red)">Error connecting to AI</div></div>`;
+  }
+  $('chatTyping').style.display='none';
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+// ── Data loading ──
+async function loadAllArbs(){
+  const minGap=+($('minGap')?.value)||1.5;
+  const minVol=+($('minVol')?.value)||0;
+  try{
+    const r=await fetch(`${API}/arb/all?min_gap=${minGap}&min_volume=${minVol}`);
+    const d=await r.json();
+    S.cross=d.cross||[];S.dutch=d.dutch||[];S.tail=d.tail||[];
+  }catch(e){console.error(e);}
+}
+async function loadLogical(){
+  try{const r=await fetch(API+'/arb/logical');S.logical=await r.json();}catch(e){S.logical={opportunities:[],count:0};}
+}
+async function loadFastMarkets(){
+  try{const r=await fetch(API+'/markets/fast?max_days=7');S.fastMarkets=await r.json();}catch(e){S.fastMarkets=[];}
+}
+async function loadFastArbs(){
+  try{const r=await fetch(API+'/arb/fast?max_days=3');S.fastArbs=await r.json();}catch(e){S.fastArbs=[];}
+}
+async function loadAllMarkets(){
+  try{const r=await fetch(API+'/markets/all');const d=await r.json();S.allMarkets=d.markets||[];S.counts=d.counts||{};}catch(e){}
+}
+async function loadHealth(){try{const r=await fetch(API+'/health');S.health=await r.json();}catch(e){}}
+async function loadHistory(){try{const r=await fetch(API+'/history');S.history=await r.json();}catch(e){S.history=[];}}
+async function loadSettings(){try{const r=await fetch(API+'/settings');S.settings=await r.json();S.bankroll=S.settings.bankroll||500;}catch(e){}}
+
+async function refresh(){
+  S.countdown=S.settings.auto_refresh||90;
+  await Promise.all([loadAllMarkets(),loadAllArbs(),loadHealth(),loadHistory(),loadSettings(),loadLogical(),loadFastMarkets(),loadFastArbs()]);
+  renderDashboard();renderArb();renderStatus();
+  const ts=new Date().toLocaleTimeString();
+  $('lastUpdate').textContent=ts;$('lastUpdate2').textContent=ts;
+}
+
+// ── Welcome flow ──
+async function startApp(){
+  const bar=$('welcomeBar'),status=$('welcomeStatus');
+  const steps=[
+    {name:'Polymarket',fn:()=>fetch(API+'/markets/polymarket').then(r=>r.json())},
+    {name:'PredictIt',fn:()=>fetch(API+'/markets/predictit').then(r=>r.json())},
+    {name:'Manifold',fn:()=>fetch(API+'/markets/manifold').then(r=>r.json())},
+    {name:'Metaculus',fn:()=>fetch(API+'/markets/metaculus').then(r=>r.json()).catch(()=>[])},
+    {name:'Opinion',fn:()=>fetch(API+'/markets/opinion').then(r=>r.json()).catch(()=>[])},
+  ];
+  let done=0;
+  for(const step of steps){
+    status.innerHTML+= `<div class="loading" id="ws-${step.name}">\u29BF ${step.name} connecting...</div>`;
+    try{
+      const d=await step.fn();
+      const el=document.getElementById('ws-'+step.name);
+      el.className='done';el.textContent=`✓ ${step.name} connected — ${Array.isArray(d)?d.length:0} markets`;
+    }catch(e){
+      const el=document.getElementById('ws-'+step.name);
+      el.className='pending';el.textContent=`○ ${step.name} unavailable`;
+    }
+    done++;bar.style.width=(done/steps.length*100)+'%';
+  }
+  // Load remaining data
+  await Promise.all([loadAllArbs(),loadAllMarkets(),loadHealth(),loadHistory(),loadSettings()]);
+  bar.style.width='100%';
+  await new Promise(r=>setTimeout(r,400));
+  $('welcome').classList.add('hidden');
+  $('app').style.display='flex';
+  S.loaded=true;
+  renderDashboard();renderArb();renderStatus();updateKelly();
+  const ts=new Date().toLocaleTimeString();
+  $('lastUpdate').textContent=ts;$('lastUpdate2').textContent=ts;
+}
+
+// ── Timer ──
+function startTimer(){
+  S.timer=setInterval(()=>{
+    S.countdown--;
+    $('timer').textContent=S.countdown+'s';
+    if(S.countdown<=0)refresh();
+  },1000);
+}
+
+// ── Keyboard shortcuts ──
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;
+  if(e.key==='?'){$('shortcutsModal').classList.toggle('open');return;}
+  if(e.key==='Escape'){closePopup();$('shortcutsModal').classList.remove('open');return;}
+  if(e.key.toLowerCase()==='r'){refresh();return;}
+  if(e.key==='/'){e.preventDefault();($('arbSearch')||$('mktSearch'))?.focus();return;}
+  const pages=['dashboard','arb','markets','calculator','portfolio','watchlist','analytics','settings'];
+  const num=parseInt(e.key);
+  if(num>=1&&num<=8)navigateTo(pages[num-1]);
+});
+
+// ── Input handlers ──
+['kellyBank','kellyEdge','kellyProb'].forEach(id=>$(id)?.addEventListener('input',updateKelly));
+let _debounce;
+['minGap','minVol'].forEach(id=>{$(id)?.addEventListener('input',()=>{clearTimeout(_debounce);_debounce=setTimeout(()=>{loadAllArbs().then(()=>{renderDashboard();renderArb();})},800);})});
+$('arbSearch')?.addEventListener('input',()=>{clearTimeout(_debounce);_debounce=setTimeout(renderArb,300)});
+$('halfKelly')?.addEventListener('change',()=>{renderArb();renderDashboard()});
+
+// ── Notifications ──
+if('Notification'in window&&Notification.permission==='default')Notification.requestPermission();
+
+// ── Init ──
+startApp();
+startTimer();
+</script>
+</body>
+</html>

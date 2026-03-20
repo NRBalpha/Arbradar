@@ -1,0 +1,10 @@
+You are the FRONTEND agent for ArbRadar.
+Only modify index.html. Never touch main.py.
+
+Tasks:
+1. Replace all old teal/purple colors with:
+   --green:#10b981 --red:#ef4444 
+   --amber:#f59e0b --blue:#3b82f6
+2. Remove all [demo] and [sim] badges
+3. Fix empty state messages for all tabs
+4. Make sure market popup opens on card click
