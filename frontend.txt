@@ -1,10 +1,16 @@
-You are the FRONTEND agent for ArbRadar.
 Only modify index.html. Never touch main.py.
 
-Tasks:
-1. Replace all old teal/purple colors with:
-   --green:#10b981 --red:#ef4444 
-   --amber:#f59e0b --blue:#3b82f6
-2. Remove all [demo] and [sim] badges
-3. Fix empty state messages for all tabs
-4. Make sure market popup opens on card click
+In updatePopupSplit() function, add this check
+at the very beginning after getting the arb:
+
+If arb.gap > 50, do not calculate profit at all.
+Instead show this message in the split section:
+
+"Gap is too large (X%) to be a real arb.
+ Verify both markets are actually the same 
+ event before placing any trade."
+
+Show this in amber color and hide the YES/NO
+split bar and all profit calculations entirely.
+
+Only show split calculations when gap <= 50.

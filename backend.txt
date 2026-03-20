@@ -1,23 +1,114 @@
-You are the BACKEND agent for ArbRadar.
-Only modify main.py. Never touch index.html.
+You are fixing ArbRadar's main.py.
 
-Tasks:
-1. Fix Metaculus — add METACULUS_API_TOKEN 
-   support from .env file in the request headers
-2. Remove ALL simulated/demo/fake data
-3. Fix /arb/cross to deduplicate results
-4. Make sure every platform fetch has retry logic
-```
+THE PROBLEM:
+The cross-platform arb matching is creating false 
+matches. Here is exactly what is happening:
 
-**Save this as `frontend.txt` in your arbradar folder:**
-```
-You are the FRONTEND agent for ArbRadar.
-Only modify index.html. Never touch main.py.
+PredictIt has markets like:
+"Which party will win the 2026 US Senate election 
+in New Mexico? — Democratic" at 99% probability
 
-Tasks:
-1. Replace all old teal/purple colors with:
-   --green:#10b981 --red:#ef4444 
-   --amber:#f59e0b --blue:#3b82f6
-2. Remove all [demo] and [sim] badges
-3. Fix empty state messages for all tabs
-4. Make sure market popup opens on card click
+Manifold has markets like:
+"Which party will win the 2026 US Senate election 
+in Texas?" at 14% probability
+
+The matching algorithm sees "Senate election" and 
+thinks these are the same market. They are NOT.
+New Mexico and Texas are completely different races.
+
+This creates fake arbs showing 86% gaps which are 
+mathematically impossible for a real arb.
+
+A real cross-platform arb looks like this:
+- Polymarket: "Will Fed cut rates in June?" = 61%
+- Manifold: "Will Fed cut rates in June?" = 54%
+- Same exact event, different platforms, small gap
+
+WHAT TO FIX IN main.py:
+
+Fix 1 - Remove obviously fake arbs:
+In the find_arb_opportunities() function or 
+wherever pairs are scored, add these filters
+BEFORE adding to results list:
+
+a) If gap > 55%, skip this pair entirely.
+   Real arbs between platforms are never this large.
+   A 55%+ gap means completely different markets.
+
+b) If prob_high > 88% AND prob_low < 12%, skip it.
+   This pattern always means different markets,
+   not a real pricing inefficiency.
+
+c) Extract location entities from both titles:
+   US_STATES = ["Alabama", "Alaska", "Arizona", 
+   "Arkansas", "California", "Colorado", 
+   "Connecticut", "Delaware", "Florida", "Georgia",
+   "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+   "Kansas", "Kentucky", "Louisiana", "Maine",
+   "Maryland", "Massachusetts", "Michigan",
+   "Minnesota", "Mississippi", "Missouri", "Montana",
+   "Nebraska", "Nevada", "New Hampshire", 
+   "New Jersey", "New Mexico", "New York",
+   "North Carolina", "North Dakota", "Ohio",
+   "Oklahoma", "Oregon", "Pennsylvania",
+   "Rhode Island", "South Carolina", "South Dakota",
+   "Tennessee", "Texas", "Utah", "Vermont",
+   "Virginia", "Washington", "West Virginia",
+   "Wisconsin", "Wyoming"]
+   
+   For each pair, find which states appear in 
+   title_a and which states appear in title_b.
+   If title_a contains state X and title_b contains
+   state Y and X != Y, skip this pair.
+   Different states = different races = not an arb.
+
+d) Strip PredictIt contract suffixes before matching:
+   PredictIt appends "— Democratic", "— Republican",
+   "— Yes", "— No" to their market titles.
+   Remove everything after " — " in PredictIt titles
+   before comparing. This prevents matching
+   "Texas — Democratic" with "Texas — Republican"
+   as if they were the same market.
+
+Fix 2 - Better title comparison:
+After stripping suffixes and checking states,
+the word overlap threshold should be 0.40 minimum
+but ALSO require that any numbers in the titles
+match exactly. If title_a says "2026" and title_b
+says "2028", they are not the same event.
+Extract all 4-digit numbers and compare them.
+If numbers exist in both titles but dont match,
+skip the pair.
+
+Fix 3 - Deduplicate final results:
+After all matching is done, deduplicate by:
+normalized_title = title.lower().strip()
+               stripped of state names
+               stripped of party names
+               stripped of " — " suffixes
+If two pairs have the same normalized_title,
+keep only the one with highest fee_adjusted_gap.
+
+Fix 4 - Add quality flag to each result:
+Add a field "confidence" to each arb pair:
+- "high" if gap < 15% and word_overlap > 0.6
+- "medium" if gap < 30% and word_overlap > 0.45
+- "low" if gap >= 30% or word_overlap <= 0.45
+
+This confidence field will be used by frontend
+to show warning badges.
+
+After making all changes, add print statements:
+print(f"Total pairs before filtering: {before}")
+print(f"Removed - gap too large: {removed_gap}")
+print(f"Removed - state mismatch: {removed_state}")  
+print(f"Removed - number mismatch: {removed_num}")
+print(f"Removed - duplicates: {removed_dup}")
+print(f"Final real arbs: {len(final_results)}")
+
+Expected result after fix:
+- No arbs with gap > 55% should appear
+- No arbs matching different US states
+- No duplicate markets
+- Remaining arbs should be genuinely suspicious
+  price differences worth investigating

@@ -77,7 +77,35 @@ EXPANDED_STOPWORDS = frozenset({
     "before", "after", "about", "into", "through", "market", "price",
     "who", "what", "when", "where", "how", "which", "their", "there",
     "more", "less", "first", "last", "next", "new", "old", "end",
-    "yes", "no", "win", "wins", "lose", "loses", "result", "results",
+    "yes", "no", "lose", "loses", "result", "results",
+})
+
+KEYWORD_SYNONYMS = {
+    "republican": "republican",
+    "gop": "republican",
+    "democrat": "democrat",
+    "democratic": "democrat",
+    "senate": "senate",
+    "senator": "senate",
+    "win": "win",
+    "wins": "win",
+    "winner": "win",
+    "election": "election",
+    "vote": "election",
+    "voting": "election",
+}
+
+US_STATES = frozenset({
+    "alabama", "alaska", "arizona", "arkansas", "california",
+    "colorado", "connecticut", "delaware", "florida", "georgia",
+    "hawaii", "idaho", "illinois", "indiana", "iowa",
+    "kansas", "kentucky", "louisiana", "maine", "maryland",
+    "massachusetts", "michigan", "minnesota", "mississippi", "missouri",
+    "montana", "nebraska", "nevada", "new hampshire", "new jersey",
+    "new mexico", "new york", "north carolina", "north dakota", "ohio",
+    "oklahoma", "oregon", "pennsylvania", "rhode island", "south carolina",
+    "south dakota", "tennessee", "texas", "utah", "vermont",
+    "virginia", "washington", "west virginia", "wisconsin", "wyoming",
 })
 
 
@@ -181,9 +209,9 @@ def clean_title(title: str) -> set:
 
 
 def extract_keywords(title: str) -> set:
-    """Improved keyword extraction with expanded stopwords."""
+    """Improved keyword extraction with expanded stopwords and synonym normalization."""
     t = re.sub(r'[^a-z0-9\s]', ' ', title.lower())
-    return {w for w in t.split() if w not in EXPANDED_STOPWORDS and len(w) > 2}
+    return {KEYWORD_SYNONYMS.get(w, w) for w in t.split() if w not in EXPANDED_STOPWORDS and len(w) > 2}
 
 
 def extract_numbers(title: str) -> set:
@@ -224,6 +252,56 @@ def extract_proper_nouns(title: str) -> set:
         if w not in _ACRONYM_EXCLUDE:
             words.add(w)
     return words
+
+
+def _extract_us_states(title: str) -> set:
+    """Extract US state names from a title using word-boundary matching."""
+    t = title.lower()
+    found = set()
+    for state in US_STATES:
+        if re.search(r'\b' + re.escape(state) + r'\b', t):
+            found.add(state)
+    # "west virginia" subsumes "virginia"
+    if "west virginia" in found:
+        found.discard("virginia")
+    return found
+
+
+def _strip_contract_suffix(title: str) -> str:
+    """Strip PredictIt contract suffixes like ' — Democratic', ' — Republican'."""
+    idx = title.find(" \u2014 ")
+    if idx != -1:
+        return title[:idx].strip()
+    return title
+
+
+def _normalize_base_title(title: str) -> str:
+    """Normalize to base title for dedup: strip after ' — ', remove party/state suffixes."""
+    # Strip everything after em dash (PredictIt contract suffix)
+    idx = title.find(" \u2014 ")
+    if idx != -1:
+        title = title[:idx]
+
+    t = title.strip()
+    t_lower = t.lower()
+
+    # Strip trailing party labels
+    for suffix in ["republican", "democrat", "democratic", "gop",
+                    "libertarian", "independent", "green party"]:
+        if t_lower.endswith(suffix):
+            t = t[:len(t) - len(suffix)].rstrip(" -\u2013\u2014,:")
+            t_lower = t.lower()
+
+    # Strip trailing state names (longest first to match "west virginia" before "virginia")
+    for state in sorted(US_STATES, key=len, reverse=True):
+        if t_lower.endswith(state):
+            t = t[:len(t) - len(state)].rstrip(" -\u2013\u2014,:")
+            t_lower = t.lower()
+
+    # Final normalization: lowercase, strip punctuation, sort keywords
+    t = re.sub(r'[^a-z0-9\s]', ' ', t_lower)
+    words = sorted(w for w in t.split() if w not in EXPANDED_STOPWORDS and len(w) > 2)
+    return ' '.join(words)
 
 
 def title_similarity(a: str, b: str) -> float:
@@ -267,13 +345,18 @@ BAD_TAIL_PATTERNS = re.compile(
 
 def is_cross_match(a: str, b: str) -> tuple[bool, float]:
     """Check if two titles match across platforms. Returns (matched, sim)."""
-    sim = keyword_similarity(a, b)
-    if sim < 0.30:
+    # Strip PredictIt contract suffixes (e.g. " — Democratic") before comparing
+    a_clean = _strip_contract_suffix(a)
+    b_clean = _strip_contract_suffix(b)
+
+    sim = keyword_similarity(a_clean, b_clean)
+    if sim < 0.40:
         return False, sim
+
     # Entity consistency: if both titles have unique proper nouns
     # that don't overlap, this is likely a different event (e.g. Iran vs Canada)
-    nouns_a = extract_proper_nouns(a)
-    nouns_b = extract_proper_nouns(b)
+    nouns_a = extract_proper_nouns(a_clean)
+    nouns_b = extract_proper_nouns(b_clean)
     if nouns_a and nouns_b:
         unique_a = nouns_a - nouns_b
         unique_b = nouns_b - nouns_a
@@ -281,9 +364,8 @@ def is_cross_match(a: str, b: str) -> tuple[bool, float]:
         # If both have unique entities and no shared entities, reject
         if unique_a and unique_b and not shared:
             return False, sim
-    if sim >= 0.45:
-        return True, sim
-    if sim >= 0.30 and entity_match(a, b):
+
+    if sim >= 0.40:
         return True, sim
     return False, sim
 
@@ -896,6 +978,12 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
     arbs = []
     seen_pairs: set[tuple] = set()
 
+    # Filtering counters
+    total_considered = 0
+    removed_gap = 0
+    removed_state = 0
+    removed_num = 0
+
     for i in range(len(platforms)):
         for j in range(i + 1, len(platforms)):
             for a in by_platform[platforms[i]]:
@@ -903,7 +991,34 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                     matched, sim = is_cross_match(a["title"], b["title"])
                     if not matched:
                         continue
+
+                    total_considered += 1
+
+                    # Strip suffixes for state/number checks
+                    a_clean = _strip_contract_suffix(a["title"])
+                    b_clean = _strip_contract_suffix(b["title"])
+
+                    # Fix 1c: State mismatch — different states = different races
+                    states_a = _extract_us_states(a_clean)
+                    states_b = _extract_us_states(b_clean)
+                    if states_a and states_b and not (states_a & states_b):
+                        removed_state += 1
+                        continue
+
+                    # Fix 2: 4-digit number mismatch — different years = different events
+                    years_a = set(re.findall(r'\b\d{4}\b', a_clean))
+                    years_b = set(re.findall(r'\b\d{4}\b', b_clean))
+                    if years_a and years_b and not (years_a & years_b):
+                        removed_num += 1
+                        continue
+
                     raw_gap = abs(a["probability"] - b["probability"])
+
+                    # Fix 1a: Gap > 55% means completely different markets
+                    if raw_gap > 55:
+                        removed_gap += 1
+                        continue
+
                     fee_gap = compute_fee_adjusted_gap(
                         a["probability"], b["probability"],
                         a["platform"], b["platform"],
@@ -919,6 +1034,11 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                     else:
                         high, low = b, a
 
+                    # Fix 1b: Extreme probability mismatch = different markets
+                    if high["probability"] > 88 and low["probability"] < 12:
+                        removed_gap += 1
+                        continue
+
                     # Deduplicate: skip if same pair of (id+platform) already seen
                     pair_key = tuple(sorted([
                         high["id"] + high["platform"],
@@ -933,6 +1053,14 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                     ct = ct_high or ct_low
                     dtr = days_until(ct)
                     ann = compute_annualized(fee_gap, dtr)
+
+                    # Fix 4: Quality confidence flag
+                    if raw_gap < 15 and sim > 0.6:
+                        confidence = "high"
+                    elif raw_gap < 30 and sim > 0.45:
+                        confidence = "medium"
+                    else:
+                        confidence = "low"
 
                     arbs.append({
                         "title": high["title"],
@@ -953,7 +1081,10 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                         "similarity": round(sim, 3),
                         "volume_high": high.get("volume", 0),
                         "volume_low": low.get("volume", 0),
+                        "confidence": confidence,
                     })
+
+    before_dedup = len(arbs)
 
     # Filter out negative fee-adjusted gap (not real arb after fees)
     arbs = [a for a in arbs if a["fee_adjusted_gap"] > 0]
@@ -996,7 +1127,55 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
             final.append(arb)
     arbs = final
 
+    # ── Dedup step 1: Group by normalized base title, keep best per group ──
+    # Strips " — <contract>" suffixes and state/party suffixes so that
+    # e.g. "Senate race — Republican" and "Senate race — Democratic" collapse.
+    base_dedup: dict[str, dict] = {}
+    for arb in arbs:
+        base_key = _normalize_base_title(arb["title"])
+        existing = base_dedup.get(base_key)
+        if existing is None or arb["fee_adjusted_gap"] > existing["fee_adjusted_gap"]:
+            base_dedup[base_key] = arb
+    arbs = list(base_dedup.values())
+
+    # ── Dedup step 2: Deduplicate by market pair (platform combo + similar title) ──
+    # If platform_a + platform_b + similar base title appears more than once,
+    # keep only the one with the highest fee_adjusted_gap.
+    pair_dedup: dict[tuple, dict] = {}
+    for arb in arbs:
+        plat_pair = tuple(sorted([arb["platform_high"], arb["platform_low"]]))
+        base = _normalize_base_title(arb["title"])
+        key = (plat_pair[0], plat_pair[1], base)
+        existing = pair_dedup.get(key)
+        if existing is None or arb["fee_adjusted_gap"] > existing["fee_adjusted_gap"]:
+            pair_dedup[key] = arb
+    arbs = list(pair_dedup.values())
+
+    # ── Dedup step 3: No duplicate market titles in the final list ──
+    # Once a market title (either side) is used, it cannot appear again.
+    seen_base_titles: set[str] = set()
+    unique_arbs: list[dict] = []
+    for arb in sorted(arbs, key=lambda x: x["fee_adjusted_gap"], reverse=True):
+        base_high = _normalize_base_title(arb["title"])
+        base_low = _normalize_base_title(arb.get("title_low", ""))
+        if base_high in seen_base_titles or (base_low and base_low in seen_base_titles):
+            continue
+        seen_base_titles.add(base_high)
+        if base_low:
+            seen_base_titles.add(base_low)
+        unique_arbs.append(arb)
+    arbs = unique_arbs
+
     arbs.sort(key=lambda x: x["fee_adjusted_gap"], reverse=True)
+
+    removed_dup = before_dedup - len(arbs)
+
+    print(f"Total pairs before filtering: {total_considered}")
+    print(f"Removed - gap too large: {removed_gap}")
+    print(f"Removed - state mismatch: {removed_state}")
+    print(f"Removed - number mismatch: {removed_num}")
+    print(f"Removed - duplicates: {removed_dup}")
+    print(f"Final real arbs: {len(arbs)}")
 
     return arbs
 
@@ -1062,10 +1241,21 @@ async def arb_dutch(min_edge: float = Query(default=1)):
         sum_probs = sum((m.get("yes_price") or 0) for m in group)
         if sum_probs <= 0:
             continue
+        # No profit if total prices >= 1.0
+        if sum_probs >= 1.0:
+            continue
         if sum_probs < 0.985:
             edge = (1 - sum_probs) * 100
             if edge < min_edge:
                 continue
+
+            guaranteed_profit_per_dollar = 1 - sum_probs
+            # Profit cannot exceed amount invested; if it does, data is bad
+            invalid_arb = False
+            if guaranteed_profit_per_dollar > 1.0:
+                guaranteed_profit_per_dollar = 0
+                invalid_arb = True
+
             # Optimal allocation
             valid = [m for m in group if m.get("yes_price", 0) > 0]
             inv_prices = [1 / m["yes_price"] for m in valid]
@@ -1089,7 +1279,8 @@ async def arb_dutch(min_edge: float = Query(default=1)):
                 "num_outcomes": len(outcomes),
                 "sum_probs": round(sum_probs, 4),
                 "edge_pct": round(edge, 2),
-                "guaranteed_profit_per_dollar": round(edge / 100, 4),
+                "guaranteed_profit_per_dollar": round(guaranteed_profit_per_dollar, 4),
+                "invalid": invalid_arb,
             })
 
     results.sort(key=lambda x: x["edge_pct"], reverse=True)
