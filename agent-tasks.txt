@@ -1,0 +1,12 @@
+You are the ArbRadar maintenance agent.
+Read CLAUDE.md first to understand the project.
+
+Your job when called:
+1. Run ./monitor.sh and read the output
+2. Check if any known issues from CLAUDE.md are still present
+3. Fix one issue at a time starting with the most critical
+4. Test the fix works
+5. Run git add . && git commit -m "fix: description"
+6. Report what you fixed and what still needs fixing
+
+Start now.

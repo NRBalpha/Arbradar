@@ -1,0 +1,31 @@
+Only modify main.py. Never touch index.html.
+
+Fix 1 - Remove candidate name contracts from matching:
+PredictIt has contracts like "Karen Bass", "Rick Caruso"
+These are individual candidate contracts within a race.
+Before matching titles, strip everything after " — "
+Also strip candidate first and last names from titles.
+If a title is just a person's name (2-3 words, no question
+mark), skip it entirely from arb matching.
+
+Fix 2 - Add guaranteed profit validation to arb pairs:
+For each arb pair calculate:
+yes_price = prob_low / 100
+no_price = 1 - (prob_high / 100)
+sum_prices = yes_price + no_price
+If sum_prices >= 1.0:
+  is_real_arb = False
+  guaranteed_profit_pct = 0
+Else:
+  is_real_arb = True
+  guaranteed_profit_pct = (1 - sum_prices) * 100
+Add both fields to every arb pair response.
+Only keep pairs where is_real_arb is True.
+
+Fix 3 - Add Kalshi public markets:
+Fetch from https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open
+No auth headers needed.
+If 403 error try https://api.elections.kalshi.com/v1/markets
+Return markets in same format as other platforms.
+Add to /markets/all and include in arb matching
+against Polymarket and PredictIt.

@@ -425,7 +425,7 @@ select{cursor:pointer}
     <h2>Live Arbitrage</h2>
     <div class="header-right">
       <span class="last-update" id="lastUpdate2">--</span>
-      <button class="btn-primary btn-sm" onclick="refresh()">Refresh</button>
+      <button class="btn-primary btn-sm btn-refresh" onclick="refresh()">Refresh</button>
     </div>
   </div>
   <div class="filter-bar">
@@ -1522,7 +1522,7 @@ async function renderWatchlist(){
   let html='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Probability</th><th>Change</th><th></th></tr></thead><tbody>';
   wl.forEach(w=>{
     html+=`<tr>
-      <td class="truncate text-primary" style="max-width:280px">${esc(w.title)}</td>
+      <td class="truncate text-primary" style="max-width:280px" title="${esc(w.title)}">${esc(w.title)}</td>
       <td>${platTag(w.platform)}</td>
       <td>${(w.current_probability||w.probability||0).toFixed(1)}%</td>
       <td style="color:${(w.price_change||0)>0?'var(--green)':(w.price_change||0)<0?'var(--red)':'var(--text-3)'}">${w.price_change?((w.price_change>0?'+':'')+w.price_change.toFixed(1)+'pp'):'--'}</td>
