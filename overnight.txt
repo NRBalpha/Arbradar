@@ -1,0 +1,64 @@
+You are fixing ArbRadar overnight. Work through
+all these tasks one by one. Take your time.
+Do not stop until everything is done.
+
+TASK 1 - Fix popup profit calculation
+In index.html find updatePopupSplit function.
+The problem is profit shows impossible numbers.
+Fix it like this:
+yesPrice = arb.prob_low / 100
+noPrice = (100 - arb.prob_high) / 100
+sumPrices = yesPrice + noPrice
+If sumPrices >= 1.0 show Not a real arb
+and hide all profit numbers.
+If sumPrices < 1.0 then:
+guaranteedProfit = (1 - sumPrices) * amount
+This must always be less than amount.
+If gap > 50 show warning Verify markets match.
+
+TASK 2 - Fix arb matching in main.py
+Add these filters to cross platform matching:
+If both titles contain different US state names skip.
+If gap > 55 percent skip.
+If prob_high > 88 and prob_low < 12 skip.
+Strip Democratic and Republican suffixes from
+PredictIt titles before matching.
+Deduplicate same base title keep only best gap.
+
+TASK 3 - Add endpoint in main.py
+Add GET /markets/fast with max_days param default 7.
+Fetch all markets filter by close_time.
+Keep only markets closing within max_days.
+Add days_left and urgency fields.
+TODAY if days_left is 0.
+TOMORROW if days_left is 1.
+THREE DAYS if days_left is 3 or less.
+THIS WEEK if days_left is 7 or less.
+Sort by days_left ascending.
+Return markets array and count.
+
+TASK 4 - Add Fast tab in index.html
+Add tab called Fast between Tail-End and
+Market Browser tabs.
+On click fetch /markets/fast?max_days=7
+Show filter buttons ALL TODAY THIS WEEK.
+Table columns MARKET PLATFORM CLOSES ACTION.
+TODAY badge is red.
+TOMORROW badge is orange.
+THREE DAYS badge is amber.
+THIS WEEK badge is gray.
+Each row opens market popup on click.
+
+TASK 5 - Fix Polymarket URLs in main.py
+All Polymarket URLs must use this format:
+https://polymarket.com/event/SLUG
+where SLUG comes from the market slug field.
+Never use just https://polymarket.com alone.
+
+TASK 6 - Final cleanup
+In index.html remove all demo and sim badges.
+Make platform filter buttons work in market browser.
+Make sure clicking any market card opens popup.
+
+When all tasks are done print this message:
+Overnight complete all 6 tasks done.

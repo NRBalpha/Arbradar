@@ -271,8 +271,15 @@ def _strip_contract_suffix(title: str) -> str:
     """Strip PredictIt contract suffixes like ' — Democratic', ' — Republican'."""
     idx = title.find(" \u2014 ")
     if idx != -1:
-        return title[:idx].strip()
-    return title
+        title = title[:idx].strip()
+    # Also strip trailing party words without em-dash
+    t = title.rstrip()
+    t_lower = t.lower()
+    for suffix in ["democratic", "republican", "democrat", "gop"]:
+        if t_lower.endswith(suffix):
+            t = t[:len(t) - len(suffix)].rstrip(" -\u2013\u2014,:")
+            break
+    return t
 
 
 def _normalize_base_title(title: str) -> str:
@@ -474,8 +481,10 @@ async def fetch_polymarket() -> list[dict]:
             if yes_price <= 0.005 or yes_price >= 0.995:
                 continue
 
-            slug = m.get("slug", m.get("id", ""))
-            url = f"https://polymarket.com/event/{slug}" if slug else "https://polymarket.com/markets"
+            slug = m.get("slug") or m.get("id") or ""
+            if not slug:
+                continue  # Skip markets without a slug — can't build a valid URL
+            url = f"https://polymarket.com/event/{slug}"
             end_date = m.get("endDate") or m.get("end_date_iso")
             close_time = parse_dt(end_date)
 
@@ -852,7 +861,7 @@ async def search_polymarket(q: str = Query(...)):
             return [
                 {
                     "title": r.get("question", ""),
-                    "url": f"https://polymarket.com/event/{r.get('slug', '')}",
+                    "url": f"https://polymarket.com/event/{r.get('slug')}",
                     "slug": r.get("slug", ""),
                     "probability": round(float(json.loads(r.get("outcomePrices", "[0.5]"))[0]) * 100, 1)
                         if r.get("outcomePrices") else 50,
@@ -1531,7 +1540,7 @@ async def markets_fast(max_days: int = Query(default=7)):
         elif days_left == 1:
             urgency = "TOMORROW"
         elif days_left <= 3:
-            urgency = "3 DAYS"
+            urgency = "THREE DAYS"
         else:
             urgency = "THIS WEEK"
 
@@ -1569,9 +1578,9 @@ async def arb_fast(max_days: int = Query(default=3), min_gap: float = Query(defa
         elif dtr < 2:
             urgency = "TOMORROW"
         elif dtr <= 3:
-            urgency = "THIS_WEEK"
+            urgency = "THREE DAYS"
         else:
-            urgency = "SOON"
+            urgency = "THIS WEEK"
 
         results.append({
             **arb,

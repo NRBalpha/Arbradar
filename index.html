@@ -441,6 +441,7 @@ select{cursor:pointer}
       <button class="btn-outline btn-sm" data-p="predict">PredictIt</button>
       <button class="btn-outline btn-sm" data-p="manifold">Manifold</button>
       <button class="btn-outline btn-sm" data-p="metaculus">Metaculus</button>
+      <button class="btn-outline btn-sm" data-p="opinion">Opinion</button>
     </div>
     <select id="mktSort"><option value="volume">Volume</option><option value="probability">Probability</option></select>
     <span style="margin-left:auto;font-size:11px;color:var(--text-3)" id="mktCount">--</span>
@@ -887,22 +888,45 @@ function updatePopupSplit(){
   const amt=+($('popupAmount')?.value)||100;
   const yesPrice=arb.prob_low/100;
   const noPrice=(100-arb.prob_high)/100;
-  const yesFee=PLAT_FEES[arb.platform_low]||0;
-  const noFee=PLAT_FEES[arb.platform_high]||0;
-  const r=calcArbSplit(amt,yesPrice,noPrice,yesFee,noFee);
+  const sumPrices=yesPrice+noPrice;
+  const gap=arb.raw_gap||arb.fee_adjusted_gap||0;
   const el=$('popupSplit');if(!el)return;
-  if(!r.valid){el.innerHTML=`<div style="text-align:center;font-size:12px;color:var(--amber);padding:4px 0">No arb — prices sum to ${(yesPrice+noPrice)*100|0}%</div>`;return;}
-  const yesPct=Math.max(r.yesPct,8),noPct=Math.max(r.noPct,8);
+
+  // Not a real arb if prices sum to 1.0 or more
+  if(sumPrices>=1.0){
+    el.innerHTML=`<div style="text-align:center;padding:10px 0">
+      <div style="font-size:13px;font-weight:700;color:var(--amber)">Not a real arb</div>
+      <div style="font-size:11px;color:var(--text-3);margin-top:4px">Prices sum to ${(sumPrices*100).toFixed(1)}% — need below 100%</div>
+    </div>`;
+    return;
+  }
+
+  // Simple guaranteed profit: always less than amount
+  const guaranteedProfit=(1-sumPrices)*amt;
+
+  // Optimal split: equalize payout in both outcomes
+  const yesAmt=(yesPrice/sumPrices)*amt;
+  const noAmt=(noPrice/sumPrices)*amt;
+  const profitPct=(guaranteedProfit/amt*100).toFixed(1);
+  const yesPctBar=Math.max((yesAmt/amt*100),8);
+  const noPctBar=Math.max((noAmt/amt*100),8);
+
+  let warning='';
+  if(gap>50){
+    warning=`<div style="text-align:center;font-size:11px;color:var(--amber);padding:6px 10px;background:var(--amber-dim);border-radius:var(--radius);margin-top:8px">&#9888; Verify markets match — gap is ${gap.toFixed(0)}%</div>`;
+  }
+
   el.innerHTML=`
     <div class="popup-split-bar">
-      <div class="popup-split-yes" style="width:${yesPct}%">$${r.yesAmt.toFixed(0)} YES</div>
-      <div class="popup-split-no" style="width:${noPct}%">$${r.noAmt.toFixed(0)} NO</div>
+      <div class="popup-split-yes" style="width:${yesPctBar}%">$${yesAmt.toFixed(0)} YES</div>
+      <div class="popup-split-no" style="width:${noPctBar}%">$${noAmt.toFixed(0)} NO</div>
     </div>
     <div class="popup-split-labels">
-      <span>Profit if YES: <b style="color:${r.ifYesWins>=0?'var(--green)':'var(--red)'}">$${r.ifYesWins.toFixed(2)}</b></span>
-      <span>Profit if NO: <b style="color:${r.ifNoWins>=0?'var(--green)':'var(--red)'}">$${r.ifNoWins.toFixed(2)}</b></span>
+      <span>BUY YES @ ${PLAT_SHORT[arb.platform_low]||arb.platform_low} &middot; ${(yesPrice*100).toFixed(0)}&cent;</span>
+      <span>BUY NO @ ${PLAT_SHORT[arb.platform_high]||arb.platform_high} &middot; ${(noPrice*100).toFixed(0)}&cent;</span>
     </div>
-    <div style="text-align:center;margin-top:6px;font-size:13px;font-weight:700;font-family:var(--font-mono);color:var(--green)">Guaranteed +$${r.guaranteedProfit.toFixed(2)} (${r.guaranteedProfitPct.toFixed(1)}%)</div>`;
+    <div style="text-align:center;margin-top:8px;font-size:14px;font-weight:700;font-family:var(--font-mono);color:var(--green)">Guaranteed +$${guaranteedProfit.toFixed(2)} (${profitPct}%)</div>
+    ${warning}`;
 }
 
 // ── Render Dashboard ──
@@ -1012,8 +1036,9 @@ function fmtCountdown(daysLeft,hoursLeft){
   return '?';
 }
 function urgencyTag(u){
-  const colors={TODAY:'var(--red)',TOMORROW:'var(--amber)',THIS_WEEK:'var(--text-2)',SOON:'var(--text-3)'};
-  return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:${u==='TODAY'?'var(--red-dim)':u==='TOMORROW'?'var(--amber-dim)':'var(--bg)'};color:${colors[u]||'var(--text-3)'};font-weight:700">${u}</span>`;
+  const colors={TODAY:'var(--red)',TOMORROW:'#f97316','THREE DAYS':'var(--amber)','THIS WEEK':'var(--text-3)'};
+  const bgs={TODAY:'var(--red-dim)',TOMORROW:'rgba(249,115,22,0.12)','THREE DAYS':'var(--amber-dim)','THIS WEEK':'rgba(255,255,255,0.04)'};
+  return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:${bgs[u]||'var(--bg)'};color:${colors[u]||'var(--text-3)'};font-weight:700">${u}</span>`;
 }
 function renderFastTab(el,search){
   let html='';
@@ -1051,7 +1076,7 @@ function renderFastTab(el,search){
     </div>`;
   let fast=S.fastMarkets;
   if(S.fastFilter==='today')fast=fast.filter(m=>m.urgency==='TODAY');
-  else if(S.fastFilter==='week')fast=fast.filter(m=>m.urgency==='TODAY'||m.urgency==='TOMORROW'||m.urgency==='THIS_WEEK');
+  else if(S.fastFilter==='week')fast=fast.filter(m=>m.urgency==='TODAY'||m.urgency==='TOMORROW'||m.urgency==='THREE DAYS'||m.urgency==='THIS WEEK');
   if(search)fast=fast.filter(m=>m.title.toLowerCase().includes(search));
   if(!fast.length){
     html+='<div class="empty-state" style="padding:30px"><div class="empty-icon">⏱</div><p>No markets closing soon in this filter.</p></div>';
@@ -1095,7 +1120,7 @@ document.querySelectorAll('#arbTabBtns button').forEach(b=>{
 function fastUrgencyBadge(daysLeft){
   if(daysLeft<1)return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:var(--red-dim);color:var(--red);font-weight:700">TODAY</span>`;
   if(daysLeft<2)return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:rgba(249,115,22,0.12);color:#f97316;font-weight:700">TOMORROW</span>`;
-  if(daysLeft<4)return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:var(--amber-dim);color:var(--amber);font-weight:700">3 DAYS</span>`;
+  if(daysLeft<4)return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:var(--amber-dim);color:var(--amber);font-weight:700">THREE DAYS</span>`;
   return `<span style="font-size:9px;padding:2px 6px;border-radius:3px;background:rgba(255,255,255,0.04);color:var(--text-3);font-weight:700">THIS WEEK</span>`;
 }
 function fastClosesCell(m){
@@ -1116,7 +1141,8 @@ function setFastPageFilter(f){
 async function loadAndRenderFast(){
   try{
     const r=await fetch(API+'/markets/fast?max_days=7');
-    S.fastPageData=await r.json();
+    const d=await r.json();
+    S.fastPageData=d.markets||[];
   }catch(e){S.fastPageData=[];}
   $('lastUpdateFast').textContent=new Date().toLocaleTimeString();
   renderFastPage();
@@ -1130,14 +1156,13 @@ function renderFastPage(){
     el.innerHTML='<div class="empty-state" style="padding:40px"><div class="empty-icon">⏱</div><p>No markets closing within 7 days found</p></div>';
     return;
   }
-  let html='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Closes</th><th>Probability</th><th>Action</th></tr></thead><tbody>';
+  let html='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Closes</th><th>Action</th></tr></thead><tbody>';
   data.forEach((m,i)=>{
     const url=resolveUrl(m.url,m.platform,null,m.title);
     html+=`<tr onclick="openFastMarketPopup(S.fastPageData,${i})" style="cursor:pointer">
       <td style="max-width:300px"><div class="truncate text-primary fw-500">${esc(m.title)}</div></td>
       <td>${platTag(m.platform)}</td>
       <td style="white-space:nowrap">${fastClosesCell(m)}</td>
-      <td><span class="fw-700" style="color:var(--green);font-family:var(--font-mono)">${m.probability.toFixed(1)}%</span></td>
       <td><a href="${esc(url)}" target="_blank" onclick="event.stopPropagation()" class="btn-outline btn-sm" style="font-size:11px;padding:3px 8px;text-decoration:none">Trade ↗</a></td>
     </tr>`;
   });
@@ -1595,7 +1620,7 @@ async function loadLogical(){
   try{const r=await fetch(API+'/arb/logical');S.logical=await r.json();}catch(e){S.logical={opportunities:[],count:0};}
 }
 async function loadFastMarkets(){
-  try{const r=await fetch(API+'/markets/fast?max_days=7');S.fastMarkets=await r.json();}catch(e){S.fastMarkets=[];}
+  try{const r=await fetch(API+'/markets/fast?max_days=7');const d=await r.json();S.fastMarkets=d.markets||[];}catch(e){S.fastMarkets=[];}
 }
 async function loadFastArbs(){
   try{const r=await fetch(API+'/arb/fast?max_days=3');S.fastArbs=await r.json();}catch(e){S.fastArbs=[];}
