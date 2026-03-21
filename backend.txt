@@ -1,32 +1,11 @@
+You are the BACKEND agent for ArbRadar.
 Only modify main.py. Never touch index.html.
 
-Add new endpoint GET /markets/fast?max_days=7
+Tasks:
+1. Fix Metaculus — add METACULUS_API_TOKEN 
+   support from .env file in the request headers
+2. Remove ALL simulated/demo/fake data
+3. Fix /arb/cross to deduplicate results
+4. Make sure every platform fetch has retry logic
 
-1. Fetch all markets from the existing 
-   fetch_all_markets() function or equivalent
 
-2. For each market calculate days_left:
-   if close_time exists:
-     parse it to datetime
-     days_left = (close_time - now).days
-   else:
-     skip this market
-
-3. Filter: only keep markets where 
-   0 <= days_left <= max_days parameter
-
-4. For each kept market add:
-   hours_left = days_left * 24
-   if days_left == 0: urgency = "TODAY"
-   elif days_left == 1: urgency = "TOMORROW"  
-   elif days_left <= 3: urgency = "3 DAYS"
-   else: urgency = "THIS WEEK"
-
-5. Sort by days_left ascending (soonest first)
-
-6. Return:
-{
-  "markets": [...],
-  "count": number,
-  "max_days": max_days
-}

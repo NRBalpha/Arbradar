@@ -1,26 +1,33 @@
 Only modify index.html. Never touch main.py.
 
-Add a new tab called "Fast" between Tail-End 
-and Market Browser tabs.
+Redesign the Markets page to look like Kalshi.
+Keep all existing functionality but change the visual design.
 
-When Fast tab is clicked fetch /markets/fast?max_days=7
-and display a table with columns:
-MARKET | PLATFORM | CLOSES | PROBABILITY | ACTION
+1. Add category filter tabs at the top like Kalshi:
+   All | Politics | Sports | Crypto | Economics | Science
 
-For CLOSES column show urgency badge:
-TODAY = red badge
-TOMORROW = orange badge
-3 DAYS = amber badge
-THIS WEEK = gray badge
+2. Each market card should look like this:
+   - White/dark card with rounded corners
+   - Category label at top left (small, gray)
+   - Event title bold and large
+   - Big probability number on the right (like 43%)
+   - Volume at bottom left
+   - Platform tag bottom right
+   - Hover effect: subtle glow border
 
-If days_left < 2 show countdown:
-"Closes in Xh Ym"
+3. Cards should be in a 2-column grid not 3
+   This makes them bigger and easier to read
 
-Each row clickable opens market popup.
+4. Each card shows YES probability as the main number
+   Color: green if > 60%, red if < 40%, white otherwise
 
-At top of tab show toggle buttons:
-[TODAY] [THIS WEEK] [ALL]
-Clicking filters the table.
+5. Add a search bar at top that filters cards instantly
 
-If no markets found show:
-"No markets closing within 7 days found"
+6. Category detection from market title keywords:
+   Politics: election, senate, president, governor, congress
+   Sports: NBA, NFL, FIFA, cup, playoffs, championship
+   Crypto: bitcoin, ethereum, BTC, ETH, crypto
+   Economics: fed, inflation, GDP, recession, rate
+   Science: AI, climate, space, quantum
+
+7. Keep click to open popup working

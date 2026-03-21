@@ -143,16 +143,39 @@ select{cursor:pointer}
 .filter-bar input[type=text]{width:220px;background:var(--bg);font-size:12px}
 .filter-group{display:flex;gap:4px}
 
-/* Market cards grid */
-.market-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.market-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:14px;cursor:pointer;transition:all .2s}
-.market-card:hover{border-color:var(--green);transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.market-card-title{font-size:13px;color:var(--text-1);font-weight:500;margin-bottom:8px;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4}
-.market-card-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px}
-.prob-bar{width:100%;height:3px;background:var(--border);border-radius:2px;margin:8px 0;overflow:hidden}
-.prob-fill{height:100%;background:var(--green);border-radius:2px;transition:width .6s ease}
+/* Market cards grid — Kalshi style */
+.market-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.market-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;
+  padding:20px 24px;cursor:pointer;transition:all .25s;display:flex;align-items:flex-start;gap:16px;position:relative}
+.market-card:hover{border-color:rgba(255,255,255,0.15);box-shadow:0 0 24px rgba(255,255,255,0.04),0 8px 32px rgba(0,0,0,.3)}
+.market-card-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.market-card-category{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);font-weight:600}
+.market-card-title{font-size:15px;color:var(--text-1);font-weight:600;line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.market-card-bottom{display:flex;align-items:center;gap:10px;margin-top:4px;font-size:11px}
+.market-card-vol{color:var(--text-3);font-size:11px}
+.market-card-prob{flex-shrink:0;font-size:36px;font-weight:800;font-family:var(--font-mono);line-height:1;
+  letter-spacing:-1px;min-width:72px;text-align:right}
+.market-card-prob.prob-green{color:var(--green)}
+.market-card-prob.prob-red{color:var(--red)}
+.market-card-prob.prob-neutral{color:var(--text-1)}
+/* Category filter tabs */
+.category-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.category-tab{background:transparent;border:1px solid var(--border);color:var(--text-3);
+  padding:6px 16px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;
+  transition:all .15s;font-family:var(--font-text)}
+.category-tab:hover{border-color:var(--border-active);color:var(--text-2)}
+.category-tab.active{background:var(--text-1);color:var(--bg);border-color:var(--text-1);font-weight:600}
+/* Markets search bar */
+.mkt-search-wrap{position:relative;flex:1;max-width:400px}
+.mkt-search-wrap input{width:100%;padding:8px 12px 8px 34px;font-size:13px;border-radius:20px;
+  background:var(--bg);border:1px solid var(--border);color:var(--text-1)}
+.mkt-search-wrap input:focus{border-color:var(--text-3)}
+.mkt-search-wrap .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);
+  color:var(--text-3);font-size:13px;pointer-events:none}
+/* Markets top bar */
+.mkt-top-bar{display:flex;flex-direction:column;gap:14px;padding:20px 24px;border-bottom:1px solid var(--border);background:var(--bg-card)}
+.mkt-top-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 
 /* Popup */
 .popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:400;opacity:0;pointer-events:none;transition:opacity .2s}
@@ -272,6 +295,17 @@ select{cursor:pointer}
 .empty-state .empty-icon{font-size:40px;margin-bottom:12px;opacity:.3}
 .empty-state p{font-size:13px;margin-bottom:12px}
 .truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Pulsing green dot for Live Arb nav */
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-left:6px;
+  animation:pulseDot 1.5s ease-in-out infinite;vertical-align:middle}
+@keyframes pulseDot{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(16,185,129,0.5)}50%{opacity:.6;box-shadow:0 0 6px 3px rgba(16,185,129,0.3)}}
+
+/* Refresh button spin */
+.btn-refreshing{pointer-events:none;position:relative;color:transparent!important}
+.btn-refreshing::after{content:'';position:absolute;inset:0;margin:auto;width:14px;height:14px;
+  border:2px solid rgba(0,0,0,0.2);border-top-color:#000;border-radius:50%;animation:btnSpin .6s linear infinite}
+@keyframes btnSpin{to{transform:rotate(360deg)}}
 .gap-bar{height:4px;border-radius:2px;background:var(--border);overflow:hidden;min-width:40px;max-width:80px}
 .gap-bar-fill{height:100%;border-radius:2px;background:var(--green)}
 .flash-up{animation:flashG .6s}
@@ -315,7 +349,7 @@ select{cursor:pointer}
 .arb-tooltip.visible{opacity:1}
 
 @media(max-width:1200px){.right-panel{display:none}}
-@media(max-width:900px){.sidebar{display:none}.stats-row{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.sidebar{display:none}.stats-row{grid-template-columns:repeat(2,1fr)}.market-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -338,7 +372,7 @@ select{cursor:pointer}
   </div>
   <div class="sidebar-nav" id="sidebarNav">
     <button class="nav-item active" data-page="dashboard"><span class="icon">◎</span>Dashboard</button>
-    <button class="nav-item" data-page="arb"><span class="icon">⟳</span>Live Arb<span class="badge" id="navArbBadge">0</span></button>
+    <button class="nav-item" data-page="arb"><span class="icon">⟳</span>Live Arb<span class="live-dot" id="arbLiveDot" style="display:none"></span><span class="badge" id="navArbBadge">0</span></button>
     <button class="nav-item" data-page="fast"><span class="icon">⚡</span>Fast</button>
     <button class="nav-item" data-page="markets"><span class="icon">◫</span>Markets</button>
     <button class="nav-item" data-page="calculator"><span class="icon">⊞</span>Calculator</button>
@@ -360,7 +394,7 @@ select{cursor:pointer}
     <div class="header-right">
       <span class="last-update" id="lastUpdate">--</span>
       <span class="refresh-timer" id="timer">90s</span>
-      <button class="btn-primary btn-sm" onclick="refresh()">Refresh</button>
+      <button class="btn-primary btn-sm btn-refresh" onclick="refresh()">Refresh</button>
     </div>
   </div>
   <div class="stats-row">
@@ -433,18 +467,31 @@ select{cursor:pointer}
 <!-- ═══ MARKETS ═══ -->
 <div class="page" id="page-markets">
   <div class="content-header"><h2>Market Browser</h2></div>
-  <div class="filter-bar">
-    <input type="text" id="mktSearch" placeholder="Search markets..." style="width:240px">
-    <div class="filter-group" id="mktPlatBtns">
-      <button class="btn-outline btn-sm active" data-p="all">All</button>
-      <button class="btn-outline btn-sm" data-p="poly">Polymarket</button>
-      <button class="btn-outline btn-sm" data-p="predict">PredictIt</button>
-      <button class="btn-outline btn-sm" data-p="manifold">Manifold</button>
-      <button class="btn-outline btn-sm" data-p="metaculus">Metaculus</button>
-      <button class="btn-outline btn-sm" data-p="opinion">Opinion</button>
+  <div class="mkt-top-bar">
+    <div class="mkt-top-row">
+      <div class="mkt-search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="mktSearch" placeholder="Search markets...">
+      </div>
+      <div class="filter-group" id="mktPlatBtns">
+        <button class="btn-outline btn-sm active" data-p="all">All</button>
+        <button class="btn-outline btn-sm" data-p="poly">Polymarket</button>
+        <button class="btn-outline btn-sm" data-p="predict">PredictIt</button>
+        <button class="btn-outline btn-sm" data-p="manifold">Manifold</button>
+        <button class="btn-outline btn-sm" data-p="metaculus">Metaculus</button>
+        <button class="btn-outline btn-sm" data-p="opinion">Opinion</button>
+      </div>
+      <select id="mktSort"><option value="volume">Volume</option><option value="probability">Probability</option></select>
+      <span style="margin-left:auto;font-size:11px;color:var(--text-3)" id="mktCount">--</span>
     </div>
-    <select id="mktSort"><option value="volume">Volume</option><option value="probability">Probability</option></select>
-    <span style="margin-left:auto;font-size:11px;color:var(--text-3)" id="mktCount">--</span>
+    <div class="category-tabs" id="mktCategoryTabs">
+      <button class="category-tab active" data-cat="all">All</button>
+      <button class="category-tab" data-cat="politics">Politics</button>
+      <button class="category-tab" data-cat="sports">Sports</button>
+      <button class="category-tab" data-cat="crypto">Crypto</button>
+      <button class="category-tab" data-cat="economics">Economics</button>
+      <button class="category-tab" data-cat="science">Science</button>
+    </div>
   </div>
   <div class="page-body"><div class="market-grid" id="mktGrid"></div></div>
 </div>
@@ -564,7 +611,8 @@ select{cursor:pointer}
 <div class="toast-container" id="toasts"></div>
 
 <script>
-const API='http://localhost:8000';
+const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
+const API = API_BASE;
 const $=id=>document.getElementById(id);
 const PLAT={poly:'Polymarket',predict:'PredictIt',manifold:'Manifold',metaculus:'Metaculus',opinion:'Opinion'};
 const PLAT_SHORT={poly:'POLY',predict:'PI',manifold:'MAN',metaculus:'META',opinion:'OPN'};
@@ -902,7 +950,8 @@ function updatePopupSplit(){
   }
 
   // Simple guaranteed profit: always less than amount
-  const guaranteedProfit=(1-sumPrices)*amt;
+  let guaranteedProfit=(1-sumPrices)*amt;
+  if(guaranteedProfit>=amt) guaranteedProfit=0;
 
   // Optimal split: equalize payout in both outcomes
   const yesAmt=(yesPrice/sumPrices)*amt;
@@ -936,7 +985,9 @@ function renderDashboard(){
   $('statArbs').textContent=arbs.length;
   $('statBestGap').textContent=bestGap>0?bestGap.toFixed(1)+'%':'--';
   $('statMarkets').textContent=S.allMarkets.length.toLocaleString();
-  $('navArbBadge').textContent=arbs.length||S.cross.length;
+  const arbCount=arbs.length||S.cross.length;
+  $('navArbBadge').textContent=arbCount;
+  const dot=$('arbLiveDot');if(dot)dot.style.display=arbCount>0?'inline-block':'none';
 
   // Top opportunities
   const top=S.cross.slice(0,3);
@@ -986,7 +1037,7 @@ async function renderArb(){
     arbs.forEach((a,i)=>{
       const sc=scores[i];
       html+=`<tr onmouseenter="showArbTooltip(event,S.cross[${S.cross.indexOf(a)}])" onmouseleave="hideArbTooltip()" onclick="openDrawer(S.cross[${S.cross.indexOf(a)}],scoreCache['${(a.title+a.platform_high).replace(/'/g,"\\'")}']||{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">
-        <td style="max-width:260px"><div class="truncate text-primary fw-500">${esc(a.title)}</div></td>
+        <td style="max-width:260px"><div class="truncate text-primary fw-500" title="${esc(a.title)}">${esc(a.title)}</div></td>
         <td>${platTag(a.platform_high)}<br>${platTag(a.platform_low)}</td>
         <td style="white-space:nowrap"><span class="text-green fw-700">${a.prob_high.toFixed(1)}%</span><br><span class="text-amber">${a.prob_low.toFixed(1)}%</span></td>
         <td><span class="${gapColor(a.fee_adjusted_gap)} fw-700">${a.fee_adjusted_gap.toFixed(1)}%</span>
@@ -1002,7 +1053,7 @@ async function renderArb(){
     if(!S.dutch.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">⊞</div><p>No math arb found. Markets are currently efficiently priced.</p></div>';return;}
     let html='<table class="data-table"><thead><tr><th>Event</th><th>Outcomes</th><th>Sum</th><th>Edge</th><th>Profit/$100</th></tr></thead><tbody>';
     S.dutch.forEach(d=>{
-      html+=`<tr><td class="truncate text-primary" style="max-width:300px">${esc(d.event_title)}</td>
+      html+=`<tr><td class="truncate text-primary" style="max-width:300px" title="${esc(d.event_title)}">${esc(d.event_title)}</td>
         <td>${d.num_outcomes}</td><td class="text-red fw-600">${(d.sum_probs*100).toFixed(1)}%</td>
         <td class="text-green fw-700">${d.edge_pct.toFixed(1)}%</td>
         <td class="text-green fw-700">$${(d.guaranteed_profit_per_dollar*100).toFixed(2)}</td></tr>`;
@@ -1016,7 +1067,7 @@ async function renderArb(){
     tail.forEach(t=>{
       const tUrl=resolveUrl(t.url,t.platform,t.slug,t.title);
       html+=`<tr onclick="window.open('${tUrl.replace(/'/g,"\\'")}','_blank')">
-        <td class="truncate text-primary" style="max-width:300px">${esc(t.title)}</td>
+        <td class="truncate text-primary" style="max-width:300px" title="${esc(t.title)}">${esc(t.title)}</td>
         <td>${platTag(t.platform)}</td><td>${t.price.toFixed(2)}</td>
         <td class="${gapColor(t.return_pct)} fw-600">${t.return_pct.toFixed(1)}%</td>
         <td>${t.days_to_resolution!=null?t.days_to_resolution+'d':'?'}</td>
@@ -1052,9 +1103,9 @@ function renderFastTab(el,search){
     logOps.forEach(o=>{
       const urlA=o.url_a||'#';const urlB=o.url_b||'#';
       html+=`<tr>
-        <td style="max-width:280px"><div class="truncate text-primary fw-500">${esc(o.title_a)}</div>
+        <td style="max-width:280px"><div class="truncate text-primary fw-500" title="${esc(o.title_a)}">${esc(o.title_a)}</div>
           <div style="font-size:10px;color:var(--text-3)">${platTag(o.platform_a)} ${o.prob_a.toFixed(1)}%</div>
-          <div class="truncate text-primary fw-500" style="margin-top:4px">${esc(o.title_b)}</div>
+          <div class="truncate text-primary fw-500" style="margin-top:4px" title="${esc(o.title_b)}">${esc(o.title_b)}</div>
           <div style="font-size:10px;color:var(--text-3)">${platTag(o.platform_b)} ${o.prob_b.toFixed(1)}%</div></td>
         <td style="max-width:260px"><span style="color:var(--red);font-size:12px;font-weight:600">${esc(o.logical_error)}</span></td>
         <td><span class="text-green fw-700">${o.gap.toFixed(1)}%</span></td>
@@ -1085,7 +1136,7 @@ function renderFastTab(el,search){
     fast.forEach(m=>{
       const mUrl=resolveUrl(m.url,m.platform,null,m.title);
       html+=`<tr onclick="window.open('${mUrl.replace(/'/g,"\\'")}','_blank')" style="cursor:pointer">
-        <td style="max-width:300px"><div class="truncate text-primary fw-500">${esc(m.title)}</div></td>
+        <td style="max-width:300px"><div class="truncate text-primary fw-500" title="${esc(m.title)}">${esc(m.title)}</div></td>
         <td>${platTag(m.platform)}</td>
         <td class="fw-600">${m.probability.toFixed(1)}%</td>
         <td>${urgencyTag(m.urgency)} <span class="fw-600" style="font-family:var(--font-mono);font-size:11px">${fmtCountdown(m.days_left,m.hours_left)}</span></td>
@@ -1100,7 +1151,7 @@ function renderFastTab(el,search){
     html+='<table class="data-table"><thead><tr><th>Market</th><th>Platforms</th><th>Gap</th><th>Closes In</th><th>Annualized</th></tr></thead><tbody>';
     S.fastArbs.forEach(a=>{
       html+=`<tr style="cursor:pointer" onclick="openDrawer(S.fastArbs[${S.fastArbs.indexOf(a)}],{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">
-        <td style="max-width:260px"><div class="truncate text-primary fw-500">${esc(a.title)}</div></td>
+        <td style="max-width:260px"><div class="truncate text-primary fw-500" title="${esc(a.title)}">${esc(a.title)}</div></td>
         <td>${platTag(a.platform_high)}<br>${platTag(a.platform_low)}</td>
         <td><span class="text-green fw-700">${a.fee_adjusted_gap.toFixed(1)}%</span></td>
         <td>${urgencyTag(a.urgency)} <span class="fw-600" style="font-family:var(--font-mono);font-size:11px">${fmtCountdown(a.days_to_resolution,a.hours_left)}</span></td>
@@ -1160,7 +1211,7 @@ function renderFastPage(){
   data.forEach((m,i)=>{
     const url=resolveUrl(m.url,m.platform,null,m.title);
     html+=`<tr onclick="openFastMarketPopup(S.fastPageData,${i})" style="cursor:pointer">
-      <td style="max-width:300px"><div class="truncate text-primary fw-500">${esc(m.title)}</div></td>
+      <td style="max-width:300px"><div class="truncate text-primary fw-500" title="${esc(m.title)}">${esc(m.title)}</div></td>
       <td>${platTag(m.platform)}</td>
       <td style="white-space:nowrap">${fastClosesCell(m)}</td>
       <td><a href="${esc(url)}" target="_blank" onclick="event.stopPropagation()" class="btn-outline btn-sm" style="font-size:11px;padding:3px 8px;text-decoration:none">Trade ↗</a></td>
@@ -1174,14 +1225,40 @@ function openFastMarketPopup(arr,idx){
   openMarketPopup(m);
 }
 
+// ── Category detection ──
+const CATEGORY_KEYWORDS={
+  politics:['election','senate','president','governor','congress','trump','biden','republican','democrat','vote','gop','dnc','house','mayor','political','party','primary','caucus','nominee'],
+  sports:['nba','nfl','fifa','cup','playoffs','championship','mlb','nhl','soccer','football','baseball','basketball','tennis','ufc','boxing','f1','racing','super bowl','world series','league'],
+  crypto:['bitcoin','ethereum','btc','eth','crypto','solana','dogecoin','token','blockchain','defi','nft','altcoin','binance','coinbase','mining','halving'],
+  economics:['fed','inflation','gdp','recession','rate','interest','unemployment','cpi','treasury','tariff','stock','market crash','dow','s&p','nasdaq','trade war','debt','deficit','jobs report'],
+  science:['ai','climate','space','quantum','nasa','spacex','fusion','vaccine','fda','who','pandemic','hurricane','earthquake','asteroid','moon','mars','gene','crispr']
+};
+function detectCategory(title){
+  const t=title.toLowerCase();
+  for(const[cat,keywords]of Object.entries(CATEGORY_KEYWORDS)){
+    if(keywords.some(kw=>t.includes(kw)))return cat;
+  }
+  return'other';
+}
+function categoryLabel(cat){
+  return{politics:'Politics',sports:'Sports',crypto:'Crypto',economics:'Economics',science:'Science',other:'General'}[cat]||'General';
+}
+function probColorClass(p){
+  if(p>60)return'prob-green';
+  if(p<40)return'prob-red';
+  return'prob-neutral';
+}
+
 // ── Render Markets ──
 function renderMarkets(){
   const search=($('mktSearch')?.value||'').toLowerCase();
   const plat=document.querySelector('#mktPlatBtns .active')?.dataset.p||'all';
+  const cat=document.querySelector('#mktCategoryTabs .active')?.dataset.cat||'all';
   const sort=$('mktSort')?.value||'volume';
   let mkts=S.allMarkets.filter(m=>{
     if(plat!=='all'&&m.platform!==plat)return false;
     if(search&&!m.title.toLowerCase().includes(search))return false;
+    if(cat!=='all'&&detectCategory(m.title)!==cat)return false;
     return true;
   });
   if(sort==='volume')mkts.sort((a,b)=>(b.volume||0)-(a.volume||0));
@@ -1190,18 +1267,29 @@ function renderMarkets(){
   mkts=mkts.slice(0,200);
   $('mktCount').textContent=`${mkts.length} of ${total}`;
   const grid=$('mktGrid');grid.innerHTML='';
-  if(!mkts.length){grid.innerHTML='<div class="empty-state"><div class="empty-icon">◫</div><p>No markets found matching your filters.<br>Try a different search term or platform.</p></div>';return;}
+  if(!mkts.length){grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">◫</div><p>No markets found matching your filters.<br>Try a different search term or category.</p></div>';return;}
   mkts.forEach(m=>{
     const c=document.createElement('div');c.className='market-card';
     c.onclick=()=>openMarketPopup(m);
-    c.innerHTML=`<div class="market-card-title">${esc(m.title)}</div>
-      <div class="prob-bar"><div class="prob-fill" style="width:${Math.min(m.probability,100)}%"></div></div>
-      <div class="market-card-meta">${platTag(m.platform)}<span class="text-green fw-700">${m.probability.toFixed(1)}%</span><span>${fmtVol(m.volume,m.platform)}</span></div>`;
+    const mCat=detectCategory(m.title);
+    const pClass=probColorClass(m.probability);
+    c.innerHTML=`<div class="market-card-body">
+        <div class="market-card-category">${categoryLabel(mCat)}</div>
+        <div class="market-card-title">${esc(m.title)}</div>
+        <div class="market-card-bottom">
+          <span class="market-card-vol">${fmtVol(m.volume,m.platform)}</span>
+          ${platTag(m.platform)}
+        </div>
+      </div>
+      <div class="market-card-prob ${pClass}">${Math.round(m.probability)}%</div>`;
     grid.appendChild(c);
   });
 }
 document.querySelectorAll('#mktPlatBtns button').forEach(b=>{
   b.onclick=()=>{document.querySelectorAll('#mktPlatBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMarkets();}
+});
+document.querySelectorAll('#mktCategoryTabs button').forEach(b=>{
+  b.onclick=()=>{document.querySelectorAll('#mktCategoryTabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderMarkets();}
 });
 $('mktSearch')?.addEventListener('input',()=>clearTimeout(window._mktD)||(window._mktD=setTimeout(renderMarkets,300)));
 $('mktSort')?.addEventListener('change',renderMarkets);
@@ -1634,10 +1722,15 @@ async function loadSettings(){try{const r=await fetch(API+'/settings');S.setting
 
 async function refresh(){
   S.countdown=S.settings.auto_refresh||90;
-  await Promise.all([loadAllMarkets(),loadAllArbs(),loadHealth(),loadHistory(),loadSettings(),loadLogical(),loadFastMarkets(),loadFastArbs()]);
-  renderDashboard();renderArb();renderStatus();
-  const ts=new Date().toLocaleTimeString();
-  $('lastUpdate').textContent=ts;$('lastUpdate2').textContent=ts;
+  document.querySelectorAll('.btn-refresh').forEach(b=>b.classList.add('btn-refreshing'));
+  try{
+    await Promise.all([loadAllMarkets(),loadAllArbs(),loadHealth(),loadHistory(),loadSettings(),loadLogical(),loadFastMarkets(),loadFastArbs()]);
+    renderDashboard();renderArb();renderStatus();
+    const ts=new Date().toLocaleTimeString();
+    $('lastUpdate').textContent=ts;$('lastUpdate2').textContent=ts;
+  }finally{
+    document.querySelectorAll('.btn-refresh').forEach(b=>b.classList.remove('btn-refreshing'));
+  }
 }
 
 // ── Welcome flow ──

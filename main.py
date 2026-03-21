@@ -30,7 +30,7 @@ load_dotenv()
 # ── config ──────────────────────────────────────────────────────────────────
 
 MIN_GAP = float(os.getenv("MIN_GAP", "1.5"))
-MIN_VOLUME = float(os.getenv("MIN_VOLUME", "500"))
+MIN_VOLUME = float(os.getenv("MIN_VOLUME", "0"))
 TIMEOUT = 10
 RETRY_DELAY = 2
 START_TIME = time.time()
@@ -60,6 +60,7 @@ PLATFORM_FEES = {
     "manifold": 0.0,
     "metaculus": 0.0,
     "opinion": 0.02,
+    "kalshi": 0.02,
 }
 
 STOP_WORDS = frozenset(
@@ -138,6 +139,7 @@ async def lifespan(application: FastAPI):
         ("Manifold", "manifold", fetch_manifold),
         ("Metaculus", "metaculus", fetch_metaculus),
         ("Opinion", "opinion", fetch_opinion),
+        ("Kalshi", "kalshi", fetch_kalshi_public),
     ]
 
     total = 0
@@ -268,10 +270,15 @@ def _extract_us_states(title: str) -> set:
 
 
 def _strip_contract_suffix(title: str) -> str:
-    """Strip PredictIt contract suffixes like ' — Democratic', ' — Republican'."""
+    """Strip PredictIt contract suffixes like ' — Democratic', ' — Republican',
+    and candidate names after '?' to prevent false matches (e.g. LA Mayor)."""
     idx = title.find(" \u2014 ")
     if idx != -1:
         title = title[:idx].strip()
+    # Strip everything after the last "?" — removes candidate-specific text
+    q_idx = title.rfind("?")
+    if q_idx != -1:
+        title = title[:q_idx].strip()
     # Also strip trailing party words without em-dash
     t = title.rstrip()
     t_lower = t.lower()
@@ -280,6 +287,19 @@ def _strip_contract_suffix(title: str) -> str:
             t = t[:len(t) - len(suffix)].rstrip(" -\u2013\u2014,:")
             break
     return t
+
+
+def _is_person_name(title: str) -> bool:
+    """Return True if a title looks like just a person's name (2-3 words, no
+    question mark, all capitalized words). Used to skip individual candidate
+    contracts from PredictIt like 'Karen Bass' or 'Rick Caruso'."""
+    t = title.strip()
+    if "?" in t:
+        return False
+    words = t.split()
+    if len(words) < 2 or len(words) > 3:
+        return False
+    return all(w[0].isupper() and w.isalpha() for w in words)
 
 
 def _normalize_base_title(title: str) -> str:
@@ -357,7 +377,7 @@ def is_cross_match(a: str, b: str) -> tuple[bool, float]:
     b_clean = _strip_contract_suffix(b)
 
     sim = keyword_similarity(a_clean, b_clean)
-    if sim < 0.40:
+    if sim < 0.30:
         return False, sim
 
     # Entity consistency: if both titles have unique proper nouns
@@ -372,7 +392,7 @@ def is_cross_match(a: str, b: str) -> tuple[bool, float]:
         if unique_a and unique_b and not shared:
             return False, sim
 
-    if sim >= 0.40:
+    if sim >= 0.30:
         return True, sim
     return False, sim
 
@@ -512,10 +532,19 @@ async def fetch_polymarket() -> list[dict]:
 
 
 async def fetch_predictit() -> list[dict]:
-    async with httpx.AsyncClient(timeout=15) as client:
-        resp = await client.get("https://www.predictit.org/api/marketdata/all/")
-        resp.raise_for_status()
-        data = resp.json()
+    async with httpx.AsyncClient(timeout=20) as client:
+        response = await client.get(
+            "https://www.predictit.org/api/marketdata/all/",
+            headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Accept": "application/json, text/plain, */*",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Referer": "https://www.predictit.org/markets",
+                "Origin": "https://www.predictit.org"
+            }
+        )
+        response.raise_for_status()
+        data = response.json()
 
     markets = []
     for market in data.get("markets", []):
@@ -700,10 +729,6 @@ async def fetch_opinion() -> list[dict]:
     endpoints = [
         "https://opinionmarkets.io/api/markets",
         "https://api.opinion.markets/v1/markets",
-        "https://opinion.markets/api/markets",
-        "https://opinionmarkets.com/api/markets",
-        "https://opinionmarkets.io/api/v1/markets",
-        "https://opinionmarkets.io/api/markets?status=open",
     ]
 
     for ep_url in endpoints:
@@ -715,8 +740,10 @@ async def fetch_opinion() -> list[dict]:
                     "Accept": "application/json",
                 },
             ) as client:
+                logger.info(f"[opinion] trying {ep_url}")
                 resp = await client.get(ep_url)
                 if resp.status_code not in (200, 201):
+                    logger.warning(f"[opinion] {ep_url} returned status {resp.status_code}")
                     continue
 
                 raw = resp.json()
@@ -769,14 +796,90 @@ async def fetch_opinion() -> list[dict]:
                     })
 
                 if markets:
-                    logger.info(f"[opinion] {len(markets)} markets from {ep_url}")
+                    logger.info(f"[opinion] SUCCESS — {len(markets)} markets from {ep_url}")
                     return markets
 
         except Exception as e:
             logger.warning(f"[opinion] {ep_url} failed: {e}")
             continue
 
-    logger.warning("[opinion] no working endpoint found")
+    logger.warning("[opinion] all endpoints failed, returning []")
+    return []
+
+
+async def fetch_kalshi_public() -> list[dict]:
+    urls_to_try = [
+        ("https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open", "v2-trading"),
+        ("https://api.elections.kalshi.com/v1/markets", "elections-v1"),
+    ]
+
+    headers = {
+        "Accept": "application/json",
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+    }
+
+    for api_url, label in urls_to_try:
+        try:
+            async with httpx.AsyncClient(timeout=15) as client:
+                resp = await client.get(api_url, headers=headers)
+                if resp.status_code == 403:
+                    logger.warning(f"[kalshi] {label} returned 403, trying next endpoint...")
+                    continue
+                resp.raise_for_status()
+                data = resp.json()
+
+            items = data.get("markets", [])
+            if not isinstance(items, list):
+                items = data if isinstance(data, list) else []
+
+            markets = []
+            for m in items:
+                try:
+                    title = m.get("title") or m.get("question") or ""
+                    if not title:
+                        continue
+
+                    yes_price = m.get("yes_ask") or m.get("last_price") or 0
+                    try:
+                        yes_price = float(yes_price)
+                    except (ValueError, TypeError):
+                        continue
+                    # Kalshi prices are 0-1 (or cents 0-100 depending on endpoint)
+                    if yes_price > 1:
+                        yes_price = yes_price / 100.0
+                    if yes_price <= 0.005 or yes_price >= 0.995:
+                        continue
+                    no_price = round(1 - yes_price, 4)
+
+                    ticker = m.get("ticker", "")
+                    market_url = f"https://kalshi.com/markets/{ticker}" if ticker else "https://kalshi.com"
+
+                    close_time = parse_dt(m.get("close_time") or m.get("expiration_time"))
+                    volume = float(m.get("volume", 0) or m.get("dollar_volume", 0) or 0)
+
+                    markets.append({
+                        "id": f"kalshi_{ticker or m.get('id', len(markets))}",
+                        "title": title,
+                        "probability": round(yes_price * 100, 2),
+                        "volume": volume,
+                        "platform": "kalshi",
+                        "url": market_url,
+                        "yes_price": round(yes_price, 4),
+                        "no_price": round(no_price, 4),
+                        "close_time": close_time.isoformat() if close_time else None,
+                    })
+                except Exception:
+                    continue
+
+            if markets:
+                logger.info(f"[kalshi] {len(markets)} markets from {label} endpoint")
+                return markets
+
+        except Exception as e:
+            logger.warning(f"[kalshi] {label} failed: {e}")
+            continue
+
+    logger.warning("[kalshi] all endpoints failed, returning []")
     return []
 
 
@@ -788,6 +891,7 @@ FETCHERS = {
     "manifold": ("manifold", fetch_manifold),
     "metaculus": ("metaculus", fetch_metaculus),
     "opinion": ("opinion", fetch_opinion),
+    "kalshi": ("kalshi", fetch_kalshi_public),
 }
 
 # Per-platform status tracking for /health
@@ -796,15 +900,33 @@ _platform_status: dict[str, dict] = {
     for k in FETCHERS
 }
 
+# Circuit breaker: track consecutive failures and backoff per platform
+_circuit_breaker: dict[str, dict] = {
+    k: {"failures": 0, "next_try": 0.0} for k in FETCHERS
+}
+_BACKOFF_SCHEDULE = [60, 120, 300, 600, 900]  # seconds: 1m, 2m, 5m, 10m, 15m max
+
 
 async def safe_fetch(name: str, fn) -> tuple[list[dict], str | None]:
-    """Fetch with retry: try twice before giving up."""
+    """Fetch with retry and circuit breaker to avoid log spam from down platforms."""
+    cb = _circuit_breaker[name]
+    now = time.time()
+
+    # Circuit breaker: skip if platform is in backoff period
+    if cb["failures"] >= 3 and now < cb["next_try"]:
+        remaining = int(cb["next_try"] - now)
+        _platform_status[name]["error"] = f"backoff ({remaining}s remaining)"
+        return [], None  # silent skip, no log spam
+
     t0 = time.time()
     for attempt in range(2):
         try:
             result = await fn()
             latency = round((time.time() - t0) * 1000)
             if result:
+                # Success — reset circuit breaker
+                cb["failures"] = 0
+                cb["next_try"] = 0.0
                 _platform_status[name] = {
                     "status": "live",
                     "count": len(result),
@@ -823,8 +945,19 @@ async def safe_fetch(name: str, fn) -> tuple[list[dict], str | None]:
                 logger.info(f"[{name}] attempt 1 failed ({e}), retrying...")
                 await asyncio.sleep(2)
             else:
+                # Increment circuit breaker
+                cb["failures"] += 1
+                idx = min(cb["failures"] - 1, len(_BACKOFF_SCHEDULE) - 1)
+                backoff_secs = _BACKOFF_SCHEDULE[idx]
+                cb["next_try"] = time.time() + backoff_secs
+
                 msg = f"[{name}] {type(e).__name__}: {e}"
-                logger.error(msg)
+                # Only log at ERROR on first failure or every 5th, to reduce spam
+                if cb["failures"] <= 1 or cb["failures"] % 5 == 0:
+                    logger.error(f"{msg} (failure #{cb['failures']}, backoff {backoff_secs}s)")
+                else:
+                    logger.info(f"[{name}] still down (failure #{cb['failures']}, backoff {backoff_secs}s)")
+
                 _platform_status[name] = {
                     "status": "down",
                     "count": 0,
@@ -834,8 +967,12 @@ async def safe_fetch(name: str, fn) -> tuple[list[dict], str | None]:
                 }
                 return [], msg
 
-    # Both attempts returned empty
+    # Both attempts returned empty — also triggers circuit breaker
     latency = round((time.time() - t0) * 1000)
+    cb["failures"] += 1
+    idx = min(cb["failures"] - 1, len(_BACKOFF_SCHEDULE) - 1)
+    cb["next_try"] = time.time() + _BACKOFF_SCHEDULE[idx]
+
     _platform_status[name] = {
         "status": "down",
         "count": 0,
@@ -905,6 +1042,12 @@ async def ep_opinion():
     return data
 
 
+@app.get("/markets/kalshi")
+async def ep_kalshi():
+    data, _ = await safe_fetch("kalshi", fetch_kalshi_public)
+    return data
+
+
 _market_cache: dict = {"data": None, "ts": 0}
 
 
@@ -936,9 +1079,9 @@ async def _fetch_all_markets() -> dict:
             counts[name] = len(data)
             if err:
                 errors.append({"platform": name, "error_msg": err})
-                # partial if we got some data despite an error
-                if len(data) > 0 and _platform_status[name].get("status") != "live":
-                    _platform_status[name]["status"] = "partial"
+            # If we got markets, mark as live regardless of errors
+            if len(data) > 0:
+                _platform_status[name]["status"] = "live"
         else:
             counts[name] = 0
 
@@ -979,24 +1122,51 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
     data = await _fetch_all_markets()
     markets = data["markets"]
 
+    # Only real-money platforms participate in arb matching
+    REAL_MONEY_PLATFORMS = {"poly", "predict", "opinion", "kalshi"}
+    ALLOWED_PAIRS = {
+        frozenset({"poly", "predict"}),
+        frozenset({"poly", "opinion"}),
+        frozenset({"predict", "opinion"}),
+        frozenset({"poly", "kalshi"}),
+        frozenset({"predict", "kalshi"}),
+    }
+    MIN_ARB_VOLUME = 0
+
     by_platform: dict[str, list[dict]] = {}
     for m in markets:
-        by_platform.setdefault(m["platform"], []).append(m)
+        if m["platform"] in REAL_MONEY_PLATFORMS:
+            by_platform.setdefault(m["platform"], []).append(m)
 
     platforms = list(by_platform.keys())
     arbs = []
     seen_pairs: set[tuple] = set()
+    matched_platform_pairs: set[frozenset] = set()
 
     # Filtering counters
     total_considered = 0
     removed_gap = 0
     removed_state = 0
     removed_num = 0
+    removed_volume = 0
+    removed_date = 0
 
     for i in range(len(platforms)):
         for j in range(i + 1, len(platforms)):
+            pair = frozenset({platforms[i], platforms[j]})
+            if pair not in ALLOWED_PAIRS:
+                continue
             for a in by_platform[platforms[i]]:
+                # Skip candidate name contracts (e.g. "Karen Bass", "Rick Caruso")
+                a_clean_title = _strip_contract_suffix(a["title"])
+                if _is_person_name(a_clean_title):
+                    continue
                 for b in by_platform[platforms[j]]:
+                    # Skip candidate name contracts
+                    b_clean_title = _strip_contract_suffix(b["title"])
+                    if _is_person_name(b_clean_title):
+                        continue
+
                     matched, sim = is_cross_match(a["title"], b["title"])
                     if not matched:
                         continue
@@ -1004,8 +1174,8 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                     total_considered += 1
 
                     # Strip suffixes for state/number checks
-                    a_clean = _strip_contract_suffix(a["title"])
-                    b_clean = _strip_contract_suffix(b["title"])
+                    a_clean = a_clean_title
+                    b_clean = b_clean_title
 
                     # Fix 1c: State mismatch — different states = different races
                     states_a = _extract_us_states(a_clean)
@@ -1021,12 +1191,44 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                         removed_num += 1
                         continue
 
+                    # Volume filter: both sides must have volume > 500
+                    vol_a = a.get("volume", 0) or 0
+                    vol_b = b.get("volume", 0) or 0
+                    if vol_a < MIN_ARB_VOLUME or vol_b < MIN_ARB_VOLUME:
+                        removed_volume += 1
+                        continue
+
+                    # Resolution date matching: if both have close_time,
+                    # they must be within 30 days of each other
+                    ct_a = parse_dt(a.get("close_time"))
+                    ct_b = parse_dt(b.get("close_time"))
+                    if ct_a and ct_b:
+                        date_diff = abs((ct_a - ct_b).days)
+                        if date_diff > 30:
+                            removed_date += 1
+                            continue
+
                     raw_gap = abs(a["probability"] - b["probability"])
 
                     # Fix 1a: Gap > 55% means completely different markets
                     if raw_gap > 55:
                         removed_gap += 1
                         continue
+
+                    # Fix: High-gap noun verification — if gap > 30%,
+                    # extract nouns > 4 chars and require >= 60% overlap
+                    if raw_gap > 30:
+                        nouns_a_set = {w for w in re.sub(r'[^a-z\s]', ' ', a_clean.lower()).split()
+                                       if len(w) > 4 and w not in EXPANDED_STOPWORDS}
+                        nouns_b_set = {w for w in re.sub(r'[^a-z\s]', ' ', b_clean.lower()).split()
+                                       if len(w) > 4 and w not in EXPANDED_STOPWORDS}
+                        if nouns_a_set and nouns_b_set:
+                            noun_union = nouns_a_set | nouns_b_set
+                            noun_shared = nouns_a_set & nouns_b_set
+                            noun_overlap = len(noun_shared) / len(noun_union)
+                            if noun_overlap < 0.60:
+                                removed_gap += 1
+                                continue
 
                     fee_gap = compute_fee_adjusted_gap(
                         a["probability"], b["probability"],
@@ -1071,6 +1273,22 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                     else:
                         confidence = "low"
 
+                    # Guaranteed profit validation:
+                    # Buy YES on low side, buy NO on high side
+                    yes_price = low["probability"] / 100
+                    no_price = 1 - (high["probability"] / 100)
+                    sum_prices = yes_price + no_price
+                    if sum_prices >= 1.0:
+                        is_real_arb = False
+                        guaranteed_profit_pct = 0.0
+                    else:
+                        is_real_arb = True
+                        guaranteed_profit_pct = (1 - sum_prices) * 100
+
+                    # Only keep pairs where is_real_arb is True
+                    if not is_real_arb:
+                        continue
+
                     arbs.append({
                         "title": high["title"],
                         "title_low": low["title"],
@@ -1080,6 +1298,8 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                         "prob_low": low["probability"],
                         "raw_gap": round(raw_gap, 2),
                         "fee_adjusted_gap": round(fee_gap, 2),
+                        "guaranteed_profit_pct": round(guaranteed_profit_pct, 2),
+                        "is_real_arb": is_real_arb,
                         "min_volume": min_vol,
                         "days_to_resolution": dtr,
                         "annualized_return": ann,
@@ -1092,6 +1312,7 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                         "volume_low": low.get("volume", 0),
                         "confidence": confidence,
                     })
+                    matched_platform_pairs.add(frozenset({high["platform"], low["platform"]}))
 
     before_dedup = len(arbs)
 
@@ -1183,8 +1404,22 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
     print(f"Removed - gap too large: {removed_gap}")
     print(f"Removed - state mismatch: {removed_state}")
     print(f"Removed - number mismatch: {removed_num}")
+    print(f"Removed - low volume: {removed_volume}")
+    print(f"Removed - date mismatch: {removed_date}")
     print(f"Removed - duplicates: {removed_dup}")
     print(f"Final real arbs: {len(arbs)}")
+
+    # Summary: real money arbs
+    PAIR_LABELS = {
+        frozenset({"poly", "predict"}): "Poly-PI",
+        frozenset({"poly", "opinion"}): "Poly-OPN",
+        frozenset({"predict", "opinion"}): "PI-OPN",
+        frozenset({"poly", "kalshi"}): "Poly-Kalshi",
+        frozenset({"predict", "kalshi"}): "PI-Kalshi",
+    }
+    matched_labels = [PAIR_LABELS[p] for p in matched_platform_pairs if p in PAIR_LABELS]
+    print(f"Total real money arbs found: {len(arbs)}")
+    print(f"Platforms matched: {', '.join(matched_labels) if matched_labels else 'none'}")
 
     return arbs
 
@@ -1544,6 +1779,10 @@ async def markets_fast(max_days: int = Query(default=7)):
         else:
             urgency = "THIS WEEK"
 
+        # Only show arb-active platforms in Fast tab
+        if m.get("platform") not in ("poly", "predict", "kalshi"):
+            continue
+
         results.append({
             **m,
             "days_left": days_left,
@@ -1551,8 +1790,21 @@ async def markets_fast(max_days: int = Query(default=7)):
             "urgency": urgency,
         })
 
-    results.sort(key=lambda x: x["days_left"])
-    return {"markets": results, "count": len(results), "max_days": max_days}
+    # Deduplicate by base title: keep only the highest-volume market per group
+    seen_bases: dict[str, int] = {}  # base_title -> index in deduped
+    deduped: list[dict] = []
+    for m in results:
+        base = _normalize_base_title(m["title"])
+        if base in seen_bases:
+            idx = seen_bases[base]
+            if m.get("volume", 0) > deduped[idx].get("volume", 0):
+                deduped[idx] = m
+        else:
+            seen_bases[base] = len(deduped)
+            deduped.append(m)
+
+    deduped.sort(key=lambda x: x["days_left"])
+    return {"markets": deduped, "count": len(deduped), "max_days": max_days}
 
 
 @app.get("/arb/fast")
@@ -1941,12 +2193,14 @@ async def get_stats():
 
 @app.get("/health")
 async def health():
-    total_markets = sum(s.get("count", 0) for s in _platform_status.values())
-    all_down = all(s.get("status") == "down" for s in _platform_status.values())
+    # Show arb-active platforms in the status sidebar
+    sidebar_platforms = {k: v for k, v in _platform_status.items() if k in ("poly", "predict", "kalshi")}
+    total_markets = sum(s.get("count", 0) for s in sidebar_platforms.values())
+    all_down = all(s.get("status") == "down" for s in sidebar_platforms.values())
 
     return {
         "status": "degraded" if all_down else "ok",
-        "platforms": dict(_platform_status),
+        "platforms": sidebar_platforms,
         "total_markets": total_markets,
         "uptime_seconds": round(time.time() - START_TIME),
         "timestamp": datetime.now(timezone.utc).isoformat(),
