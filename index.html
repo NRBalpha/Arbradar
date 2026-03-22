@@ -21,8 +21,17 @@
   --sidebar-w:220px;--right-w:320px;
   --radius:8px;--radius-lg:12px;
 }
+[data-theme="light"]{
+  --bg:#f0f2f5;--bg-card:#ffffff;
+  --border:rgba(0,0,0,0.08);--border-active:rgba(0,0,0,0.15);
+  --green:#059669;--green-glow:rgba(5,150,105,0.12);--green-dim:rgba(5,150,105,0.06);
+  --red:#dc2626;--red-dim:rgba(220,38,38,0.08);
+  --amber:#d97706;--amber-dim:rgba(217,119,6,0.08);
+  --blue:#2563eb;--blue-dim:rgba(37,99,235,0.08);
+  --text-1:#1e293b;--text-2:#475569;--text-3:#94a3b8;
+}
 html,body{height:100%;overflow:hidden}
-body{background:var(--bg);color:var(--text-2);font-family:var(--font-text);font-size:13px;line-height:1.5}
+body{background:var(--bg);color:var(--text-2);font-family:var(--font-text);font-size:13px;line-height:1.5;transition:background .3s,color .3s}
 .mono{font-family:var(--font-mono)}
 a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}
@@ -36,10 +45,10 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 /* Layout */
 .app{display:flex;height:100vh;position:relative}
 .sidebar{width:var(--sidebar-w);background:var(--bg-card);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;flex-shrink:0;z-index:10;position:relative}
+  display:flex;flex-direction:column;flex-shrink:0;z-index:10;position:relative;transition:background .3s,color .3s}
 .main-content{flex:1;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column}
 .right-panel{width:var(--right-w);background:var(--bg-card);border-left:1px solid var(--border);
-  display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;transition:width .3s}
+  display:flex;flex-direction:column;flex-shrink:0;overflow:hidden;transition:width .3s,background .3s,color .3s}
 .right-panel.collapsed{width:0;border:none;overflow:hidden}
 
 /* Sidebar */
@@ -63,7 +72,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
 
 /* Top bar for main content */
 .content-header{display:flex;align-items:center;padding:14px 24px;border-bottom:1px solid var(--border);
-  background:var(--bg-card);flex-shrink:0;gap:12px;min-height:52px}
+  background:var(--bg-card);flex-shrink:0;gap:12px;min-height:52px;transition:background .3s,color .3s}
 .content-header h2{font-size:15px;font-weight:700;color:var(--text-1);white-space:nowrap}
 .header-right{margin-left:auto;display:flex;align-items:center;gap:12px}
 .refresh-timer{color:var(--amber);font-size:12px;font-weight:600;min-width:36px}
@@ -86,15 +95,17 @@ input:focus,select:focus,textarea:focus{border-color:var(--green)}
 select{cursor:pointer}
 
 /* Cards */
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;transition:border .2s}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;transition:border .2s,background .3s,color .3s}
 .card:hover{border-color:var(--border-active)}
 .card-glow{box-shadow:0 0 30px rgba(16,185,129,0.06)}
 
 /* Stats cards row */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:20px 24px}
-.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;
+  box-shadow:0 0 20px rgba(255,255,255,0.02);transition:all .3s}
+.stat-card:hover{border-color:var(--border-active);box-shadow:0 0 30px rgba(16,185,129,0.08)}
 .stat-card .label{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-3);font-weight:600}
-.stat-card .value{font-size:28px;font-weight:800;color:var(--text-1);margin-top:4px;line-height:1.1;font-family:var(--font-mono)}
+.stat-card .value{font-size:32px;font-weight:800;color:var(--text-1);margin-top:4px;line-height:1.1;font-family:var(--font-mono)}
 .stat-card .value.green{color:var(--green)}.stat-card .value.blue{color:var(--blue)}
 .stat-card .value.amber{color:var(--amber)}.stat-card .value.red{color:var(--red)}
 .stat-card .sub{font-size:11px;color:var(--text-3);margin-top:4px}
@@ -113,6 +124,7 @@ select{cursor:pointer}
 .plat-tag.poly{background:var(--blue-dim);color:var(--blue)}.plat-tag.predict{background:var(--amber-dim);color:var(--amber)}
 .plat-tag.manifold{background:var(--green-dim);color:var(--green)}.plat-tag.metaculus{background:var(--red-dim);color:var(--red)}
 .plat-tag.opinion{background:var(--blue-dim);color:var(--blue)}
+.plat-tag.kalshi{background:rgba(139,92,246,0.1);color:#8b5cf6}
 
 /* Gap colors */
 .text-green{color:var(--green)}.text-red{color:var(--red)}.text-amber{color:var(--amber)}.text-blue{color:var(--blue)}
@@ -139,7 +151,7 @@ select{cursor:pointer}
 
 /* Filter bar */
 .filter-bar{display:flex;align-items:center;gap:10px;padding:12px 24px;border-bottom:1px solid var(--border);
-  background:var(--bg-card);flex-wrap:wrap}
+  background:var(--bg-card);flex-wrap:wrap;transition:background .3s,color .3s}
 .filter-bar input[type=text]{width:220px;background:var(--bg);font-size:12px}
 .filter-group{display:flex;gap:4px}
 
@@ -348,8 +360,66 @@ select{cursor:pointer}
 .arb-tooltip{position:fixed;background:var(--bg-card);border:1px solid var(--green);border-radius:var(--radius);padding:8px 12px;font-size:11px;color:var(--text-2);z-index:300;pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 4px 16px rgba(0,0,0,.5);max-width:320px;white-space:nowrap}
 .arb-tooltip.visible{opacity:1}
 
+/* Arb row enhancements */
+.arb-row-hot{background:rgba(16,185,129,0.04)!important}
+.arb-row-hot:hover{background:rgba(16,185,129,0.08)!important}
+.profit-badge{display:inline-flex;align-items:center;gap:3px;background:var(--green-dim);
+  color:var(--green);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;
+  font-family:var(--font-mono)}
+.confidence-bar{display:flex;gap:2px;align-items:center}
+.confidence-bar .seg{width:16px;height:5px;border-radius:2px;background:var(--border)}
+.confidence-bar .seg.on{background:var(--green)}
+.confidence-bar.medium .seg.on{background:var(--amber)}
+.confidence-bar.low .seg.on{background:var(--red)}
+.plat-circle{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;
+  border-radius:50%;font-size:8px;font-weight:800;color:#fff;flex-shrink:0}
+.plat-circle.poly{background:var(--blue)}.plat-circle.predict{background:var(--amber)}
+.plat-circle.manifold{background:var(--green)}.plat-circle.metaculus{background:var(--red)}
+.plat-circle.kalshi{background:#8b5cf6}.plat-circle.opinion{background:var(--blue)}
+
+/* Theme toggle */
+.theme-toggle{background:none;border:1px solid var(--border);border-radius:var(--radius);
+  padding:6px 8px;cursor:pointer;color:var(--text-2);font-size:16px;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;width:34px;height:34px}
+.theme-toggle:hover{border-color:var(--border-active);color:var(--text-1)}
+
+/* Sparkline */
+.sparkline{display:flex;align-items:flex-end;gap:2px;height:24px;margin-top:6px}
+.sparkline .bar{width:6px;border-radius:2px 2px 0 0;background:var(--blue);opacity:.5;transition:height .3s}
+.sparkline .bar:last-child{opacity:1}
+
+/* Popup trade instructions */
+.trade-steps{padding:0 20px 16px;border-bottom:1px solid var(--border)}
+.trade-step{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:12px}
+.trade-step .step-num{width:22px;height:22px;border-radius:50%;background:var(--green-dim);
+  color:var(--green);font-size:10px;font-weight:800;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0}
+.trade-step .step-text{color:var(--text-2);line-height:1.4}
+.trade-step .step-text b{color:var(--text-1)}
+.popup-big-profit{text-align:center;padding:16px 20px;border-bottom:1px solid var(--border)}
+.popup-big-profit .profit-num{font-size:40px;font-weight:800;font-family:var(--font-mono);color:var(--green)}
+.popup-big-profit .profit-label{font-size:11px;color:var(--text-3);margin-top:2px}
+.btn-copy{background:var(--bg);border:1px solid var(--border);color:var(--text-2);padding:6px 14px;
+  font-size:11px;border-radius:var(--radius);cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:5px}
+.btn-copy:hover{border-color:var(--green);color:var(--green)}
+.risk-warning{background:var(--red-dim);border:1px solid rgba(239,68,68,0.2);border-radius:var(--radius);
+  padding:10px 14px;margin:0 20px 12px;font-size:11px;color:var(--red);display:flex;align-items:start;gap:6px}
+
 @media(max-width:1200px){.right-panel{display:none}}
-@media(max-width:900px){.sidebar{display:none}.stats-row{grid-template-columns:repeat(2,1fr)}.market-grid{grid-template-columns:1fr}}
+@media(max-width:768px){
+  .sidebar{display:none}
+  .right-panel{display:none}
+  .bottom-nav{display:flex!important}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .market-grid{grid-template-columns:1fr}
+  .data-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .data-table-wrap .data-table{min-width:600px}
+  .popup-card{position:fixed;inset:0;max-width:100%;width:100%;max-height:100vh;
+    border-radius:0;transform:none!important}
+  .popup-card.open{transform:none!important}
+  .page-body{padding:12px!important}
+  .content-header{padding:10px 16px}
+}
 </style>
 </head>
 <body>
@@ -381,7 +451,21 @@ select{cursor:pointer}
     <button class="nav-item" data-page="analytics"><span class="icon">◩</span>Analytics</button>
     <button class="nav-item" data-page="settings"><span class="icon">⚙</span>Settings</button>
   </div>
+  <div style="padding:8px 12px;border-top:1px solid var(--border)">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">☾</button>
+  </div>
   <div class="sidebar-status" id="sidebarStatus"></div>
+</nav>
+
+<!-- Bottom Navigation (mobile) -->
+<nav class="bottom-nav" id="bottomNav" style="display:none;position:fixed;bottom:0;left:0;right:0;
+  background:var(--bg-card);border-top:1px solid var(--border);z-index:100;padding:6px 0;
+  justify-content:space-around;align-items:center">
+  <button class="nav-item" data-page="dashboard" style="flex-direction:column;gap:2px;padding:4px 8px;font-size:9px"><span class="icon">◎</span>Home</button>
+  <button class="nav-item" data-page="arb" style="flex-direction:column;gap:2px;padding:4px 8px;font-size:9px"><span class="icon">⟳</span>Arb</button>
+  <button class="nav-item" data-page="fast" style="flex-direction:column;gap:2px;padding:4px 8px;font-size:9px"><span class="icon">⚡</span>Fast</button>
+  <button class="nav-item" data-page="markets" style="flex-direction:column;gap:2px;padding:4px 8px;font-size:9px"><span class="icon">◫</span>Markets</button>
+  <button class="nav-item" data-page="settings" style="flex-direction:column;gap:2px;padding:4px 8px;font-size:9px"><span class="icon">⚙</span>More</button>
 </nav>
 
 <!-- Main Content -->
@@ -399,10 +483,11 @@ select{cursor:pointer}
   </div>
   <div class="stats-row">
     <div class="stat-card"><div class="label">Live Arb Opportunities</div><div class="value green" id="statArbs">--</div><div class="sub">cross-platform</div></div>
-    <div class="stat-card"><div class="label">Best Gap</div><div class="value blue" id="statBestGap">--</div><div class="sub">fee-adjusted</div></div>
+    <div class="stat-card"><div class="label">Best Gap</div><div class="value blue" id="statBestGap">--</div><div class="sub">fee-adjusted</div><div class="sparkline" id="gapSparkline"></div></div>
     <div class="stat-card"><div class="label">Markets Tracked</div><div class="value" id="statMarkets">--</div><div class="sub">across all platforms</div></div>
     <div class="stat-card"><div class="label">Today P&L</div><div class="value amber" id="statPnl">$0</div><div class="sub">realized</div></div>
   </div>
+  <div id="dashLast24h" style="padding:0 24px 8px;font-size:11px;color:var(--text-3)"></div>
   <div class="page-body" style="display:grid;grid-template-columns:3fr 2fr;gap:16px">
     <div>
       <h3 style="font-size:13px;font-weight:700;color:var(--text-1);margin-bottom:12px">Top Opportunities</h3>
@@ -437,6 +522,7 @@ select{cursor:pointer}
       <button class="btn-outline btn-sm" data-tab="dutch">Math Arb</button>
       <button class="btn-outline btn-sm" data-tab="tail">Tail-End</button>
       <button class="btn-outline btn-sm" data-tab="fast">⚡ Fast</button>
+      <button data-tab="ev" class="btn-outline btn-sm">+EV</button>
     </div>
     <label style="font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:4px"><input type="checkbox" id="halfKelly" checked style="accent-color:var(--green)"> Half Kelly</label>
   </div>
@@ -480,6 +566,7 @@ select{cursor:pointer}
         <button class="btn-outline btn-sm" data-p="manifold">Manifold</button>
         <button class="btn-outline btn-sm" data-p="metaculus">Metaculus</button>
         <button class="btn-outline btn-sm" data-p="opinion">Opinion</button>
+        <button class="btn-outline btn-sm" data-p="kalshi">Kalshi</button>
       </div>
       <select id="mktSort"><option value="volume">Volume</option><option value="probability">Probability</option></select>
       <span style="margin-left:auto;font-size:11px;color:var(--text-3)" id="mktCount">--</span>
@@ -614,12 +701,12 @@ select{cursor:pointer}
 const API_BASE = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
 const API = API_BASE;
 const $=id=>document.getElementById(id);
-const PLAT={poly:'Polymarket',predict:'PredictIt',manifold:'Manifold',metaculus:'Metaculus',opinion:'Opinion'};
-const PLAT_SHORT={poly:'POLY',predict:'PI',manifold:'MAN',metaculus:'META',opinion:'OPN'};
+const PLAT={poly:'Polymarket',predict:'PredictIt',manifold:'Manifold',metaculus:'Metaculus',opinion:'Opinion',kalshi:'Kalshi'};
+const PLAT_SHORT={poly:'POLY',predict:'PI',manifold:'MAN',metaculus:'META',opinion:'OPN',kalshi:'KAL'};
 
 // ── State ──
 let S={
-  cross:[],dutch:[],tail:[],logical:{opportunities:[],count:0},fastMarkets:[],fastArbs:[],
+  cross:[],dutch:[],tail:[],logical:{opportunities:[],count:0},fastMarkets:[],fastArbs:[],ev:[],
   allMarkets:[],counts:{},health:{},
   history:[],stats:{},watchlist:[],settings:{},analytics:{},
   page:'dashboard',arbTab:'cross',fastFilter:'all',fastPageFilter:'all',fastPageData:[],prevPrices:{},
@@ -630,12 +717,14 @@ let S={
 // ── Helpers ──
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 function platTag(p){return`<span class="plat-tag ${p}">${PLAT_SHORT[p]||p}</span>`}
+const PLAT_FAVICON={poly:'https://polymarket.com/favicon.ico',predict:'https://www.predictit.org/favicon.ico',kalshi:'https://kalshi.com/favicon.ico',manifold:'https://manifold.markets/favicon.ico'};
+function platLogo(p){const url=PLAT_FAVICON[p];if(!url)return platTag(p);return`<span style="display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#1a1a2e;overflow:hidden;flex-shrink:0" title="${PLAT[p]||p}"><img src="${url}" style="width:14px;height:14px;object-fit:contain" alt="${PLAT_SHORT[p]||p}"></span>`;}
 function fmtVol(v,p){if(v==null)return'--';v=+v;if(p==='metaculus')return v.toLocaleString()+' forecasters';if(v>=1e6)return'$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return'$'+(v/1e3).toFixed(1)+'K';return'$'+v.toLocaleString()}
 function gapColor(g){return g>5?'text-green':g>=3?'text-amber':g>0?'text-muted':'text-red'}
 function gradeFor(score){return score>80?'A':score>60?'B':score>40?'C':score>20?'D':'F'}
 
 // ── URL helpers ──
-const PLAT_BASE={poly:'https://polymarket.com',predict:'https://www.predictit.org',manifold:'https://manifold.markets',metaculus:'https://www.metaculus.com',opinion:'https://opinionmarkets.io'};
+const PLAT_BASE={poly:'https://polymarket.com',predict:'https://www.predictit.org',manifold:'https://manifold.markets',metaculus:'https://www.metaculus.com',opinion:'https://opinionmarkets.io',kalshi:'https://kalshi.com'};
 function isSpecificUrl(url,platform){
   if(!url)return false;
   const base=PLAT_BASE[platform]||'';
@@ -675,6 +764,47 @@ function toast(msg,type='success'){
   setTimeout(()=>t.remove(),4000);
 }
 
+// ── Theme toggle ──
+function toggleTheme(){
+  const current=document.documentElement.getAttribute('data-theme');
+  const next=current==='light'?'dark':'light';
+  if(next==='light') document.documentElement.setAttribute('data-theme','light');
+  else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('arbradar-theme',next);
+  const btn=$('themeToggle');if(btn)btn.textContent=next==='light'?'☀':'☾';
+}
+(function(){
+  const t=localStorage.getItem('arbradar-theme');
+  if(t==='light'){document.documentElement.setAttribute('data-theme','light');
+    const btn=$('themeToggle');if(btn)btn.textContent='☀';}
+})();
+
+// ── Gap sparkline ──
+function updateGapSparkline(bestGap){
+  let hist=JSON.parse(localStorage.getItem('arbradar-gap-history')||'[]');
+  if(bestGap>0){hist.push(bestGap);if(hist.length>10)hist=hist.slice(-10);
+    localStorage.setItem('arbradar-gap-history',JSON.stringify(hist));}
+  const el=$('gapSparkline');if(!el||!hist.length)return;
+  const max=Math.max(...hist,1);
+  el.innerHTML=hist.map(v=>`<div class="bar" style="height:${Math.max((v/max)*24,2)}px"></div>`).join('');
+}
+
+// ── Platform circle helper ──
+function platCircle(p){
+  const letter=(PLAT_SHORT[p]||p).charAt(0);
+  return `<span class="plat-circle ${p}" title="${PLAT[p]||p}">${letter}</span>`;
+}
+
+// ── Copy trade details ──
+function copyTradeDetails(){
+  const arb=window._popupArb;if(!arb)return;
+  const yp=arb.prob_low/100, np=(100-arb.prob_high)/100;
+  const amt=+($('popupAmount')?.value)||100;
+  const profit=Math.max((1-yp-np)*amt,0);
+  const text=`${arb.title}\n1. Buy YES on ${PLAT[arb.platform_low]} at ${(yp*100).toFixed(0)}\u00A2\n2. Buy NO on ${PLAT[arb.platform_high]} at ${(np*100).toFixed(0)}\u00A2\nAmount: $${amt} | Guaranteed profit: +$${profit.toFixed(2)}`;
+  navigator.clipboard.writeText(text).then(()=>toast('Trade details copied'));
+}
+
 // ── Kelly ──
 function calcKelly(bank,edge,prob){
   const p=prob/100,q=1-p;
@@ -689,11 +819,14 @@ function arbKelly(gap,probH){
   const e=gap/100,p=Math.max(probH/100,.01),q=1-p;
   const f1=e/(1-p+.001),b=(1+e)/(1-e+.001),f2=Math.max(0,(b*p-q)/b);
   const f=Math.min(Math.min(f1,f2),.25);
-  const amt=f*bank*(half?.5:1);
-  return amt<1?'<$1':'$'+amt.toFixed(0);
+  const raw=f*bank*(half?.5:1);
+  const amt=Math.max(raw,0);
+  if(amt<0.50)return'$0';
+  if(amt<1)return'$1';
+  return'$'+amt.toFixed(0);
 }
 // ── Platform Fees ──
-const PLAT_FEES={poly:0.02,predict:0.10,manifold:0,metaculus:0,opinion:0.05};
+const PLAT_FEES={poly:0.02,predict:0.10,manifold:0,metaculus:0,opinion:0.05,kalshi:0.07};
 
 // ── Arb Split Calculator ──
 function calcArbSplit(totalAmount,yesPrice,noPrice,yesFee,noFee){
@@ -800,8 +933,10 @@ function navigateTo(page){
   S.page=page;
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   $('page-'+page)?.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.querySelector(`.nav-item[data-page="${page}"]`)?.classList.add('active');
+  document.querySelectorAll('#sidebarNav .nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`#sidebarNav .nav-item[data-page="${page}"]`)?.classList.add('active');
+  document.querySelectorAll('#bottomNav .nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector(`#bottomNav .nav-item[data-page="${page}"]`)?.classList.add('active');
   if(page==='fast')loadAndRenderFast();
   if(page==='markets')renderMarkets();
   if(page==='calculator')renderCalc('kelly');
@@ -810,7 +945,11 @@ function navigateTo(page){
   if(page==='analytics')renderAnalytics();
   if(page==='settings')renderSettings();
 }
-document.querySelectorAll('.nav-item').forEach(n=>{n.onclick=()=>navigateTo(n.dataset.page)});
+document.querySelectorAll('#sidebarNav .nav-item').forEach(n=>{n.onclick=()=>navigateTo(n.dataset.page)});
+$('bottomNav')?.addEventListener('click',e=>{
+  const btn=e.target.closest('[data-page]');
+  if(btn)navigateTo(btn.dataset.page);
+});
 
 // ── Score fetching ──
 const scoreCache={};
@@ -845,20 +984,29 @@ function openDrawer(arb,score){
   const yesUrl=resolveUrl(arb.url_low,arb.platform_low,arb.slug_low,arb.title_low||arb.title);
   const noUrl=resolveUrl(arb.url_high,arb.platform_high,arb.slug_high,arb.title);
   const arbJson=JSON.stringify(arb).replace(/"/g,'&quot;');
+  const yp=arb.prob_low/100, np=(100-arb.prob_high)/100;
+  const estProfit=Math.max((1-yp-np)*100,0);
+  const riskWarn=gap>20?`<div class="risk-warning">⚠ High gap (${gap.toFixed(1)}%) — verify both markets reference the same event and resolution criteria before trading.</div>`:'';
   $('popupContent').innerHTML=`
     <!-- S1: platform + title -->
     <div class="popup-head">
       <div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:0">
-        <div style="display:flex;gap:4px;align-items:center">${platTag(arb.platform_high)} <span style="font-size:10px;color:var(--text-3)">vs</span> ${platTag(arb.platform_low)}</div>
+        <div style="display:flex;gap:6px;align-items:center">${platLogo(arb.platform_high)} <span style="font-size:10px;color:var(--text-3)">vs</span> ${platLogo(arb.platform_low)}</div>
         <div class="popup-title">${esc(arb.title)}</div>
       </div>
       <button class="popup-close" onclick="closePopup()">×</button>
     </div>
-    <!-- S2: big probability -->
+    <!-- S2: big profit -->
+    <div class="popup-big-profit">
+      <div class="profit-num">+$${estProfit.toFixed(2)}</div>
+      <div class="profit-label">estimated profit per $100 · ${gap.toFixed(1)}% gap</div>
+    </div>
+    <!-- S2b: big probability -->
     <div class="popup-prob">
       <div class="big-num" style="color:${gapCol}">${gap.toFixed(1)}%</div>
       <div class="big-label">fee-adjusted gap · ${arb.prob_high.toFixed(0)}% vs ${arb.prob_low.toFixed(0)}%</div>
     </div>
+    ${riskWarn}
     <!-- S3: AI loading -->
     <div class="popup-ai" id="popupAI">
       <div class="ai-dots"><span></span><span></span><span></span></div>
@@ -934,8 +1082,8 @@ function openMarketPopup(m){
 function updatePopupSplit(){
   const arb=window._popupArb;if(!arb)return;
   const amt=+($('popupAmount')?.value)||100;
-  const yesPrice=arb.prob_low/100;
-  const noPrice=(100-arb.prob_high)/100;
+  const yesPrice=arb.yes_price_low!=null ? arb.yes_price_low : arb.prob_low/100;
+  const noPrice=arb.no_price_high!=null ? arb.no_price_high : (100-arb.prob_high)/100;
   const sumPrices=yesPrice+noPrice;
   const gap=arb.raw_gap||arb.fee_adjusted_gap||0;
   const el=$('popupSplit');if(!el)return;
@@ -985,6 +1133,12 @@ function renderDashboard(){
   $('statArbs').textContent=arbs.length;
   $('statBestGap').textContent=bestGap>0?bestGap.toFixed(1)+'%':'--';
   $('statMarkets').textContent=S.allMarkets.length.toLocaleString();
+  updateGapSparkline(bestGap);
+  // Last 24h arb counter
+  const now24=Date.now();
+  const last24h=(S.history||[]).filter(h=>h.timestamp&&(now24-new Date(h.timestamp).getTime())<86400000).length;
+  const d24el=$('dashLast24h');
+  if(d24el)d24el.textContent=last24h>0?`${last24h} arb${last24h>1?'s':''} logged in last 24h`:'';
   const arbCount=arbs.length||S.cross.length;
   $('navArbBadge').textContent=arbCount;
   const dot=$('arbLiveDot');if(dot)dot.style.display=arbCount>0?'inline-block':'none';
@@ -1000,14 +1154,17 @@ function renderDashboard(){
     card.className='card';
     card.style.cssText='margin-bottom:10px;cursor:pointer;padding:14px';
     card.onclick=()=>openDrawer(a,sc);
+    const _yp2=a.prob_low/100, _np2=(100-a.prob_high)/100;
+    const _estProfit=Math.max((1-_yp2-_np2)*S.bankroll,0);
     card.innerHTML=`
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
         <span class="grade ${sc.grade}">${sc.grade}</span>
         <span class="truncate text-primary fw-600" style="flex:1;font-size:13px">${esc(a.title)}</span>
+        ${_estProfit>0?`<span class="profit-badge" style="font-size:12px;padding:3px 10px">+$${_estProfit.toFixed(2)}</span>`:''}
       </div>
       <div style="display:flex;gap:12px;font-size:12px;color:var(--text-2)">
-        ${platTag(a.platform_high)} <span class="text-green fw-700">${a.prob_high.toFixed(1)}%</span>
-        ${platTag(a.platform_low)} <span class="text-amber fw-600">${a.prob_low.toFixed(1)}%</span>
+        ${platCircle(a.platform_high)} <span class="text-green fw-700">${a.prob_high.toFixed(1)}%</span>
+        ${platCircle(a.platform_low)} <span class="text-amber fw-600">${a.prob_low.toFixed(1)}%</span>
         <span style="margin-left:auto" class="text-green fw-700">${a.fee_adjusted_gap.toFixed(1)}% gap</span>
         <span>${arbKelly(a.fee_adjusted_gap,a.prob_high)}</span>
       </div>`;
@@ -1033,37 +1190,44 @@ async function renderArb(){
     if(search)arbs=arbs.filter(a=>a.title.toLowerCase().includes(search));
     if(!arbs.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">⟳</div><p>No arb opportunities found above current threshold.<br>Try lowering Min Gap % or refreshing.</p><button class="btn-primary btn-sm" onclick="refresh()">Refresh</button></div>';return;}
     const scores=await Promise.all(arbs.map(fetchScore));
-    let html='<table class="data-table"><thead><tr><th>Market</th><th>Platforms</th><th>Prices</th><th>Gap</th><th>Score</th><th>Kelly</th><th></th></tr></thead><tbody>';
+    let html='<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Market</th><th>Platforms</th><th>Prices</th><th>Gap</th><th>Profit</th><th>Score</th><th>Kelly</th><th></th></tr></thead><tbody>';
     arbs.forEach((a,i)=>{
       const sc=scores[i];
-      html+=`<tr onmouseenter="showArbTooltip(event,S.cross[${S.cross.indexOf(a)}])" onmouseleave="hideArbTooltip()" onclick="openDrawer(S.cross[${S.cross.indexOf(a)}],scoreCache['${(a.title+a.platform_high).replace(/'/g,"\\'")}']||{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">
+      const _yp=a.prob_low/100, _np=(100-a.prob_high)/100;
+      const quickProfit=Math.max((1-_yp-_np)*100,0);
+      const confLevel=a.fee_adjusted_gap>5?'high':a.fee_adjusted_gap>=3?'medium':'low';
+      const confSegs=confLevel==='high'?3:confLevel==='medium'?2:1;
+      const confClass=confLevel==='high'?'':confLevel==='medium'?' medium':' low';
+      html+=`<tr class="${a.fee_adjusted_gap>3?'arb-row-hot':''}" onmouseenter="showArbTooltip(event,S.cross[${S.cross.indexOf(a)}])" onmouseleave="hideArbTooltip()" onclick="openDrawer(S.cross[${S.cross.indexOf(a)}],scoreCache['${(a.title+a.platform_high).replace(/'/g,"\\'")}']||{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">
         <td style="max-width:260px"><div class="truncate text-primary fw-500" title="${esc(a.title)}">${esc(a.title)}</div></td>
-        <td>${platTag(a.platform_high)}<br>${platTag(a.platform_low)}</td>
+        <td style="white-space:nowrap"><div style="display:flex;align-items:center;gap:4px">${platCircle(a.platform_high)}<span style="font-size:11px">${PLAT_SHORT[a.platform_high]||a.platform_high}</span></div><div style="display:flex;align-items:center;gap:4px;margin-top:3px">${platCircle(a.platform_low)}<span style="font-size:11px">${PLAT_SHORT[a.platform_low]||a.platform_low}</span></div></td>
         <td style="white-space:nowrap"><span class="text-green fw-700">${a.prob_high.toFixed(1)}%</span><br><span class="text-amber">${a.prob_low.toFixed(1)}%</span></td>
         <td><span class="${gapColor(a.fee_adjusted_gap)} fw-700">${a.fee_adjusted_gap.toFixed(1)}%</span>
-          <div class="gap-bar"><div class="gap-bar-fill" style="width:${Math.min(a.fee_adjusted_gap*3,100)}%"></div></div></td>
+          <div class="gap-bar"><div class="gap-bar-fill" style="width:${Math.min(a.fee_adjusted_gap*3,100)}%"></div></div>
+          <div class="confidence-bar${confClass}" style="margin-top:3px">${[0,1,2].map(j=>`<div class="seg${j<confSegs?' on':''}"></div>`).join('')}</div></td>
+        <td>${quickProfit>0?`<span class="profit-badge">+$${quickProfit.toFixed(2)}</span>`:'--'}</td>
         <td><span class="grade ${sc.grade}">${sc.grade}</span></td>
         <td class="text-green fw-700">${arbKelly(a.fee_adjusted_gap,a.prob_high)}</td>
         <td><button class="btn-primary btn-sm" onclick="event.stopPropagation();openDrawer(S.cross[${S.cross.indexOf(a)}],scoreCache['${(a.title+a.platform_high).replace(/'/g,"\\'")}']||{score:0,grade:'?',tradeable:false,warnings:[],recommendation:'',breakdown:{}})">ANALYZE →</button></td>
       </tr>`;
     });
-    html+='</tbody></table>';
+    html+='</tbody></table></div>';
     el.innerHTML=html;
   } else if(tab==='dutch'){
     if(!S.dutch.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">⊞</div><p>No math arb found. Markets are currently efficiently priced.</p></div>';return;}
-    let html='<table class="data-table"><thead><tr><th>Event</th><th>Outcomes</th><th>Sum</th><th>Edge</th><th>Profit/$100</th></tr></thead><tbody>';
+    let html='<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Event</th><th>Outcomes</th><th>Sum</th><th>Edge</th><th>Profit/$100</th></tr></thead><tbody>';
     S.dutch.forEach(d=>{
       html+=`<tr><td class="truncate text-primary" style="max-width:300px" title="${esc(d.event_title)}">${esc(d.event_title)}</td>
         <td>${d.num_outcomes}</td><td class="text-red fw-600">${(d.sum_probs*100).toFixed(1)}%</td>
         <td class="text-green fw-700">${d.edge_pct.toFixed(1)}%</td>
         <td class="text-green fw-700">$${(d.guaranteed_profit_per_dollar*100).toFixed(2)}</td></tr>`;
     });
-    html+='</tbody></table>';el.innerHTML=html;
+    html+='</tbody></table></div>';el.innerHTML=html;
   } else if(tab==='tail'){
     let tail=S.tail;
     if(search)tail=tail.filter(t=>t.title.toLowerCase().includes(search));
     if(!tail.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">◩</div><p>No tail-end opportunities found.<br>These appear when markets have low-probability outcomes with high annualized returns.</p></div>';return;}
-    let html='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Price</th><th>Return</th><th>Days</th><th>Annualized</th></tr></thead><tbody>';
+    let html='<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Price</th><th>Return</th><th>Days</th><th>Annualized</th></tr></thead><tbody>';
     tail.forEach(t=>{
       const tUrl=resolveUrl(t.url,t.platform,t.slug,t.title);
       html+=`<tr onclick="window.open('${tUrl.replace(/'/g,"\\'")}','_blank')">
@@ -1073,9 +1237,30 @@ async function renderArb(){
         <td>${t.days_to_resolution!=null?t.days_to_resolution+'d':'?'}</td>
         <td class="${t.annualized_return>30?'text-green':t.annualized_return>10?'text-amber':'text-muted'} fw-600">${t.annualized_return.toFixed(0)}%</td></tr>`;
     });
-    html+='</tbody></table>';el.innerHTML=html;
+    html+='</tbody></table></div>';el.innerHTML=html;
   } else if(tab==='fast'){
     renderFastTab(el,search);
+  } else if(tab==='ev'){
+    let ev=S.ev;
+    if(search)ev=ev.filter(e=>e.title.toLowerCase().includes(search));
+    if(!ev.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">◎</div><p>No +EV opportunities found.<br>These appear when one platform prices a market significantly different from the consensus across all platforms.</p></div>';return;}
+    let html='<table class="data-table"><thead><tr><th>Market</th><th>Platform</th><th>Their Price</th><th>Consensus</th><th>EV Edge</th><th>Action</th></tr></thead><tbody>';
+    ev.forEach(e=>{
+      const evCol=e.ev_pct>10?'text-green':e.ev_pct>5?'text-amber':'text-muted';
+      const dirIcon=e.direction==='UNDERPRICED'?'↑':'↓';
+      html+=`<tr onclick="window.open('${(e.url||'#').replace(/'/g,"\\'")}','_blank')">
+        <td style="max-width:280px"><div class="truncate text-primary fw-500" title="${esc(e.title)}">${esc(e.title)}</div>
+          <div style="font-size:10px;color:var(--text-3);margin-top:2px">${e.all_prices.map(p=>`${platTag(p.platform)} ${p.price}%`).join(' · ')}</div>
+        </td>
+        <td>${platTag(e.platform)}</td>
+        <td class="fw-700 ${e.direction==='UNDERPRICED'?'text-green':'text-red'}">${e.platform_price}%</td>
+        <td class="text-muted">${e.consensus_price}%</td>
+        <td><span class="${evCol} fw-700">${dirIcon} ${e.ev_pct.toFixed(1)}%</span></td>
+        <td style="font-size:11px;color:var(--text-2);max-width:200px">${esc(e.action)}</td>
+      </tr>`;
+    });
+    html+='</tbody></table>';
+    el.innerHTML=html;
   }
 }
 function fmtCountdown(daysLeft,hoursLeft){
@@ -1619,9 +1804,9 @@ async function saveSettings(){
 // ── Sidebar status ──
 function renderStatus(){
   const platforms=S.health.platforms||{};
-  const names={poly:'Polymarket',predict:'PredictIt',manifold:'Manifold',metaculus:'Metaculus',opinion:'Opinion'};
+  const names={poly:'Polymarket',predict:'PredictIt',manifold:'Manifold',metaculus:'Metaculus',opinion:'Opinion',kalshi:'Kalshi'};
   let html='';
-  ['poly','predict','manifold','metaculus','opinion'].forEach(key=>{
+  ['poly','predict','manifold','metaculus','opinion','kalshi'].forEach(key=>{
     const p=platforms[key]||{};
     const status=p.status||(p.count>0?'live':(p.ok?'live':'down'));
     const count=p.count!=null?p.count:(S.counts||{})[key]||0;
@@ -1713,6 +1898,9 @@ async function loadFastMarkets(){
 async function loadFastArbs(){
   try{const r=await fetch(API+'/arb/fast?max_days=3');S.fastArbs=await r.json();}catch(e){S.fastArbs=[];}
 }
+async function loadEV(){
+  try{const r=await fetch(API+'/arb/ev?min_ev=3');S.ev=await r.json();}catch(e){S.ev=[];}
+}
 async function loadAllMarkets(){
   try{const r=await fetch(API+'/markets/all');const d=await r.json();S.allMarkets=d.markets||[];S.counts=d.counts||{};}catch(e){}
 }
@@ -1724,7 +1912,7 @@ async function refresh(){
   S.countdown=S.settings.auto_refresh||90;
   document.querySelectorAll('.btn-refresh').forEach(b=>b.classList.add('btn-refreshing'));
   try{
-    await Promise.all([loadAllMarkets(),loadAllArbs(),loadHealth(),loadHistory(),loadSettings(),loadLogical(),loadFastMarkets(),loadFastArbs()]);
+    await Promise.all([loadAllMarkets(),loadAllArbs(),loadHealth(),loadHistory(),loadSettings(),loadLogical(),loadFastMarkets(),loadFastArbs(),loadEV()]);
     renderDashboard();renderArb();renderStatus();
     const ts=new Date().toLocaleTimeString();
     $('lastUpdate').textContent=ts;$('lastUpdate2').textContent=ts;
@@ -1757,7 +1945,7 @@ async function startApp(){
     done++;bar.style.width=(done/steps.length*100)+'%';
   }
   // Load remaining data
-  await Promise.all([loadAllArbs(),loadAllMarkets(),loadHealth(),loadHistory(),loadSettings()]);
+  await Promise.all([loadAllArbs(),loadAllMarkets(),loadHealth(),loadHistory(),loadSettings(),loadEV()]);
   bar.style.width='100%';
   await new Promise(r=>setTimeout(r,400));
   $('welcome').classList.add('hidden');

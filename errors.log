@@ -18,3 +18,1647 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 2026-03-21 10:50:10,962 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
 2026-03-21 10:50:10,974 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
 2026-03-21 10:50:10,975 WARNING [opinion] no working endpoint found (tried all endpoints)
+2026-03-21 13:16:30,774 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:16:31,037 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:16:31,310 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:16:31,310 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:16:32,135 WARNING [kalshi] v2-trading failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:16:32,873 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:16:32,873 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:23:21,194 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:23:21,212 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:23:21,226 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:23:21,226 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:23:21,988 WARNING [kalshi] v2-trading failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:23:22,749 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:23:22,750 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:33:23,559 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:33:23,580 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:23,595 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:23,595 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:33:24,379 WARNING [kalshi] v2-trading failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:33:25,120 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:33:25,120 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:33:30,911 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:33:30,940 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:30,957 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:30,957 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:33:31,456 WARNING [kalshi] v2-trading failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:33:31,895 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:33:31,895 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:33:37,376 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:33:37,394 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:37,408 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:37,408 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:33:37,900 WARNING [kalshi] v2-trading failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:33:38,373 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:33:38,373 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:33:59,731 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:33:59,752 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:59,765 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:33:59,766 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:34:00,470 WARNING [kalshi] v2-trading failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:34:01,175 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:34:01,175 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:34:12,442 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:34:12,460 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:34:12,474 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:34:12,474 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:34:12,970 WARNING [kalshi] v2-trading failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=200&status=open'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:34:13,474 WARNING [kalshi] v2-trading-nofilt failed: Client error '401 Unauthorized' for url 'https://trading-api.kalshi.com/trade-api/v2/markets?limit=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-03-21 13:34:13,949 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:34:13,950 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:34:32,118 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:34:32,155 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:34:32,168 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:34:32,169 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:34:32,880 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 13:34:33,370 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 13:34:34,068 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:34:34,068 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 13:37:32,175 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 13:37:32,189 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:37:32,207 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 13:37:32,207 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 13:37:32,955 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 13:37:33,439 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 13:37:34,149 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 13:37:34,149 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:02:29,488 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:02:29,742 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:02:30,011 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:02:30,012 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:02:30,772 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:02:31,263 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:02:32,022 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:02:32,022 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:41,675 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:44,666 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:44,689 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:44,706 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:44,706 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:46,729 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:46,745 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:46,745 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:47,152 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,169 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,183 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,205 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,221 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,221 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:47,226 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,226 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:47,228 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,228 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:47,231 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:47,231 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:47,743 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:47,760 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:47,863 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:47,961 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:48,381 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:48,405 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:48,477 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:48,589 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:48,626 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:48,657 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:48,661 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:48,735 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:49,135 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:49,136 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:49,146 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:49,146 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:49,148 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:49,148 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:49,192 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:49,192 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:49,271 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,286 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,300 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,313 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,326 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,327 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:49,330 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,330 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:49,332 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,332 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:49,334 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:03:49,334 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:03:51,342 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:51,543 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:51,670 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:51,674 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:03:51,694 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:51,715 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:51,715 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:51,716 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:52,237 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:52,254 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:52,255 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:52,255 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:03:52,748 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:52,748 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:53,094 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:53,094 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:53,094 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:53,094 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:03:53,094 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:03:53,094 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:04:24,811 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #1, backoff 60s)
+2026-03-21 14:04:25,636 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #5, backoff 900s)
+2026-03-21 14:04:26,349 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #10, backoff 900s)
+2026-03-21 14:08:38,708 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:08:38,729 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:08:38,744 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:08:38,745 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:08:39,492 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:08:40,001 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:08:40,759 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:08:40,759 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:10,909 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:13,885 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:13,907 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:13,924 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:13,924 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:15,941 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:15,956 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:15,956 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:16,335 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,420 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,439 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,461 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,461 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:16,463 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,478 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,478 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:16,483 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,483 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:16,487 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:16,487 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:17,038 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:17,051 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:17,065 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:17,401 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:17,545 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:17,590 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:17,590 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:17,648 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:17,665 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:17,743 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:17,909 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:18,004 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:18,307 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:18,307 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:18,309 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:18,309 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:18,313 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:18,313 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:18,363 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:18,364 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:18,494 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,530 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,545 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,545 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:18,547 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,561 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,574 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,575 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:18,577 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,578 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:18,580 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-21 14:12:18,580 WARNING [opinion] all endpoints failed, returning []
+2026-03-21 14:12:20,500 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:20,537 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:20,679 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:20,817 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:20,843 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:20,858 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:20,872 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:20,955 WARNING [metaculus] all attempts failed, returning []
+2026-03-21 14:12:21,317 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:21,378 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:21,411 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:21,411 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:12:21,778 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:21,778 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:22,400 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:22,400 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:22,400 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:22,400 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:12:22,400 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:12:22,401 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:25,776 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:25,788 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:25,788 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:25,789 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:25,790 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:25,967 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,152 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,360 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,389 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,475 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,652 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,722 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,754 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:26,771 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:27,114 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:27,114 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:27,124 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:27,124 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:27,126 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:27,126 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:27,131 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:27,131 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:27,182 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:27,182 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:27,221 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:27,221 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:27,224 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:27,224 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:29,660 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:29,677 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:29,678 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:29,678 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:29,719 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:29,720 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:29,747 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,235 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,251 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,266 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,267 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,293 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,293 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,294 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-21 14:22:30,800 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:30,801 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:30,801 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:30,802 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:39,007 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:39,008 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:39,008 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:39,008 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:39,008 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:39,008 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:39,008 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:39,009 WARNING [kalshi] all endpoints failed, returning []
+2026-03-21 14:22:39,009 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-21 14:22:39,010 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:21,882 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:21,917 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:21,942 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:21,974 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:21,997 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,330 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,331 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:22,335 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,335 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:22,340 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,340 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:22,344 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,344 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:22,349 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,349 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:22,362 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,390 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,468 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,468 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:22,472 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:22,472 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:22,957 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:22,959 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:23,117 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:23,118 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:23,119 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:23,363 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:23,413 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:24,565 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,591 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,617 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,642 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,666 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,695 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,721 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,754 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,754 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:24,761 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,762 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:24,766 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,766 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:24,770 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,770 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:24,775 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,775 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:24,804 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,805 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:24,810 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 08:39:24,810 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 08:39:24,999 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:25,029 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:25,030 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:25,031 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:25,032 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:25,143 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:25,176 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:25,177 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:25,179 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:25,180 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:25,180 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:25,181 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:25,238 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:25,239 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:25,631 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:25,631 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:25,634 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:25,634 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:25,637 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:25,637 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:25,648 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:25,648 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:25,649 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:25,649 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:25,652 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:25,652 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:25,657 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:25,658 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:28,581 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:28,599 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:28,607 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:28,623 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:28,627 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:28,638 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:28,672 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:28,673 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:28,674 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:28,675 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:28,676 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:28,915 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:28,917 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:28,920 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 08:39:29,477 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:29,478 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:29,479 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:29,555 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:29,556 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:29,558 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:29,996 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:29,999 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:30,911 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:30,912 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:30,914 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:30,914 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:30,915 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:30,918 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:30,919 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:30,919 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:47,063 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 08:39:47,301 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:47,301 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 08:39:47,752 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 08:39:47,753 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:12,572 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:12,606 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:12,621 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:12,638 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:12,682 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,079 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,079 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:14,082 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,083 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:14,087 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,087 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:14,092 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,092 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:14,106 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,106 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:14,121 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,148 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,189 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,189 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:14,196 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:14,196 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:14,643 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:14,670 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:14,671 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:14,880 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:14,921 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,112 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,535 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,625 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,644 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,663 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:15,674 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:15,674 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,759 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:15,782 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:15,821 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:15,918 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,947 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:15,948 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:16,072 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:16,105 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:16,194 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,246 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,266 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,300 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,357 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,358 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:16,365 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,386 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,387 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:16,391 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,419 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,419 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:16,421 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,422 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:16,424 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,442 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:16,443 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,443 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:16,451 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,452 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:16,456 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 11:44:16,456 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 11:44:16,460 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:16,460 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:16,460 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:16,460 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:16,461 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:16,461 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:16,521 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:16,521 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:16,523 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:16,523 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:16,802 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:16,802 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:16,802 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:16,802 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:18,735 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:18,786 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:18,969 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:19,052 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,079 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,079 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,172 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:19,200 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:19,241 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,242 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:19,259 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,303 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,432 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 11:44:19,513 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,555 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,555 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,743 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,759 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:19,848 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:20,015 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:20,015 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:20,111 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:20,111 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:20,137 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:20,137 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:20,627 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:20,628 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:20,635 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:20,636 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 11:44:20,654 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:20,654 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:22,152 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:22,152 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 11:44:22,153 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 11:44:22,154 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:50,486 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,512 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,526 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,539 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,560 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,733 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,733 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:50,735 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,735 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:50,739 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,739 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:50,741 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,741 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:50,743 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,754 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,754 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:50,756 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,778 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,778 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:50,780 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:50,780 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:51,228 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:51,270 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:51,423 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:51,424 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:51,474 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:51,476 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:51,478 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,125 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:52,131 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:52,138 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:52,138 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:52,143 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:52,143 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:52,144 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:52,147 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,160 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,184 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,197 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,209 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,210 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,230 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:52,781 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,815 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,825 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,835 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,856 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,856 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:52,859 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,870 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,880 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,880 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:52,882 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,882 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:52,884 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,884 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:52,886 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,896 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,897 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:52,899 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,899 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:52,901 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:23:52,901 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:23:53,176 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:53,177 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:53,178 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:53,178 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:53,230 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:53,230 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:53,452 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:53,452 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:53,456 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:53,456 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:53,460 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:53,461 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:53,461 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:53,461 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:54,227 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #1, backoff 60s)
+2026-03-22 12:23:55,072 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:55,081 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:55,081 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:55,082 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:55,082 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:55,087 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:55,087 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:23:55,592 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:55,617 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:55,702 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:55,900 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:55,931 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:55,933 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:55,936 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,022 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,040 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,169 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,385 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,407 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,408 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,435 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:23:56,717 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:56,719 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:56,731 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:56,731 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:57,054 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:57,055 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:57,691 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:57,692 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:57,692 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:57,692 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:57,693 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:57,693 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:23:57,693 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:23:57,693 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:27:44,349 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:27:44,369 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:27:44,383 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:27:44,383 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:27:45,014 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:27:45,432 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:27:46,437 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:27:46,437 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:01,560 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:04,379 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:04,405 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:04,421 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:04,421 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:06,438 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,450 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,450 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:06,820 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,834 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,844 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,861 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,872 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,872 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:06,875 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,875 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:06,876 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,876 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:06,880 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:06,880 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:07,406 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:07,424 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:07,425 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:07,425 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:07,879 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:07,900 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:07,902 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:07,905 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:07,925 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:07,937 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:07,949 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:07,950 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:08,876 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:08,876 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:08,893 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:08,894 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:08,938 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,950 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,961 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,973 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,984 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,984 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:08,987 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,988 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:08,990 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,991 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:08,994 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:30:08,994 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:30:09,090 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:09,091 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:09,109 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:09,109 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:10,695 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:10,695 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:10,695 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:10,696 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:30:11,308 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:11,328 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:11,554 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:11,572 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:11,771 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:11,793 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:11,987 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:12,003 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:30:12,409 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:12,409 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:12,669 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:12,669 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:12,669 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:12,669 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:30:12,669 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:30:12,673 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:34:39,005 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:34:39,018 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:34:39,031 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:34:39,031 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:34:39,699 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:34:40,091 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:34:41,061 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:34:41,067 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:34:44,850 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:34:44,868 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:34:44,887 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:34:44,887 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:34:45,328 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:34:45,807 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:34:46,455 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:34:46,455 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:34:58,256 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:34:58,266 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:34:58,280 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:34:58,280 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:34:58,846 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:34:59,253 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:00,181 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:35:00,181 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:35:00,443 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:00,460 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:00,470 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:00,486 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:00,486 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:35:00,490 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:00,490 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:35:00,493 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:00,493 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:35:01,035 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:01,038 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:01,207 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:01,429 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:35:01,597 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:35:01,599 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:35:01,626 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:01,636 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:01,637 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:02,289 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:35:02,289 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:35:02,292 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:35:02,292 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:35:02,297 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:35:02,297 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:35:02,523 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:02,535 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:02,546 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:02,561 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:02,561 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:35:02,564 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:02,565 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:35:02,566 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:35:02,567 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:35:03,660 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #1, backoff 60s)
+2026-03-22 12:35:04,189 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:35:04,359 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:35:04,360 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:35:04,740 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:04,760 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:04,760 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:05,191 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:05,203 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:05,204 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:35:05,844 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:35:05,844 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:35:05,849 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:35:05,849 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:35:05,867 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:35:05,867 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:40:05,447 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:40:05,467 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:40:05,482 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:40:05,482 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:40:06,092 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:40:06,503 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:40:07,473 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:40:07,473 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:50,767 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,808 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,828 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,847 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,863 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,888 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,888 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:50,894 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,895 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:50,897 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,897 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:50,899 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,899 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:50,901 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:50,901 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:51,473 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:51,476 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:51,476 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:51,488 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:51,489 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:52,128 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:42:52,133 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:42:52,138 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:52,139 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:52,161 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:52,161 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:52,180 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:52,946 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:52,958 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:52,969 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:52,979 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:52,992 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:53,004 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:53,004 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:53,008 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:53,009 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:53,011 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:53,011 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:53,013 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:53,013 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:53,016 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:42:53,016 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:42:53,100 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:53,100 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:53,102 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:53,102 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:53,126 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:53,126 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:53,326 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:53,343 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:53,347 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:53,366 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:54,928 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:42:55,513 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:55,543 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:55,559 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:55,801 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:55,814 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:56,080 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:56,083 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:56,083 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:56,296 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:56,309 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:42:56,735 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:56,735 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:56,736 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:56,736 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:42:56,738 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:42:56,738 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:43:03,926 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:43:03,926 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:43:03,927 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:43:03,927 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:43:03,948 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:04,335 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:04,361 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:04,365 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:06,877 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:07,952 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:08,015 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:17,386 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:17,406 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:17,420 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:17,420 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:43:17,996 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:18,424 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:19,580 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:43:19,581 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:43:19,734 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:19,751 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:19,763 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:19,764 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:43:19,767 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:19,767 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:43:20,200 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:20,201 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:20,603 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:20,606 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:20,619 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:20,635 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:21,266 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:43:21,274 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:43:21,277 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:43:21,277 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:43:21,938 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:21,950 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:21,967 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:21,967 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:43:21,969 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:43:21,969 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:43:22,698 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #1, backoff 60s)
+2026-03-22 12:43:23,675 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:23,678 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:43:23,709 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:23,723 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:24,128 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:24,143 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:43:24,777 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:43:24,777 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:43:24,781 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:43:24,781 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:47:08,488 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:08,507 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:08,521 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:08,521 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:09,111 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:09,547 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:10,524 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:47:10,524 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:47:27,616 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:27,631 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:27,655 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:27,656 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:28,252 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:28,688 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:29,606 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:47:29,606 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:47:53,774 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:53,971 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:54,031 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:54,041 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:54,041 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:54,047 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:54,047 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:54,050 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:54,050 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:54,477 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:54,478 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:54,527 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:55,109 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:55,110 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:55,111 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:55,118 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:55,131 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:55,132 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:56,042 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:47:56,042 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:47:56,045 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:47:56,045 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:47:56,065 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:47:56,066 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:47:56,095 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:56,110 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:56,126 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:56,142 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:56,142 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:56,144 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:56,145 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:56,147 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:47:56,147 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:47:57,981 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:57,983 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:57,985 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:47:58,469 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:58,483 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:58,484 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:58,905 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:58,921 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:58,921 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:47:59,561 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:47:59,561 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:48:00,438 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:48:00,438 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:48:00,438 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:48:00,438 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:49:14,504 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:49:14,520 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:49:14,537 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:49:14,537 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:49:15,120 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:49:15,543 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:49:16,470 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:49:16,470 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:49:48,849 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:49:48,868 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:49:48,883 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:49:48,883 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:49:49,491 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:49:49,914 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:49:50,859 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:49:50,859 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:50:58,378 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:50:58,399 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:50:58,413 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:50:58,413 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:50:59,026 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:50:59,427 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:51:00,358 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:51:00,358 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:53:46,922 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:53:46,950 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:53:46,972 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:53:46,973 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:53:47,647 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:53:48,049 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:53:48,955 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:53:48,956 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:09,448 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:09,465 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:09,481 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:09,482 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:10,099 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:10,526 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:11,461 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:11,461 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:20,477 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:23,275 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:23,300 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:23,314 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:23,314 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:25,336 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,351 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,351 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:25,631 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,644 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,741 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,760 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,773 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,773 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:25,775 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,775 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:25,781 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,782 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:25,786 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:25,786 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:26,233 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:26,234 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:26,352 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:26,450 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:26,837 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:26,855 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:26,855 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:26,883 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:26,887 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:26,924 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:26,942 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:27,001 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:27,762 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:27,763 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:27,765 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:27,765 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:27,838 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,850 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,859 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,869 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,879 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,880 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:27,882 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,882 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:27,884 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,884 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:27,886 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 12:54:27,886 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 12:54:27,968 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:27,969 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:27,987 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:27,987 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:28,849 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #1, backoff 60s)
+2026-03-22 12:54:29,656 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:29,659 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:29,660 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:29,762 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 12:54:30,187 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:30,201 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:30,380 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:30,428 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:30,599 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:30,627 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:30,781 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:30,833 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 12:54:31,243 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:31,244 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:35,063 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:35,063 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:35,063 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:35,063 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 12:54:35,063 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 12:54:35,063 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:20,194 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:20,413 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:20,648 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:20,648 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:21,296 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:21,709 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:22,703 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:22,704 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:41,303 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:44,381 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:44,404 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:44,420 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:44,421 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:46,442 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,457 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,458 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:46,735 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,746 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,756 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,773 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,785 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,785 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:46,788 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,788 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:46,789 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,790 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:46,793 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:46,793 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:47,437 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:47,631 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:47,631 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:47,632 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:47,692 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:47,699 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:47,699 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:47,878 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:47,926 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:48,051 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:48,068 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:48,146 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:48,842 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,856 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,866 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,876 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,886 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:48,886 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:48,887 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:48,887 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:48,887 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,888 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:48,891 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,891 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:48,893 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,893 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:48,896 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:17:48,896 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:17:49,006 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:49,006 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:49,084 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:49,085 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:50,502 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:50,502 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:50,504 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:50,676 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:17:51,306 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:51,335 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:51,412 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:51,530 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:51,731 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:51,746 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:51,825 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:51,997 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:17:52,362 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:52,362 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:52,363 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:52,363 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:56,346 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:56,347 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:17:56,348 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:17:56,348 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:19:24,946 ERROR [predict] HTTPStatusError: Client error '429 Too Many Requests' for url 'https://www.predictit.org/api/marketdata/all/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429 (failure #1, backoff 60s)
+2026-03-22 13:28:22,608 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:28:22,629 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:28:22,647 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:28:22,647 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:28:23,340 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:28:23,802 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:28:24,844 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:28:24,844 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:34:28,800 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:34:28,819 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:34:28,833 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:34:28,834 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:34:29,464 WARNING [kalshi] Dome API failed: Client error '400 Bad Request' for url 'https://api.domeapi.io/v1/kalshi/markets?limit=200'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400, falling back to direct API
+2026-03-22 13:34:30,121 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:34:30,557 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:34:31,553 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:34:31,553 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:35:58,525 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:35:58,544 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:35:58,561 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:35:58,562 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:35:59,167 WARNING [kalshi] Dome API failed: Client error '400 Bad Request' for url 'https://api.domeapi.io/v1/kalshi/markets?limit=200'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400, falling back to direct API
+2026-03-22 13:35:59,778 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:36:00,218 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:36:01,189 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:36:01,189 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:39:10,763 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:39:10,782 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:39:10,798 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:39:10,798 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:39:11,406 WARNING [kalshi] Dome API failed: Client error '400 Bad Request' for url 'https://api.domeapi.io/v1/kalshi/markets?limit=200'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400, falling back to direct API
+2026-03-22 13:39:12,058 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:39:12,494 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:39:13,098 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:39:13,098 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:40:38,070 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:40:38,086 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:40:38,156 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:40:38,156 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:40:38,778 WARNING [kalshi] Dome API failed: Client error '404 Not Found' for url 'https://api.domeapi.io/v1/markets?platform=kalshi&limit=200'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404, falling back to direct API
+2026-03-22 13:40:39,377 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:40:39,808 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:40:40,437 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:40:40,437 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:41:26,133 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:41:26,156 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:41:26,171 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:41:26,172 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:41:26,755 WARNING [kalshi] Dome API failed: Client error '404 Not Found' for url 'https://api.domeapi.io/v1/markets?platform=kalshi&limit=200'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404, falling back to direct API
+2026-03-22 13:41:27,338 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:41:27,767 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:41:28,365 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:41:28,365 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:43:34,640 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:43:34,662 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:43:34,677 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:43:34,677 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:43:36,091 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:43:36,498 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:43:37,086 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:43:37,086 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:43:47,778 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:43:47,801 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:43:47,821 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:43:47,822 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:43:48,706 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:43:49,143 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:43:49,553 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:43:49,553 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:50:34,258 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:50:34,274 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:50:34,291 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:50:34,291 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:50:35,621 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:50:36,058 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:50:36,657 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:50:36,657 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:50:53,673 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:50:53,696 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:50:53,722 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:50:53,722 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:50:55,083 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:50:55,503 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:50:56,109 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:50:56,109 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:51:55,090 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:51:55,106 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:51:55,121 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:51:55,121 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:51:56,358 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:51:56,800 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:51:57,402 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:51:57,403 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:52:31,345 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:52:31,364 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:52:31,378 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:52:31,378 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:52:32,584 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:52:32,996 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:52:33,608 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:52:33,609 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:53:41,379 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:53:41,394 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:53:41,406 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:53:41,406 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:53:42,654 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:53:43,095 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:53:43,749 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:53:43,749 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:53:48,926 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:53:48,943 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:53:48,956 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:53:48,957 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:53:50,098 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:53:50,541 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:53:51,011 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:53:51,011 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:54:13,966 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:54:13,990 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:54:14,003 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:54:14,003 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:54:15,213 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:54:15,628 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:54:16,176 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:54:16,176 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:56:25,849 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:56:25,868 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:56:25,882 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:56:25,882 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:56:27,141 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:56:27,570 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:56:28,130 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:56:28,130 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:57:06,341 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:57:06,358 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:57:06,374 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:57:06,374 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 13:57:07,984 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:57:08,393 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 13:57:08,958 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 13:57:08,959 WARNING [kalshi] all endpoints failed, returning []
+2026-03-22 13:59:49,417 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 13:59:49,437 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:59:49,450 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 13:59:49,450 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:21,793 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:21,814 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:21,829 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:21,830 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:43,956 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:46,786 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:46,902 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:46,922 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:46,922 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:49,076 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,097 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,097 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:49,658 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,669 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,680 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,699 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,711 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,712 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:49,714 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,714 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:49,715 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,716 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:49,718 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:49,719 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:50,566 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:50,734 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:50,908 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:50,949 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:51,763 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,784 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,806 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,823 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,847 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,848 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:51,853 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,853 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:51,857 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,857 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:51,861 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:00:51,861 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:00:53,385 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:00:59,246 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:01:00,383 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:01:00,753 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:04:14,235 ERROR [predict] ConnectTimeout:  (failure #1, backoff 60s)
+2026-03-22 14:06:54,887 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:06:54,935 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:06:54,957 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:06:54,957 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:45,829 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:48,665 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:48,689 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:48,710 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:48,711 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:50,734 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:50,747 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:50,747 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:51,111 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,122 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,132 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,149 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,160 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,160 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:51,162 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,162 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:51,165 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,165 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:51,167 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:51,167 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:52,024 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:52,236 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:52,243 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:52,243 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:53,209 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,219 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,228 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,237 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,247 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,247 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:53,249 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,249 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:53,251 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,251 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:53,253 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:26:53,253 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:26:54,766 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:55,025 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:55,695 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:26:55,698 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:42:19,373 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:42:19,392 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:42:19,408 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:42:19,408 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:44:00,258 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:44:00,279 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:44:00,293 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:44:00,293 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:38,260 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:41,225 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:41,246 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:41,259 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:41,260 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:43,281 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,294 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,295 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:43,534 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,545 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,555 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,626 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,643 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,643 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:43,645 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,645 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:43,646 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,646 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:43,650 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,663 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,663 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:43,667 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:43,667 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:44,624 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:44,812 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:44,879 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:45,033 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:45,193 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:45,684 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,714 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,724 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,734 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,734 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:45,736 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,746 WARNING [opinion] https://opinionmarkets.io/api/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,755 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,755 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:45,757 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,757 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:45,759 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,759 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:45,761 WARNING [opinion] https://api.opinion.markets/v1/markets failed: [Errno 8] nodename nor servname provided, or not known
+2026-03-22 14:45:45,761 WARNING [opinion] all endpoints failed, returning []
+2026-03-22 14:45:47,401 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:53,056 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:53,057 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:54,186 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:45:54,187 WARNING [metaculus] all attempts failed, returning []
+2026-03-22 14:47:06,203 WARNING [kalshi] Dome API failed: Server error '502 Bad Gateway' for url 'https://api.domeapi.io/v1/kalshi/markets?limit=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502, falling back to direct API
+2026-03-22 14:47:41,670 WARNING [kalshi] v2-trading returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 14:47:42,254 WARNING [kalshi] v2-trading-nofilt returned 401 — need API key at kalshi.com/profile/api
+2026-03-22 14:47:42,804 WARNING [kalshi] elections-v1 failed: Client error '404 Not Found' for url 'https://api.elections.kalshi.com/v1/markets?per_page=100'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+2026-03-22 14:47:42,804 WARNING [kalshi] all endpoints failed, returning []

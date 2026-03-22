@@ -42,6 +42,7 @@ WATCHLIST_FILE = BASE / "watchlist.json"
 SETTINGS_FILE = BASE / "settings.json"
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
 METACULUS_API_TOKEN = os.getenv("METACULUS_API_TOKEN", "")
+KALSHI_API_KEY = os.getenv("KALSHI_API_KEY", "")
 
 _ai_client = None
 if _anthropic_mod and ANTHROPIC_API_KEY:
@@ -370,14 +371,47 @@ BAD_TAIL_PATTERNS = re.compile(
 )
 
 
+def _extract_bracket_candidate(title: str) -> str | None:
+    idx = title.find(" \u2014 ")
+    if idx == -1:
+        return None
+    candidate = title[idx + 3:].strip()
+    words = candidate.split()
+    # Skip party names, generic labels — only match actual person names
+    NON_PERSON = frozenset({
+        "republican", "democrat", "democratic", "gop", "libertarian",
+        "independent", "green", "other", "yes", "no", "over", "under",
+        "male", "female", "true", "false", "none", "draw", "tie",
+    })
+    if len(words) == 1 and candidate.lower() in NON_PERSON:
+        return None
+    # Must look like a person name: 2-3 capitalized words, no question mark
+    if 2 <= len(words) <= 3 and "?" not in candidate:
+        if all(w[0].isupper() for w in words if w):
+            return candidate.lower()
+    return None
+
+
 def is_cross_match(a: str, b: str) -> tuple[bool, float]:
     """Check if two titles match across platforms. Returns (matched, sim)."""
     # Strip PredictIt contract suffixes (e.g. " — Democratic") before comparing
+    cand_a = _extract_bracket_candidate(a)
+    cand_b = _extract_bracket_candidate(b)
+    if cand_a:
+        cand_words = cand_a.split()
+        b_lower = b.lower()
+        if not all(w in b_lower for w in cand_words):
+            return False, 0.0
+    if cand_b:
+        cand_words = cand_b.split()
+        a_lower = a.lower()
+        if not all(w in a_lower for w in cand_words):
+            return False, 0.0
     a_clean = _strip_contract_suffix(a)
     b_clean = _strip_contract_suffix(b)
 
     sim = keyword_similarity(a_clean, b_clean)
-    if sim < 0.30:
+    if sim < 0.25:
         return False, sim
 
     # Entity consistency: if both titles have unique proper nouns
@@ -476,7 +510,7 @@ async def fetch_polymarket() -> list[dict]:
     async with httpx.AsyncClient(timeout=15) as client:
         resp = await client.get(
             "https://gamma-api.polymarket.com/markets"
-            "?limit=100&active=true&closed=false"
+            "?limit=500&active=true&closed=false"
         )
         resp.raise_for_status()
         data = resp.json()
@@ -808,22 +842,80 @@ async def fetch_opinion() -> list[dict]:
 
 
 async def fetch_kalshi_public() -> list[dict]:
+    dome_key = os.getenv("DOME_API_KEY", "")
+    if dome_key:
+        logger.info(f"[kalshi] Dome key found: {dome_key[:10]}..., attempting Dome API")
+        try:
+            async with httpx.AsyncClient(timeout=15) as client:
+                resp = await client.get(
+                    "https://api.domeapi.io/v1/kalshi/markets?limit=100",
+                    headers={"Authorization": f"Bearer {dome_key}"}
+                )
+                resp.raise_for_status()
+                data = resp.json()
+            items = data.get("markets", [])
+            logger.info(f"[kalshi] Dome returned {len(items)} raw items, first keys: {list(items[0].keys()) if items else 'empty'}")
+            markets = []
+            for m in items:
+                try:
+                    title = m.get("title") or m.get("question") or ""
+                    if not title:
+                        continue
+                    last_price = m.get("last_price") or m.get("yes_bid") or m.get("yes_ask") or 50
+                    try:
+                        yes_price = float(last_price)
+                    except (ValueError, TypeError):
+                        yes_price = 50
+                    if yes_price > 1:
+                        yes_price = yes_price / 100.0
+                    if yes_price <= 0 or yes_price >= 1:
+                        yes_price = 0.5
+                    if yes_price <= 0.005 or yes_price >= 0.995:
+                        continue
+                    no_price = round(1 - yes_price, 4)
+                    slug = m.get("market_slug") or m.get("ticker") or ""
+                    market_url = f"https://kalshi.com/markets/{slug}" if slug else "https://kalshi.com"
+                    close_time = parse_dt(m.get("end_time") or m.get("close_time"))
+                    volume = float(m.get("volume_total") or m.get("volume_1_month") or 0)
+                    markets.append({
+                        "id": f"kalshi_{slug or len(markets)}",
+                        "title": title,
+                        "probability": round(yes_price * 100, 2),
+                        "volume": volume,
+                        "platform": "kalshi",
+                        "url": market_url,
+                        "yes_price": round(yes_price, 4),
+                        "no_price": round(no_price, 4),
+                        "close_time": close_time.isoformat() if close_time else None,
+                    })
+                except Exception:
+                    continue
+            if markets:
+                logger.info(f"[kalshi] {len(markets)} markets via Dome API")
+                return markets
+        except Exception as e:
+            logger.warning(f"[kalshi] Dome API failed: {e}, falling back to direct API")
+
     urls_to_try = [
-        ("https://trading-api.kalshi.com/trade-api/v2/markets?limit=100&status=open", "v2-trading"),
-        ("https://api.elections.kalshi.com/v1/markets", "elections-v1"),
+        ("https://trading-api.kalshi.com/trade-api/v2/markets?limit=200&status=open", "v2-trading"),
+        ("https://trading-api.kalshi.com/trade-api/v2/markets?limit=100", "v2-trading-nofilt"),
+        ("https://api.elections.kalshi.com/v1/markets?per_page=100", "elections-v1"),
     ]
 
     headers = {
         "Accept": "application/json",
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "Content-Type": "application/json",
     }
+    if KALSHI_API_KEY:
+        headers["Authorization"] = f"Bearer {KALSHI_API_KEY}"
 
     for api_url, label in urls_to_try:
         try:
             async with httpx.AsyncClient(timeout=15) as client:
                 resp = await client.get(api_url, headers=headers)
-                if resp.status_code == 403:
-                    logger.warning(f"[kalshi] {label} returned 403, trying next endpoint...")
+                if resp.status_code in (401, 403):
+                    logger.warning(f"[kalshi] {label} returned {resp.status_code} — need API key at kalshi.com/profile/api")
                     continue
                 resp.raise_for_status()
                 data = resp.json()
@@ -1047,6 +1139,12 @@ async def ep_kalshi():
     data, _ = await safe_fetch("kalshi", fetch_kalshi_public)
     return data
 
+@app.post("/admin/reset-circuit-breakers")
+async def reset_circuit_breakers():
+    for k in _circuit_breaker:
+        _circuit_breaker[k]["failures"] = 0
+        _circuit_breaker[k]["next_try"] = 0.0
+    return {"ok": True, "reset": list(_circuit_breaker.keys())}
 
 _market_cache: dict = {"data": None, "ts": 0}
 
@@ -1103,11 +1201,10 @@ async def markets_all():
 
 # ── arb detection: cross-platform ──────────────────────────────────────────
 
-def compute_fee_adjusted_gap(prob_a: float, prob_b: float, plat_a: str, plat_b: str) -> float:
-    raw_gap = abs(prob_a - prob_b)
-    fee_a = PLATFORM_FEES.get(plat_a, 0.02) * 100
-    fee_b = PLATFORM_FEES.get(plat_b, 0.02) * 100
-    return raw_gap - fee_a - fee_b
+def compute_fee_adjusted_gap(prob_high: float, prob_low: float, plat_high: str, plat_low: str) -> float:
+    fee_h = PLATFORM_FEES.get(plat_high, 0.02) * 100
+    fee_l = PLATFORM_FEES.get(plat_low, 0.02) * 100
+    return round(abs(prob_high - prob_low) - fee_h - fee_l, 2)
 
 
 def compute_annualized(gap_pct: float, days: int | None) -> float | None:
@@ -1211,7 +1308,7 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                     raw_gap = abs(a["probability"] - b["probability"])
 
                     # Fix 1a: Gap > 55% means completely different markets
-                    if raw_gap > 55:
+                    if raw_gap > 15:
                         removed_gap += 1
                         continue
 
@@ -1226,7 +1323,7 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                             noun_union = nouns_a_set | nouns_b_set
                             noun_shared = nouns_a_set & nouns_b_set
                             noun_overlap = len(noun_shared) / len(noun_union)
-                            if noun_overlap < 0.60:
+                            if noun_overlap < 0.40:
                                 removed_gap += 1
                                 continue
 
@@ -1275,8 +1372,8 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
 
                     # Guaranteed profit validation:
                     # Buy YES on low side, buy NO on high side
-                    yes_price = low["probability"] / 100
-                    no_price = 1 - (high["probability"] / 100)
+                    yes_price = low.get("yes_price") or low["probability"] / 100
+                    no_price = high.get("no_price") or round(1 - (high.get("yes_price") or high["probability"] / 100), 4)
                     sum_prices = yes_price + no_price
                     if sum_prices >= 1.0:
                         is_real_arb = False
@@ -1311,6 +1408,8 @@ async def arb_cross(min_gap: float = Query(default=1.5), min_volume: float = Que
                         "volume_high": high.get("volume", 0),
                         "volume_low": low.get("volume", 0),
                         "confidence": confidence,
+                        "yes_price_low": round(yes_price, 4),
+                        "no_price_high": round(no_price, 4),
                     })
                     matched_platform_pairs.add(frozenset({high["platform"], low["platform"]}))
 
@@ -1751,6 +1850,63 @@ async def arb_logical():
 
     opportunities.sort(key=lambda x: x["gap"], reverse=True)
     return {"opportunities": opportunities, "count": len(opportunities)}
+
+
+@app.get("/arb/ev")
+async def arb_ev(min_ev: float = Query(default=3.0)):
+    """Find +EV opportunities: markets where one platform diverges significantly from consensus."""
+    data = await _fetch_all_markets()
+    markets = data["markets"]
+
+    # Only real money platforms
+    REAL_MONEY = {"poly", "predict", "kalshi"}
+    real_markets = [m for m in markets if m["platform"] in REAL_MONEY]
+
+    # Group markets by normalized title
+    groups: dict[str, list[dict]] = {}
+    for m in real_markets:
+        key = _normalize_base_title(m["title"])
+        if key:
+            groups.setdefault(key, []).append(m)
+
+    results = []
+    for key, group in groups.items():
+        if len(group) < 2:
+            continue
+
+        probs = [m["probability"] for m in group]
+        consensus = sum(probs) / len(probs)
+
+        for m in group:
+            ev = m["probability"] - consensus
+            abs_ev = abs(ev)
+
+            if abs_ev < min_ev:
+                continue
+
+            # Determine direction
+            if ev > 0:
+                direction = "OVERPRICED"
+                action = f"BUY NO on {m['platform'].upper()} — priced too high vs consensus"
+            else:
+                direction = "UNDERPRICED"
+                action = f"BUY YES on {m['platform'].upper()} — priced too low vs consensus"
+
+            results.append({
+                "title": m["title"],
+                "platform": m["platform"],
+                "platform_price": round(m["probability"], 1),
+                "consensus_price": round(consensus, 1),
+                "ev_pct": round(abs_ev, 2),
+                "direction": direction,
+                "action": action,
+                "url": m.get("url", ""),
+                "volume": m.get("volume", 0) or 0,
+                "all_prices": [{"platform": x["platform"], "price": round(x["probability"], 1)} for x in group],
+            })
+
+    results.sort(key=lambda x: x["ev_pct"], reverse=True)
+    return results[:50]
 
 
 # ── fast markets & fast arbs ──────────────────────────────────────────────
